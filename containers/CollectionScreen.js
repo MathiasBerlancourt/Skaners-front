@@ -46,6 +46,7 @@ const CollectionScreen = () => {
       inactiveColor={"black"}
       swipeEnabled={true}
       selectedTabTextColor={"green"}
+      sceneContainerStyle={{ color: "red", backgroundColor: "red" }}
     />
   );
 
