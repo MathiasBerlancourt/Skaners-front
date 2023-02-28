@@ -1,15 +1,8 @@
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import logo from "../assets/Images/skanerslogoS.png";
 import { useNavigation } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 
 export default function SplashScreen() {
   const navigation = useNavigation();
@@ -19,20 +12,6 @@ export default function SplashScreen() {
     <View style={styles.background}>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo} />
-        <LottieView
-          autoPlay
-          ref={animation}
-          colorFilters={[
-            {
-              color: "green",
-            },
-            {
-              color: "yellow",
-            },
-          ]}
-          style={styles.loader}
-          source={require("../assets/Json/loaderSplashScreen.json")}
-        />
       </View>
       <Text style={styles.txt}>Hello Crack,</Text>
       <Text style={styles.txt}>Bienvenue sur Skaners !</Text>
