@@ -118,7 +118,7 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -156,7 +156,7 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -177,7 +177,7 @@ export default function App() {
                           name="Camera"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton />;
+                              return <ProfileBoutton setToken={setToken} />;
                             },
                             title: "Camera",
                           }}
@@ -191,7 +191,7 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -215,7 +215,7 @@ export default function App() {
                           name="Collection"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton />;
+                              return <ProfileBoutton setToken={setToken} />;
                             },
                             title: "Collection",
                           }}
@@ -229,7 +229,7 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -267,7 +267,7 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
