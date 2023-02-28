@@ -13,8 +13,8 @@ import {
 
 export default function SignInScreen({ setToken }) {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("bestdev@skaners.com");
-  const [password, setPassword] = useState("pass");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
