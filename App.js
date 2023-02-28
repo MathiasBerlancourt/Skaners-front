@@ -14,6 +14,11 @@ import SearchScreen from "./containers/SearchScreen";
 import CameraScreen from "./containers/CameraScreen";
 import CollectionScreen from "./containers/CollectionScreen";
 import CropDropScreen from "./containers/CropDropScreen";
+import { TouchableOpacity } from "react-native";
+import ProfileBoutton from "./components/ProfileBoutton";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -85,7 +90,7 @@ export default function App() {
                   <Tab.Screen
                     name="TabHome"
                     options={{
-                      tabBarLabel: "Home",
+                      tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
                         <Ionicons name={"ios-home"} size={size} color={color} />
                       ),
@@ -99,6 +104,9 @@ export default function App() {
                             title: "My App",
                             headerStyle: { backgroundColor: "red" },
                             headerTitleStyle: { color: "white" },
+                            headerRight: () => {
+                              return <ProfileBoutton />;
+                            },
                           }}
                         >
                           {() => <HomeScreen />}
@@ -118,10 +126,10 @@ export default function App() {
                   <Tab.Screen
                     name="TabSearch"
                     options={{
-                      tabBarLabel: "Search",
+                      tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
                         <Ionicons
-                          name={"ios-options"}
+                          name={"search-sharp"}
                           size={size}
                           color={color}
                         />
@@ -133,37 +141,22 @@ export default function App() {
                         <Stack.Screen
                           name="Search"
                           options={{
+                            headerRight: () => {
+                              return <ProfileBoutton />;
+                            },
                             title: "Search",
                           }}
                         >
                           {() => <SearchScreen />}
                         </Stack.Screen>
-                      </Stack.Navigator>
-                    )}
-                  </Tab.Screen>
 
-                  <Tab.Screen
-                    name="TabCropDrop"
-                    options={{
-                      tabBarLabel: "CropDrop",
-                      tabBarIcon: ({ color, size }) => (
-                        <Ionicons
-                          name={"ios-options"}
-                          size={size}
-                          color={color}
-                        />
-                      ),
-                    }}
-                  >
-                    {() => (
-                      <Stack.Navigator>
                         <Stack.Screen
-                          name="CropDrop"
+                          name="Profile"
                           options={{
-                            title: "CropDrop",
+                            title: "User Profile",
                           }}
                         >
-                          {() => <CropDropScreen />}
+                          {() => <ProfileScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -172,13 +165,9 @@ export default function App() {
                   <Tab.Screen
                     name="TabCamera"
                     options={{
-                      tabBarLabel: "Camera",
+                      tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons
-                          name={"ios-options"}
-                          size={size}
-                          color={color}
-                        />
+                        <FontAwesome5 name="camera" size={size} color={color} />
                       ),
                     }}
                   >
@@ -187,10 +176,22 @@ export default function App() {
                         <Stack.Screen
                           name="Camera"
                           options={{
+                            headerRight: () => {
+                              return <ProfileBoutton />;
+                            },
                             title: "Camera",
                           }}
                         >
                           {() => <CameraScreen />}
+                        </Stack.Screen>
+
+                        <Stack.Screen
+                          name="Profile"
+                          options={{
+                            title: "User Profile",
+                          }}
+                        >
+                          {() => <ProfileScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -198,10 +199,10 @@ export default function App() {
                   <Tab.Screen
                     name="TabCollection"
                     options={{
-                      tabBarLabel: "Collection",
+                      tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons
-                          name={"ios-options"}
+                        <MaterialIcons
+                          name="collections"
                           size={size}
                           color={color}
                         />
@@ -213,10 +214,60 @@ export default function App() {
                         <Stack.Screen
                           name="Collection"
                           options={{
+                            headerRight: () => {
+                              return <ProfileBoutton />;
+                            },
                             title: "Collection",
                           }}
                         >
                           {() => <CollectionScreen />}
+                        </Stack.Screen>
+
+                        <Stack.Screen
+                          name="Profile"
+                          options={{
+                            title: "User Profile",
+                          }}
+                        >
+                          {() => <ProfileScreen />}
+                        </Stack.Screen>
+                      </Stack.Navigator>
+                    )}
+                  </Tab.Screen>
+                  <Tab.Screen
+                    name="TabCropDrop"
+                    options={{
+                      tabBarLabel: "",
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                          name="shoe-sneaker"
+                          size={size}
+                          color={color}
+                        />
+                      ),
+                    }}
+                  >
+                    {() => (
+                      <Stack.Navigator>
+                        <Stack.Screen
+                          name="CropDrop"
+                          options={{
+                            headerRight: () => {
+                              return <ProfileBoutton />;
+                            },
+                            title: "CropDrop",
+                          }}
+                        >
+                          {() => <CropDropScreen />}
+                        </Stack.Screen>
+
+                        <Stack.Screen
+                          name="Profile"
+                          options={{
+                            title: "User Profile",
+                          }}
+                        >
+                          {() => <ProfileScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
