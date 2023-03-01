@@ -9,9 +9,10 @@ import {
   StyleSheet,
 } from "react-native";
 
+
 export default function SignInScreen({ setToken, setId }) {
-  const [email, setEmail] = useState("bestdev@skaners.com");
-  const [password, setPassword] = useState("pass");
+  const [email, setEmail] = useState("louis987@mail.com");
+  const [password, setPassword] = useState("azerty");
   const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
