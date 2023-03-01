@@ -19,7 +19,7 @@ const WelcomeScreen = () => {
       <TouchableOpacity
         style={styles.signUpBtn}
         onPress={() => {
-          navigation.navigate("SignUp");
+          navigation.navigate("Create User Account");
         }}
       >
         <Text style={styles.txt}>S'inscrire</Text>

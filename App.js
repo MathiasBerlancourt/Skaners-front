@@ -7,7 +7,10 @@ import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
-import SignUpScreen from "./containers/SignUpScreen";
+// import SignUpScreen from "./containers/SignUpScreen";
+import CreateUserAccountScreen from "./containers/CreateUserAccountScreen";
+import FinalizeUserAccountScreen from "./containers/FinalizeUserAccountScreen";
+import ChooseUserAvatarScreen from "./containers/ChooseUserAvatarScreen";
 import SplashScreen from "./containers/SplashScreen";
 import WelcomeScreen from "./containers/WelcomeScreen";
 import SearchScreen from "./containers/SearchScreen";
@@ -20,6 +23,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PIctureHomeView";
+import ChooseYourAvatarScreens from "./containers/ChooseUserAvatarScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -80,9 +84,22 @@ export default function App() {
             <Stack.Screen name="Welcome">
               {() => <WelcomeScreen />}
             </Stack.Screen>
-            <Stack.Screen name="SignUp">
-              {() => <SignUpScreen setToken={setToken} setId={setId} />}
-            </Stack.Screen>
+
+            <Stack.Screen
+              name="Create User Account"
+              component={CreateUserAccountScreen}
+            />
+
+            <Stack.Screen
+              name="Finalize User Account"
+              component={FinalizeUserAccountScreen}
+            />
+
+            <Stack.Screen
+              name="Choose Avatar"
+              component={ChooseUserAvatarScreen}
+            />
+
             <Stack.Screen name="SignIn">
               {() => <SignInScreen setToken={setToken} setId={setId} />}
             </Stack.Screen>
