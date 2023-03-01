@@ -13,8 +13,9 @@ import WelcomeScreen from "./containers/WelcomeScreen";
 import SearchScreen from "./containers/SearchScreen";
 import CameraScreen from "./containers/CameraScreen";
 import CollectionScreen from "./containers/CollectionScreen";
-import CropDropScreen from "./containers/CropDropScreen";
-import { TouchableOpacity } from "react-native";
+import CopDropScreen from "./containers/CopDropScreen";
+import SkansCheckScreen from "./containers/SkansCheckScreen";
+import SingleSkanScreen from "./containers/SingleSkanScreen";
 import ProfileButton from "./components/ProfileButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -124,15 +125,20 @@ export default function App() {
                           {() => <HomeScreen />}
                         </Stack.Screen>
 
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
+                        <Stack.Screen name="Profile">
                           {() => (
-                            <ProfileScreen setToken={setToken} setId={setId} />
+                            <ProfileScreen
+                              setToken={setToken}
+                              setId={setId}
+                              userId={userId}
+                            />
                           )}
+                        </Stack.Screen>
+                        <Stack.Screen name="SkansCheck">
+                          {() => <SkansCheckScreen />}
+                        </Stack.Screen>
+                        <Stack.Screen name="SingleSkan">
+                          {() => <SingleSkanScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -152,25 +158,8 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen
-                          name="Search"
-                          options={{
-                            headerRight: () => {
-                              return <ProfileButton />;
-                            },
-                            title: "Search",
-                          }}
-                        >
+                        <Stack.Screen name="Search">
                           {() => <SearchScreen />}
-                        </Stack.Screen>
-
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
-                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -187,25 +176,8 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen
-                          name="Camera"
-                          options={{
-                            headerRight: () => {
-                              return <ProfileButton setToken={setToken} />;
-                            },
-                            title: "Camera",
-                          }}
-                        >
+                        <Stack.Screen name="Camera">
                           {() => <CameraScreen />}
-                        </Stack.Screen>
-
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
-                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -225,25 +197,8 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen
-                          name="Collection"
-                          options={{
-                            headerRight: () => {
-                              return <ProfileButton setToken={setToken} />;
-                            },
-                            title: "Collection",
-                          }}
-                        >
+                        <Stack.Screen name="Collection">
                           {() => <CollectionScreen />}
-                        </Stack.Screen>
-
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
-                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -263,25 +218,8 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen
-                          name="CropDrop"
-                          options={{
-                            headerRight: () => {
-                              return <ProfileButton />;
-                            },
-                            title: "CropDrop",
-                          }}
-                        >
-                          {() => <CropDropScreen />}
-                        </Stack.Screen>
-
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
-                          {() => <ProfileScreen setToken={setToken} />}
+                        <Stack.Screen name="CopDrop">
+                          {() => <CopDropScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

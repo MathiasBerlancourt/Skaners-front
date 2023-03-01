@@ -2,9 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
-export default function ProfileScreen({ setToken, setId }) {
+export default function ProfileScreen({ setToken, setId, userId }) {
   const [data, setData] = useState({});
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     try {
@@ -17,6 +20,7 @@ export default function ProfileScreen({ setToken, setId }) {
           );
 
           setData(response.data);
+          setId(id);
         } else {
           alert("Noooooo");
         }
@@ -44,7 +48,7 @@ export default function ProfileScreen({ setToken, setId }) {
         <TouchableOpacity
           style={styles.btn}
           onPress={() => {
-            console.log("admin");
+            navigation.navigate("SkansCheck", { id: userId });
           }}
         >
           <Text style={styles.btnTxt}>Admin Panel</Text>
