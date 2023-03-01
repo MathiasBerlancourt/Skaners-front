@@ -1,8 +1,8 @@
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 
-const ProfileBoutton = () => {
+const ProfileButton = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -15,4 +15,4 @@ const ProfileBoutton = () => {
   );
 };
 
-export default ProfileBoutton;
+export default ProfileButton;
