@@ -10,6 +10,8 @@ import {
   SafeAreaView,
   ActivityIndicator,
   FlatList,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 import { MasonryFlashList } from "@shopify/flash-list";
@@ -18,6 +20,8 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [pictures, setPictures] = useState([]);
   const navigation = useNavigation();
+  const width = Dimensions.get("window").width;
+  const height = Dimensions.get("window").height;
   useEffect(() => {
     const fetchPictures = async () => {
       try {
@@ -37,9 +41,10 @@ export default function HomeScreen() {
   } else
     return (
       <ScrollView>
-        <Text>Favroris</Text>
-        <ScrollView style={styles.pictureContainer}>
-          <Text style={styles.title}>Parcourir</Text>
+        <Text style={styles.title}>Parcourir</Text>
+        <View
+          style={[styles.pictureContainer, { width: width, height: height }]}
+        >
           <MasonryFlashList
             data={pictures}
             numColumns={2}
@@ -49,13 +54,19 @@ export default function HomeScreen() {
               return index === 1 ? 1 : 2;
             }}
             renderItem={({ item }) => (
-              <Image
-                source={{ uri: item.url }}
-                style={styles.pictureSneakersLarge}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("HomeView", { url: item.url });
+                }}
+              >
+                <Image
+                  source={{ uri: item.url }}
+                  style={styles.pictureSneakersLarge}
+                />
+              </TouchableOpacity>
             )}
           />
-        </ScrollView>
+        </View>
       </ScrollView>
     );
 }
@@ -63,27 +74,25 @@ const styles = StyleSheet.create({
   title: {
     justifyContent: "center",
     textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 15,
+    color: "tomato",
+    fontWeight: "bold",
   },
   pictureContainer: {
-    borderColor: "pink",
-    borderWidth: 4,
-    // flex: 1,
-    // flexWrap: "wrap",
-
-    // alignContent: "flex-start",
+    paddingHorizontal: 40,
   },
   pictureSneakersLarge: {
     resizeMode: "cover",
     height: 180,
     width: "100%",
+    gap: 5,
 
     borderRadius: 15,
   },
   pictureSneakersShort: {
     resizeMode: "cover",
     height: 60,
-    width: 150,
-    borderColor: "purple",
-    borderWidth: 4,
+    width: "100%",
   },
 });
