@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
 
-export default function SignUpScreen({ setToken }) {
+export default function SignUpScreen({ setToken, setId }) {
   const [email, setEmail] = useState("");
   const [userName, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -48,7 +48,8 @@ export default function SignUpScreen({ setToken }) {
           setErrorMessage("");
           if (response.data.token) {
             setToken(response.data.token);
-            alert("Connexion réussi");
+            setId(response.data.user._id);
+            alert("Connexion réussie");
           }
         }
       } catch (error) {

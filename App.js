@@ -15,7 +15,7 @@ import CameraScreen from "./containers/CameraScreen";
 import CollectionScreen from "./containers/CollectionScreen";
 import CropDropScreen from "./containers/CropDropScreen";
 import { TouchableOpacity } from "react-native";
-import ProfileBoutton from "./components/ProfileBoutton";
+import ProfileButton from "./components/ProfileButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -26,6 +26,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const setToken = async (token) => {
     if (token) {
@@ -37,15 +38,26 @@ export default function App() {
     setUserToken(token);
   };
 
+  const setId = async (id) => {
+    if (id) {
+      await AsyncStorage.setItem("userId", id);
+    } else {
+      await AsyncStorage.removeItem("userId");
+    }
+    setUserId(id);
+  };
+
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       // We should also handle error for production apps
       const userToken = await AsyncStorage.getItem("userToken");
+      const userId = await AsyncStorage.getItem("userId");
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
       setUserToken(userToken);
+      setUserId(userId);
 
       setIsLoading(false);
     };
@@ -68,10 +80,10 @@ export default function App() {
               {() => <WelcomeScreen />}
             </Stack.Screen>
             <Stack.Screen name="SignUp">
-              {() => <SignUpScreen setToken={setToken} />}
+              {() => <SignUpScreen setToken={setToken} setId={setId} />}
             </Stack.Screen>
             <Stack.Screen name="SignIn">
-              {() => <SignInScreen setToken={setToken} />}
+              {() => <SignInScreen setToken={setToken} setId={setId} />}
             </Stack.Screen>
           </>
         ) : (
@@ -105,7 +117,7 @@ export default function App() {
                             headerStyle: { backgroundColor: "red" },
                             headerTitleStyle: { color: "white" },
                             headerRight: () => {
-                              return <ProfileBoutton />;
+                              return <ProfileButton />;
                             },
                           }}
                         >
@@ -118,7 +130,9 @@ export default function App() {
                             title: "User Profile",
                           }}
                         >
-                          {() => <ProfileScreen setToken={setToken} />}
+                          {() => (
+                            <ProfileScreen setToken={setToken} setId={setId} />
+                          )}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -142,7 +156,7 @@ export default function App() {
                           name="Search"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton />;
+                              return <ProfileButton />;
                             },
                             title: "Search",
                           }}
@@ -177,7 +191,7 @@ export default function App() {
                           name="Camera"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton setToken={setToken} />;
+                              return <ProfileButton setToken={setToken} />;
                             },
                             title: "Camera",
                           }}
@@ -215,7 +229,7 @@ export default function App() {
                           name="Collection"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton setToken={setToken} />;
+                              return <ProfileButton setToken={setToken} />;
                             },
                             title: "Collection",
                           }}
@@ -253,7 +267,7 @@ export default function App() {
                           name="CropDrop"
                           options={{
                             headerRight: () => {
-                              return <ProfileBoutton />;
+                              return <ProfileButton />;
                             },
                             title: "CropDrop",
                           }}

@@ -1,6 +1,4 @@
-import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -11,8 +9,8 @@ import {
   StyleSheet,
 } from "react-native";
 
-export default function SignInScreen({ setToken }) {
-  const navigation = useNavigation();
+
+export default function SignInScreen({ setToken, setId }) {
   const [email, setEmail] = useState("louis987@mail.com");
   const [password, setPassword] = useState("azerty");
   const [submit, setSubmit] = useState(false);
@@ -27,9 +25,11 @@ export default function SignInScreen({ setToken }) {
             `https://site--skaners-back--jhlzj9jljvpm.code.run/signin`,
             { email: email, password: password }
           );
+
           if (response.data.token) {
             setToken(response.data.token);
-            alert("Connexion réussi");
+            setId(response.data.user._id);
+            alert("Connexion réussie");
           }
         }
       } catch (error) {
