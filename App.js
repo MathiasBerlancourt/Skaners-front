@@ -13,8 +13,7 @@ import WelcomeScreen from "./containers/WelcomeScreen";
 import SearchScreen from "./containers/SearchScreen";
 import CameraScreen from "./containers/CameraScreen";
 import CollectionScreen from "./containers/CollectionScreen";
-import CropDropScreen from "./containers/CropDropScreen";
-import { TouchableOpacity } from "react-native";
+import CopDropScreen from "./containers/CopDropScreen";
 import ProfileButton from "./components/ProfileButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -279,7 +278,7 @@ export default function App() {
                             title: "CropDrop",
                           }}
                         >
-                          {() => <CropDropScreen />}
+                          {() => <CopDropScreen />}
                         </Stack.Screen>
 
                         <Stack.Screen
