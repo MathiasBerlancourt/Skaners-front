@@ -96,6 +96,7 @@ export default function App() {
               {() => (
                 <Tab.Navigator
                   screenOptions={{
+                    headerShown: false,
                     tabBarActiveTintColor: "tomato",
                     tabBarInactiveTintColor: "gray",
                   }}
@@ -215,7 +216,7 @@ export default function App() {
                     )}
                   </Tab.Screen>
                   <Tab.Screen
-                    name="TabCropDrop"
+                    name="TabCopDrop"
                     options={{
                       tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
@@ -229,25 +230,8 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen
-                          name="CropDrop"
-                          options={{
-                            headerRight: () => {
-                              return <ProfileButton />;
-                            },
-                            title: "CropDrop",
-                          }}
-                        >
+                        <Stack.Screen name="CopDrop">
                           {() => <CopDropScreen />}
-                        </Stack.Screen>
-
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
-                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
