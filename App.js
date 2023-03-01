@@ -20,6 +20,7 @@ import ProfileButton from "./components/ProfileButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PictureHomeView from "./components/PIctureHomeView";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -95,7 +96,6 @@ export default function App() {
               {() => (
                 <Tab.Navigator
                   screenOptions={{
-                    headerShown: false,
                     tabBarActiveTintColor: "tomato",
                     tabBarInactiveTintColor: "gray",
                   }}
@@ -103,6 +103,7 @@ export default function App() {
                   <Tab.Screen
                     name="TabHome"
                     options={{
+                      headerShown: false,
                       tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
                         <Ionicons name={"ios-home"} size={size} color={color} />
@@ -122,10 +123,20 @@ export default function App() {
                             },
                           }}
                         >
-                          {() => <HomeScreen />}
+                          {(...props) => <HomeScreen {...props} />}
                         </Stack.Screen>
-
-                        <Stack.Screen name="Profile">
+                        <Stack.Screen
+                          name="HomeView"
+                          options={{ title: "Picture Home View" }}
+                        >
+                          {(props) => <PictureHomeView {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen
+                          name="Profile"
+                          options={{
+                            title: "User Profile",
+                          }}
+                        >
                           {() => (
                             <ProfileScreen
                               setToken={setToken}
@@ -218,8 +229,25 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen name="CopDrop">
+                        <Stack.Screen
+                          name="CropDrop"
+                          options={{
+                            headerRight: () => {
+                              return <ProfileButton />;
+                            },
+                            title: "CropDrop",
+                          }}
+                        >
                           {() => <CopDropScreen />}
+                        </Stack.Screen>
+
+                        <Stack.Screen
+                          name="Profile"
+                          options={{
+                            title: "User Profile",
+                          }}
+                        >
+                          {() => <ProfileScreen setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
