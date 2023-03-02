@@ -6,12 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  LogBox,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
 
 const SingleSkanScreen = () => {
+  LogBox.ignoreLogs([
+    "EventEmitter.removeListener('url', ...): Method has been deprecated. Please instead use `remove()` on the subscription returned by `EventEmitter.addListener`.",
+    "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+  ]);
   const { params } = useRoute();
   const navigation = useNavigation();
   const data = params.elem;
@@ -31,7 +36,10 @@ const SingleSkanScreen = () => {
 
   const sendSkanResponse = async () => {
     try {
-      await axios.put("http://localhost:3310/checkSkan", updateCheck);
+      await axios.put(
+        "https://site--skaners-back--jhlzj9jljvpm.code.run/checkSkan",
+        updateCheck
+      );
       const createTwoButtonAlert = () =>
         Alert.alert("Message", "Le skan a été checké", [
           { text: "OK", onPress: () => navigation.navigate("SkansCheck") },
@@ -102,14 +110,14 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontSize: "18em",
+    fontSize: 18,
     padding: 10,
     marginVertical: 15,
     borderWidth: 2,
     position: "relative",
   },
   textArea: {
-    fontSize: "18em",
+    fontSize: 18,
     paddingBottom: 10,
     paddingHorizontal: 10,
     marginVertical: 25,
