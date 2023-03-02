@@ -73,33 +73,31 @@ const CreateUserAccountScreen = () => {
           }}
           secureTextEntry={true}
         />
-        <View style={styles.containerDoB}>
-          <Text style={styles.txtDoB}>Date of birth</Text>
 
-          <View style={styles.DateTimePicker}>
-            <TouchableOpacity onPress={displayDatepicker}>
-              {isDisplayDate && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={dateOfBirth}
-                  mode={displaymode}
-                  is24Hour={true}
-                  display="default"
-                  onChange={changeSelectedDate}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-      {/* <TextInput
+        <Text style={styles.txtDoB}>Date of birth</Text>
+
+        {/* <TouchableOpacity onPress={displayDatepicker}>
+          {isDisplayDate && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateOfBirth}
+              mode={displaymode}
+              is24Hour={true}
+              display="default"
+              onChange={changeSelectedDate}
+            />
+          )}
+        </TouchableOpacity> */}
+
+        <TextInput
           style={styles.input}
           placeholder="Date de naissance (format mm-jj-aaaa)"
           placeholderTextColor="whitesmoke"
           onChangeText={(input) => {
             setDateOfBirth(input);
           }}
-        /> */}
+        />
+      </View>
 
       <View />
 
