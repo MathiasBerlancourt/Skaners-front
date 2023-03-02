@@ -26,6 +26,18 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
 
   useEffect(() => {
     const signUp = async () => {
+      // //Debut du test
+      // console.log("email: ", accountInfos.email);
+      // console.log("userName: ", accountInfos.userName);
+      // console.log("password: ", accountInfos.password);
+      // console.log("firstName:", accountInfos.firstName);
+      // console.log("lastName: ", accountInfos.lastName);
+      // console.log("dateOfBirth:", accountInfos.dateOfBirth);
+      // console.log(" phoneNumber:", accountInfos.phoneNumber);
+      // console.log("sex:", accountInfos.sex);
+      // console.log("favoriteBrand:", accountInfos.favoriteBrand);
+      // return;
+      // //fin du test
       try {
         if (submit) {
           const response = await axios.post(

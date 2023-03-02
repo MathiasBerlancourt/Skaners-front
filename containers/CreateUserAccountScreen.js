@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRoute } from "@react-navigation/native";
 import {
   Text,
   TextInput,
@@ -7,18 +6,35 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const CreateUserAccountScreen = () => {
   const [email, setEmail] = useState("");
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  // const [dateOfBirth, setDateOfBirth] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigation = useNavigation();
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [displaymode, setMode] = useState("date");
+  const [isDisplayDate, setShow] = useState(false);
+  const changeSelectedDate = (event, selectedDate) => {
+    const currentDate = selectedDate || dateOfBirth;
+    setDateOfBirth(currentDate);
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const displayDatepicker = () => {
+    showMode("date");
+  };
+  console.log("date of birth : ", dateOfBirth);
   return (
     <KeyboardAwareScrollView>
       <Text style={styles.title}>Inscris toi !</Text>
@@ -57,18 +73,36 @@ const CreateUserAccountScreen = () => {
           }}
           secureTextEntry={true}
         />
+        <View style={styles.containerDoB}>
+          <Text style={styles.txtDoB}>Date of birth</Text>
 
-        <TextInput
+          <View style={styles.DateTimePicker}>
+            <TouchableOpacity onPress={displayDatepicker}>
+              {isDisplayDate && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={dateOfBirth}
+                  mode={displaymode}
+                  is24Hour={true}
+                  display="default"
+                  onChange={changeSelectedDate}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      {/* <TextInput
           style={styles.input}
-          placeholder="Date de naissance (format jj-mm-aaaa)"
+          placeholder="Date de naissance (format mm-jj-aaaa)"
           placeholderTextColor="whitesmoke"
           onChangeText={(input) => {
             setDateOfBirth(input);
           }}
-        />
+        /> */}
 
-        <View />
-      </View>
+      <View />
+
       <TouchableOpacity
         style={styles.signUpBtn}
         onPress={() => {
@@ -114,6 +148,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 20,
+  },
+
+  containerDoB: {
+    backgroundColor: "lightgray",
+    flexDirection: "row",
+    height: 30,
+    borderRadius: 20,
+    marginVertical: 15,
+    marginHorizontal: 20,
+    paddingLeft: 10,
+    width: "25%",
+  },
+  txtDoB: {
+    color: "whitesmoke",
+    paddingVertical: 6,
+  },
+  DateTimePicker: {
+    // marginRight: 30,
+    // paddingBottom: 50,
   },
 
   input: {
