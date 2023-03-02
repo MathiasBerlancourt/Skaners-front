@@ -32,7 +32,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
-
+  console.log("usertoken : ", userToken);
+  console.log("userId : ", userId);
   const setToken = async (token) => {
     if (token) {
       await AsyncStorage.setItem("userToken", token);
@@ -85,20 +86,23 @@ export default function App() {
               {() => <WelcomeScreen />}
             </Stack.Screen>
 
-            <Stack.Screen
-              name="Create User Account"
-              component={CreateUserAccountScreen}
-            />
+            <Stack.Screen name="Create User Account">
+              {(props) => <CreateUserAccountScreen {...props} />}
+            </Stack.Screen>
 
-            <Stack.Screen
-              name="Finalize User Account"
-              component={FinalizeUserAccountScreen}
-            />
+            <Stack.Screen name="Finalize User Account">
+              {(props) => <FinalizeUserAccountScreen {...props} />}
+            </Stack.Screen>
 
-            <Stack.Screen
-              name="Choose Avatar"
-              component={ChooseUserAvatarScreen}
-            />
+            <Stack.Screen name="Choose Avatar">
+              {(props) => (
+                <ChooseUserAvatarScreen
+                  setToken={setToken}
+                  setId={setId}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
 
             <Stack.Screen name="SignIn">
               {() => <SignInScreen setToken={setToken} setId={setId} />}

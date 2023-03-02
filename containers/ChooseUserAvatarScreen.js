@@ -1,54 +1,85 @@
 import { useEffect, useState } from "react";
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
 
-const ChooseUserAvatarScreens = () => {
-  // {
-  //   email,
-  //   userName,
-  //   password,
-  //   confirmPassword,
-  //   errorMessage,
-  //   setErrorMessage,
-  // }
-
-  const [email, setEmail] = useState("");
-  const [userName, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [sex, setSex] = useState("");
-  const [favoriteBrand, setFavoriteBrand] = useState();
-  const [shoeSize, setShoeSize] = useState("");
-  const [username, setUserName] = useState("");
+const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
   const [avatar, setAvatar] = useState("");
   const [isSelected, setIsSelected] = useState(false);
 
   const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const accountInfos = {
+    email: route.params.email,
+    userName: route.params.userName,
+    password: route.params.password,
+    firstName: route.params.firstName,
+    lastName: route.params.lastName,
+    dateOfBirth: route.params.dateOfBirth,
+    phoneNumber: route.params.phoneNumber,
+    sex: route.params.sex,
+    favoriteBrand: route.params.favoriteBrand,
+    pictureUrl: avatar,
+  };
+
+  useEffect(() => {
+    const signUp = async () => {
+      try {
+        if (submit) {
+          const response = await axios.post(
+            "https://site--skaners-back--jhlzj9jljvpm.code.run/signup",
+            // "http://localhost:3310/signup",
+            {
+              email: accountInfos.email,
+              userName: accountInfos.userName,
+              password: accountInfos.password,
+              firstName: accountInfos.firstName,
+              lastName: accountInfos.lastName,
+              dateOfBirth: accountInfos.dateOfBirth,
+              phoneNumber: accountInfos.phoneNumber,
+              sex: accountInfos.sex,
+              favoriteBrand: accountInfos.favoriteBrand,
+              pictureUrl: avatar,
+            }
+          );
+
+          setErrorMessage("");
+          if (response.data.token) {
+            setToken(response.data.token);
+            setId(response.data.user._id);
+            alert("Connexion réussie");
+          }
+        }
+      } catch (error) {
+        console.log("error message server : ", error.message);
+        console.log("email: ", accountInfos.email);
+        console.log("userName: ", accountInfos.userName);
+        console.log("password: ", accountInfos.password);
+        console.log("firstName:", accountInfos.firstName);
+        console.log("lastName: ", accountInfos.lastName);
+        console.log("dateOfBirth:", accountInfos.dateOfBirth);
+        console.log(" phoneNumber:", accountInfos.phoneNumber);
+        console.log("sex:", accountInfos.sex);
+        console.log("favoriteBrand:", accountInfos.favoriteBrand);
+
+        setErrorMessage("Adresse email ou userName déjà utilisé");
+        setSubmit(false);
+      }
+    };
+    signUp();
+  }, [submit]);
+
   return (
-    <View>
+    <KeyboardAwareScrollView>
       <View style={styles.finalizeContainer}>
         <Text style={styles.title}>Choisis ton avatar</Text>
 
         <View style={styles.avatarsList}>
           {imagesAvatar.avatars.map((img, index) => {
             return (
-              <View style={{ marginTop: 50 }}>
+              <View key={index} style={{ marginTop: 50 }}>
                 <Avatar
                   key={index}
                   picture={img}
@@ -66,19 +97,13 @@ const ChooseUserAvatarScreens = () => {
         style={styles.signUpBtn}
         disabled={submit}
         onPress={() => {
-          if (!email || !userName || !password || !confirmPassword) {
-            return setErrorMessage("Remplissez tous les champs");
-          }
-          if (password !== confirmPassword) {
-            return setErrorMessage("Mot de passe différents");
-          }
           setSubmit(true);
         }}
       >
         <Text style={styles.signUpTxt}>CREER MON COMPTE</Text>
       </TouchableOpacity>
       <Text style={styles.errorTxt}>{errorMessage}</Text>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRoute } from "@react-navigation/native";
 import {
   Text,
   TextInput,
@@ -8,34 +9,18 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import imagesAvatar from "../assets/Json/avatar-url.json";
-import Avatar from "../components/Avatars";
 
-const CreateUserAccountScreen = ({ setToken, setId }) => {
+const CreateUserAccountScreen = () => {
   const [email, setEmail] = useState("");
   const [userName, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [sex, setSex] = useState("");
-  const [favoriteBrand, setFavoriteBrand] = useState();
-  const [shoeSize, setShoeSize] = useState("");
-  const [username, setUserName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [isSelected, setIsSelected] = useState(false);
-
-  const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
   const navigation = useNavigation();
   return (
-    <View>
+    <KeyboardAwareScrollView>
       <Text style={styles.title}>Inscris toi !</Text>
       <View style={styles.createContainer}>
         <TextInput
@@ -72,37 +57,45 @@ const CreateUserAccountScreen = ({ setToken, setId }) => {
           }}
           secureTextEntry={true}
         />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Date de naissance (format jj-mm-aaaa)"
+          placeholderTextColor="whitesmoke"
+          onChangeText={(input) => {
+            setDateOfBirth(input);
+          }}
+        />
+
         <View />
       </View>
       <TouchableOpacity
         style={styles.signUpBtn}
-        disabled={submit}
         onPress={() => {
-          if (!email || !userName || !password || !confirmPassword) {
+          if (
+            !email ||
+            !userName ||
+            !password ||
+            !confirmPassword ||
+            !dateOfBirth
+          ) {
             return setErrorMessage("Remplissez tous les champs");
           }
           if (password !== confirmPassword) {
             return setErrorMessage("Mot de passe différents");
           }
-          // setSubmit(true);
-          //METTRE UN NAVIGATION VERS LA SUITE
-        }}
-      >
-        <Text style={styles.signUpTxt}>CONTINUER</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
           navigation.navigate("Finalize User Account", {
             email: email,
             userName: userName,
             password: password,
+            dateOfBirth: dateOfBirth,
           });
         }}
       >
-        <Text>BOUTTON TEST</Text>
+        <Text style={styles.signUpTxt}>CONTINUER</Text>
       </TouchableOpacity>
       <Text style={styles.errorTxt}>{errorMessage}</Text>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
