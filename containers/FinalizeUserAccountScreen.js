@@ -39,7 +39,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             Tu pourras compléter ces informations plus tard dans ton profil
           </Text>
         </View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Prénom</Text>
           <TextInput
             style={styles.inputWithTitle}
@@ -51,7 +51,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             value={firstName}
           />
         </View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Nom</Text>
           <TextInput
             style={styles.inputWithTitle}
@@ -63,8 +63,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             value={lastName}
           />
         </View>
-        <View style={styles.inputContainer}></View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Numéro de téléphone</Text>
           <TextInput
             placeholder="07-XX-XX-XX-XX"
@@ -76,7 +75,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             }}
           />
         </View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Sexe</Text>
           <TextInput
             placeholder="M"
@@ -88,7 +87,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             value={sex}
           />
         </View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Marque(s) favorite(s)</Text>
           <TextInput
             placeholder="Air Jordan"
@@ -100,7 +99,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
             value={favoriteBrand}
           />
         </View>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.inputTitle}>Pointure</Text>
           <TextInput
             placeholder="43"
@@ -129,8 +128,8 @@ export default FinalizeUserAccountScreen;
 
 const styles = StyleSheet.create({
   notaBene: {
+    fontFamily: "LouisGeorgeItalic",
     color: "grey",
-    fontStyle: "italic",
     fontSize: 12,
     textAlign: "center",
   },
@@ -144,6 +143,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily: "LemonMilkBold",
     fontSize: 25,
     fontWeight: "bold",
     marginHorizontal: 30,
@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   inputTitle: {
+    fontFamily: "LouisGeorge",
     marginHorizontal: 30,
     color: "gray",
     marginTop: 15,
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   signUpTxt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     fontWeight: "bold",

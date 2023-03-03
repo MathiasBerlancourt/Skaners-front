@@ -90,6 +90,7 @@ export default function SignInScreen({ setToken, setId }) {
 }
 const styles = StyleSheet.create({
   input: {
+    fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
     height: 30,
     borderRadius: 20,
@@ -110,17 +111,20 @@ const styles = StyleSheet.create({
   },
 
   loginTxt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
   },
 
   passwordForgetTxt: {
+    fontFamily: "LouisGeorge",
     marginHorizontal: 35,
     color: "grey",
   },
 
   errorTxt: {
+    fontFamily: "LouisGeorge",
     color: "#F86F00",
     marginHorizontal: 20,
     fontWeight: "bold",

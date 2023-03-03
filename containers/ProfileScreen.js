@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
+    fontFamily: "LouisGeorge",
     fontSize: hp("3%"),
     textAlign: "center",
     color: "#515151",
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
   },
 
   btnTxt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     fontWeight: "bold",

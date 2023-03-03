@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     paddingVertical: 15,
+    fontFamily: "LemonMilkBold",
     textAlign: "left",
     color: "#FF7E00",
     paddingLeft: 15,

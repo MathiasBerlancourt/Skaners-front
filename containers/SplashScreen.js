@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
 
   txt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     textAlign: "center",
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
   },
 
   txtSkip: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 15,
     marginRight: 25,
