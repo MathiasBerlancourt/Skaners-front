@@ -15,11 +15,14 @@ const CreateUserAccountScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigation = useNavigation();
+  //imports pour le datePicker qui en en cours de dev
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [displaymode, setMode] = useState("date");
   const [isDisplayDate, setShow] = useState(false);
   const changeSelectedDate = (event, selectedDate) => {
     const currentDate = selectedDate || dateOfBirth;
+
+    //Fin import pour le datePicker
     setDateOfBirth(currentDate);
   };
   const showMode = (currentMode) => {
@@ -39,7 +42,7 @@ const CreateUserAccountScreen = () => {
       <View style={styles.createContainer}>
         <TextInput
           style={styles.input}
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Adresse email"
           onChangeText={(input) => {
             setEmail(input);
@@ -47,7 +50,7 @@ const CreateUserAccountScreen = () => {
         />
         <TextInput
           style={styles.input}
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Username"
           onChangeText={(input) => {
             setUsername(input);
@@ -55,7 +58,7 @@ const CreateUserAccountScreen = () => {
         />
         <TextInput
           style={styles.input}
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Mot de Passe"
           onChangeText={(input) => {
             setPassword(input);
@@ -64,7 +67,7 @@ const CreateUserAccountScreen = () => {
         />
         <TextInput
           style={styles.input}
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Confirme le mot de passe"
           onChangeText={(input) => {
             setConfirmPassword(input);
@@ -90,7 +93,7 @@ const CreateUserAccountScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Date de naissance (format mm-jj-aaaa)"
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           onChangeText={(input) => {
             setDateOfBirth(input);
           }}
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "orange",
+    borderBottomColor: "#FF7E00",
     borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 20,

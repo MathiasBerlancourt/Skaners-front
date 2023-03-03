@@ -3,6 +3,7 @@ import { View, Text, useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { LogBox } from "react-native";
 import SkansCategory from "../components/SkansCategory";
+import LikesCategory from "../components/LikesCategory";
 LogBox.ignoreLogs(["Sending..."]);
 
 const FavoritesCategoryRoute = () => (
@@ -13,12 +14,12 @@ const FavoritesCategoryRoute = () => (
 
 const LikesCategoryRoute = () => (
   <View style={{ flex: 1, backgroundColor: "lightgrey" }}>
-    {/* <SkansCategory /> */}
+    {/* <LikesCategory /> */}
   </View>
 );
 const SkansCategoryRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "green" }}>
-    <Text>Je suis la Category Skans</Text>
+  <View style={{ flex: 1 }}>
+    <SkansCategory />
   </View>
 );
 

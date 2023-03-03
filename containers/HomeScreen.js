@@ -1,71 +1,107 @@
 import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
 import {
-  Button,
   Text,
   View,
   Image,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
   ActivityIndicator,
-  FlatList,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import { MasonryFlashList } from "@shopify/flash-list";
 
 export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [pictures, setPictures] = useState([]);
+  const [skans, setSkans] = useState([]);
   const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
+
   useEffect(() => {
     const fetchPictures = async () => {
       try {
-        const response = await axios.get(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/pictures"
-        );
-        setPictures(response.data);
+        const [responseParcourir, responseLikes] = await Promise.all([
+          axios.get(
+            "https://site--skaners-back--jhlzj9jljvpm.code.run/pictures"
+          ),
+          axios.get(
+            "https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans"
+          ),
+        ]);
+        setSkans(responseLikes.data);
+        setPictures(responseParcourir.data);
         setIsLoading(false);
       } catch (error) {
-        console.log(error.message);
+        console.log("error : ", error);
       }
     };
+
     fetchPictures();
   }, []);
-  if (isLoading) {
+
+  if (isLoading === true) {
     return <ActivityIndicator />;
   } else
     return (
       <ScrollView>
-        <Text style={styles.title}>Parcourir</Text>
-        <View
-          style={[styles.pictureContainer, { width: width, height: height }]}
-        >
-          <MasonryFlashList
-            data={pictures}
-            numColumns={2}
-            estimatedItemSize={200}
-            refreshing={true}
-            getColumnFlex={(items, index, maxColumns, extraData) => {
-              return index === 1 ? 1 : 2;
-            }}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("HomeView", { url: item.url });
-                }}
-              >
-                <Image
-                  source={{ uri: item.url }}
-                  style={styles.pictureSneakersLarge}
-                />
-              </TouchableOpacity>
-            )}
-          />
+        <View style={{ paddingTop: height * 0.05 }}>
+          <Text style={styles.title}>MES DERNIERS LIKES</Text>
+          <ScrollView horizontal={true}>
+            <View style={styles.likesContainer}>
+              {Array.isArray(skans) &&
+                skans.map((skan, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        navigation.navigate("Collection");
+                      }}
+                    >
+                      <Image
+                        source={{ uri: skan?.pictureUrl }}
+                        key={skan.id}
+                        style={{
+                          height: 0.13 * height,
+                          width: 0.6 * width,
+                          borderRadius: 10,
+                          marginHorizontal: 3,
+                          marginVertical: 5,
+                        }}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+            </View>
+          </ScrollView>
+          <Text style={styles.title}>PARCOURIR</Text>
+          <View style={styles.layoutContainer}>
+            {Array.isArray(pictures) &&
+              pictures.map((elem, index) => {
+                return (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => {
+                      navigation.navigate("HomeView", { url: elem.url });
+                    }}
+                  >
+                    <Image
+                      key={elem.id}
+                      source={{ uri: elem.url }}
+                      style={{
+                        height: 0.2 * height,
+                        width: 0.43 * width,
+                        borderRadius: 10,
+                        marginVertical: 4,
+                        marginHorizontal: 4,
+                      }}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+          </View>
         </View>
       </ScrollView>
     );
@@ -76,24 +112,23 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     paddingVertical: 15,
-    color: "tomato",
-    fontWeight: "bold",
     fontFamily: "LemonMilkBold",
+    textAlign: "left",
+    color: "#FF7E00",
+    paddingLeft: 15,
   },
   pictureContainer: {
-    paddingHorizontal: 40,
+    paddingHorizontal: 0,
   },
-  pictureSneakersLarge: {
-    resizeMode: "cover",
-    height: 180,
-    width: "100%",
-    gap: 5,
+  likesContainer: { flexDirection: "row" },
+  layoutContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
 
-    borderRadius: 15,
-  },
-  pictureSneakersShort: {
+  pictureSneakers: {
     resizeMode: "cover",
-    height: 60,
-    width: "100%",
+    borderRadius: 2,
   },
 });

@@ -43,7 +43,6 @@ export default function CameraScreen() {
     if (image) {
       try {
         const asset = await MediaLibrary.createAssetAsync(image);
-        console.log(asset);
         const lastIndex = asset.uri.lastIndexOf(".");
 
         const ext = asset.uri.slice(lastIndex + 1);
