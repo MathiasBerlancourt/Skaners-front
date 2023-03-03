@@ -6,7 +6,9 @@ import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
 
 const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState(
+    "https://cdn.shopify.com/s/files/1/2358/2817/products/air-jordan-1-retro-high-85-og-black-white-1_2000x.png?v=1676450597"
+  );
   const [isSelected, setIsSelected] = useState(false);
 
   const [submit, setSubmit] = useState(false);

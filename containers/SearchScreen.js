@@ -92,8 +92,12 @@ const SearchScreen = () => {
         data={sneakers}
         renderItem={({ item }) => {
           return (
-            <View style={(justifyContent = "center")}>
-              <Text>{item.name}</Text>
+            <View
+              style={{ alignItems: "center", backgroundColor: "whitesmoke" }}
+            >
+              <Text style={{ fontWeight: "bold", color: "gray" }}>
+                {item.name}
+              </Text>
               <Image
                 source={{ uri: item.picture }}
                 style={{ width: 200, height: 200 }}
@@ -122,16 +126,16 @@ const styles = StyleSheet.create({
     height: 35,
     alignItems: "baseline",
     paddingHorizontal: 10,
+    justifyContent: "center",
   },
   titleSearch: {
     justifyContent: "center",
     textAlign: "center",
     fontSize: 20,
-    paddingVertical: 15,
     textAlign: "left",
     color: "#FF7E00",
-    paddingLeft: 0,
     fontWeight: "bold",
+    marginTop: 4,
   },
 
   searchContainer: {
