@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Platform,
-} from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { Camera, CameraType } from "expo-camera";
@@ -14,9 +7,6 @@ import * as MediaLibrary from "expo-media-library";
 import axios from "axios";
 import Button from "../components/PhotoButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { copyAsync } from "expo-file-system";
-import * as FileSystem from "expo-file-system";
-import * as DocumentPicker from "react-native-document-picker";
 
 export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
