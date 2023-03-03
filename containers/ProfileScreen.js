@@ -1,10 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ProfileScreen({ setToken, setId, userId }) {
+export default function ProfileScreen({ setToken, setId, refresh }) {
   const [data, setData] = useState({});
 
   const navigation = useNavigation();
@@ -29,31 +33,67 @@ export default function ProfileScreen({ setToken, setId, userId }) {
     } catch (error) {
       console.log(error.message);
     }
-  }, []);
+  }, [refresh]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.avatarBox}>
-        <Image
-          source={
-            data.pictureUrl
-              ? { uri: data.pictureUrl }
-              : require("../assets/Images/blank_pfp.png")
-          }
-          style={styles.avatar}
-        />
-        <Text style={styles.name}>{data.userName}</Text>
-      </View>
-      {data.adminRank > 0 && (
+      <View>
+        {data.adminRank > 0 && (
+          <TouchableOpacity
+            style={styles.btnAdmin}
+            onPress={() => {
+              navigation.navigate("SkansCheck", { id: data._id });
+            }}
+          >
+            <Text style={styles.btnAdminTxt}>ADMIN</Text>
+          </TouchableOpacity>
+        )}
+        <View style={styles.avatarBox}>
+          <Image
+            source={
+              data.pictureUrl
+                ? { uri: data.pictureUrl }
+                : require("../assets/Images/blank_pfp.png")
+            }
+            style={styles.avatar}
+          />
+          <Text style={styles.name}>{data.firstName}</Text>
+          <Text>{data.userName}</Text>
+        </View>
+        <View style={styles.parameters}>
+          <Text style={styles.paramsTitle}>PARAMETRES</Text>
+          <View style={styles.infoBox}>
+            <Text style={styles.labelColor}>Nom d'utilisateur</Text>
+            <Text>{data.userName}</Text>
+          </View>
+          <View style={styles.infoBox}>
+            <Text style={styles.labelColor}>Adresse e-mail</Text>
+            <Text>{data.email}</Text>
+          </View>
+          <View style={styles.infoBox}>
+            <Text style={styles.labelColor}>Numéro de téléphone</Text>
+            <Text>{data.phoneNumber}</Text>
+          </View>
+          <View style={styles.infoBox}>
+            <Text style={styles.labelColor}>Pointure</Text>
+            <Text>{data.shoeSize} EU</Text>
+          </View>
+          <View style={styles.infoBox}>
+            <Text style={styles.labelColor}>Marque favorite</Text>
+            <Text>{data.favoriteBrand}</Text>
+          </View>
+        </View>
         <TouchableOpacity
-          style={styles.btn}
           onPress={() => {
-            navigation.navigate("SkansCheck", { id: data._id });
+            navigation.navigate("UpdateProfile", {
+              elem: data,
+            });
           }}
         >
-          <Text style={styles.btnTxt}>Admin Panel</Text>
+          <Text style={styles.updateText}>Mettre à jour les informations</Text>
         </TouchableOpacity>
-      )}
+      </View>
+
       <TouchableOpacity
         style={styles.btn}
         onPress={() => {
@@ -70,24 +110,40 @@ export default function ProfileScreen({ setToken, setId, userId }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: "white",
     flex: 1,
+    justifyContent: "space-between",
   },
 
   avatar: {
-    height: 150,
-    width: 150,
-    resizeMode: "cover",
+    height: 100,
+    width: 100,
+    resizeMode: "contain",
     borderRadius: 100,
     borderColor: "#717171",
     borderWidth: 2,
   },
 
+  btnAdmin: {
+    position: "absolute",
+    zIndex: 1,
+    padding: hp("2%"),
+    borderRadius: wp("2%"),
+    right: 0,
+    top: hp("2%"),
+    backgroundColor: "red",
+  },
+
+  btnAdminTxt: {
+    color: "white",
+    fontWeight: "bold",
+  },
+
   name: {
-    fontSize: 20,
+    fontSize: hp("3%"),
     textAlign: "center",
-    marginVertical: 20,
+    color: "#515151",
+    marginTop: 20,
     fontWeight: "bold",
     textTransform: "uppercase",
   },
@@ -95,6 +151,26 @@ const styles = StyleSheet.create({
   avatarBox: {
     paddingVertical: 20,
     marginBottom: 10,
+    alignItems: "center",
+  },
+
+  parameters: {
+    width: wp("90%"),
+  },
+
+  paramsTitle: {
+    fontSize: hp("2%"),
+    marginBottom: hp("2.5%"),
+  },
+
+  infoBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: hp("2.5%"),
+  },
+
+  labelColor: {
+    color: "#717171",
   },
 
   btn: {
@@ -112,5 +188,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+  },
+
+  updateText: {
+    fontSize: hp("2%"),
+    textAlign: "center",
+    fontWeight: 500,
+    textDecorationLine: "underline",
   },
 });
