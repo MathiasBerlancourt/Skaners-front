@@ -69,7 +69,7 @@ const SearchScreen = () => {
         <View style={styles.titleContainer}>
           <Text style={styles.titleSearch}>
             <Ionicons name="md-search-outline" size={18} color="#FF7E00" />{" "}
-            Rechercher
+            RECHERCHER
           </Text>
           {displaySearchBar ? (
             <SimpleLineIcons
