@@ -69,7 +69,7 @@ export default function CameraScreen() {
 
         // console.log(formData);
         const response = await axios.post(
-          "https://e549-193-252-55-178.eu.ngrok.io/user/addSkan",
+          "https://site--skaners-back--jhlzj9jljvpm.code.run/user/addSkan",
           formData,
           {
             headers: {
