@@ -6,16 +6,11 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const SkansCheckScreen = () => {
+const SkansCheckScreen = ({ route, navigation, refresh, setRefresh }) => {
   const [data, setData] = useState({});
-  const [refresh, setRefresh] = useState(false);
-
-  const navigation = useNavigation();
-  const route = useRoute();
 
   useEffect(() => {
     try {
@@ -59,8 +54,6 @@ const SkansCheckScreen = () => {
                 onPress={() => {
                   navigation.navigate("SingleSkan", {
                     elem,
-                    setRefresh,
-                    refresh,
                   });
                 }}
                 key={i}
