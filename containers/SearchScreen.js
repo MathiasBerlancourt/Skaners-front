@@ -11,8 +11,11 @@ import {
 } from "react-native";
 import axios from "axios";
 import { FontAwesome } from "@expo/vector-icons";
-
+import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -23,6 +26,8 @@ const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
+  const [displaySearchBar, setDisplaySearchBar] = useState(false);
+  const navigation = useNavigation();
 
   const handleName = (name) => {
     setName(name);
@@ -54,55 +59,91 @@ const SearchScreen = () => {
   }, [name, brand, color]);
 
   return (
-    <View style={{ height: height }}>
-      <View style={styles.titleContainer}>
-        <FontAwesome name="search" size={18} color="#FF7E00" />
-        <Text style={styles.titleSearch}> Rechercher</Text>
-      </View>
-      <View
-        style={[
-          { height: 0.2 * height, alignItems: "center" },
-          styles.searchContainer,
-        ]}
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {
+          return setDisplaySearchBar(!displaySearchBar);
+        }}
       >
-        <TextInput
-          placeholderTextColor="#717171"
-          placeholder="Modele..."
-          style={styles.input}
-          onChangeText={handleName}
-          value={name}
-        ></TextInput>
-        <TextInput
-          placeholderTextColor="#717171"
-          placeholder="Marque..."
-          style={styles.input}
-          onChangeText={handleBrand}
-          value={brand}
-        ></TextInput>
-        <TextInput
-          placeholderTextColor="#717171"
-          placeholder="Couleur..."
-          style={styles.input}
-          onChangeText={handleColor}
-          value={color}
-        ></TextInput>
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleSearch}>
+            <Ionicons name="md-search-outline" size={18} color="#FF7E00" />{" "}
+            Rechercher
+          </Text>
+          {displaySearchBar ? (
+            <SimpleLineIcons
+              name="arrow-up"
+              size={18}
+              color="#FF7E00"
+              style={{ paddingHorizontal: 15 }}
+            />
+          ) : (
+            <SimpleLineIcons
+              name="arrow-down"
+              size={18}
+              color="#FF7E00"
+              style={{ paddingHorizontal: 15 }}
+            />
+          )}
+        </View>
+      </TouchableOpacity>
+      {displaySearchBar && (
+        <View
+          style={[
+            { height: 0.2 * height, alignItems: "center" },
+            styles.searchContainer,
+          ]}
+        >
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Modele..."
+            style={styles.input}
+            onChangeText={handleName}
+            value={name}
+          ></TextInput>
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Marque..."
+            style={styles.input}
+            onChangeText={handleBrand}
+            value={brand}
+          ></TextInput>
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Couleur..."
+            style={styles.input}
+            onChangeText={handleColor}
+            value={color}
+          ></TextInput>
+        </View>
+      )}
 
       <FlatList
         data={sneakers}
         renderItem={({ item }) => {
           return (
-            <View
-              style={{ alignItems: "center", backgroundColor: "whitesmoke" }}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("product screen", { id: item._id });
+              }}
             >
-              <Text style={{ fontWeight: "bold", color: "gray" }}>
-                {item.name}
-              </Text>
-              <Image
-                source={{ uri: item.picture }}
-                style={{ width: 200, height: 200 }}
-              />
-            </View>
+              <View
+                style={{
+                  height: "auto",
+                  alignItems: "center",
+                  backgroundColor: "whitesmoke",
+                }}
+              >
+                <Text style={{ fontWeight: "bold", color: "gray" }}>
+                  {item.name}
+                </Text>
+                <Image
+                  source={{ uri: item.picture }}
+                  style={{ width: 200, height: 200 }}
+                />
+              </View>
+            </TouchableOpacity>
           );
         }}
       />
@@ -122,20 +163,23 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     flexDirection: "row",
-    marginHorizontal: 10,
+
     height: 35,
     alignItems: "baseline",
-    paddingHorizontal: 10,
-    justifyContent: "center",
+
+    justifyContent: "space-between",
+    backgroundColor: "lightgray",
   },
   titleSearch: {
     justifyContent: "center",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 22,
     textAlign: "left",
     color: "#FF7E00",
     fontWeight: "bold",
     marginTop: 4,
+    fontFamily: "LouisGeorge",
+    paddingHorizontal: 15,
   },
 
   searchContainer: {

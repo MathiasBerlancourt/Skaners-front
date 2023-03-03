@@ -26,6 +26,7 @@ import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
 import ProductCardScreenSkan from "./containers/ProductCardScreenSkan";
 import UpdateProfileScreen from "./containers/UpdateProfileScreen";
+import ProductScreen from "./containers/ProductScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -226,6 +227,9 @@ export default function App() {
                       <Stack.Navigator>
                         <Stack.Screen name="Search">
                           {() => <SearchScreen />}
+                        </Stack.Screen>
+                        <Stack.Screen name="product screen">
+                          {() => <ProductScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
