@@ -5,8 +5,14 @@ import {
   FlatList,
   TextInput,
   ScrollView,
+  Text,
+  Image,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
+import { FontAwesome } from "@expo/vector-icons";
+
+import { TouchableOpacity } from "react-native";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -15,6 +21,8 @@ const SearchScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [sneakers, setSneakers] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const width = Dimensions.get("window").width;
+  const height = Dimensions.get("window").height;
 
   const handleName = (name) => {
     setName(name);
@@ -33,6 +41,7 @@ const SearchScreen = () => {
           `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
+        console.log("sneakers :", sneakers);
 
         setErrorMessage("");
         setIsLoading(false);
@@ -45,33 +54,55 @@ const SearchScreen = () => {
   }, [name, brand, color]);
 
   return (
-    <ScrollView>
-      <View style={styles.searchContainer}>
+    <View style={{ height: height }}>
+      <View style={styles.titleContainer}>
+        <FontAwesome name="search" size={18} color="#FF7E00" />
+        <Text style={styles.titleSearch}> Rechercher</Text>
+      </View>
+      <View
+        style={[
+          { height: 0.2 * height, alignItems: "center" },
+          styles.searchContainer,
+        ]}
+      >
         <TextInput
           placeholderTextColor="#717171"
-          placeholder="Modele"
+          placeholder="Modele..."
           style={styles.input}
           onChangeText={handleName}
           value={name}
         ></TextInput>
         <TextInput
           placeholderTextColor="#717171"
-          placeholder="Marque"
+          placeholder="Marque..."
           style={styles.input}
           onChangeText={handleBrand}
           value={brand}
         ></TextInput>
         <TextInput
           placeholderTextColor="#717171"
-          placeholder="Couleur"
+          placeholder="Couleur..."
           style={styles.input}
           onChangeText={handleColor}
           value={color}
         ></TextInput>
       </View>
-      {/* ce n'est pas possible de mettre une FlatList comme ça, ça affiche un msg d'erreur */}
-      <View>{/* <FlatList data={sneakers} /> */}</View>
-    </ScrollView>
+
+      <FlatList
+        data={sneakers}
+        renderItem={({ item }) => {
+          return (
+            <View style={(justifyContent = "center")}>
+              <Text>{item.name}</Text>
+              <Image
+                source={{ uri: item.picture }}
+                style={{ width: 200, height: 200 }}
+              />
+            </View>
+          );
+        }}
+      />
+    </View>
   );
 };
 export default SearchScreen;
@@ -79,10 +110,31 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   input: {
     backgroundColor: "lightgray",
-
-    paddingLeft: 10,
+    height: "20%",
+    borderRadius: 20,
+    paddingLeft: 20,
+    width: "80%",
   },
+
+  titleContainer: {
+    flexDirection: "row",
+    marginHorizontal: 10,
+    height: 35,
+    alignItems: "baseline",
+    paddingHorizontal: 10,
+  },
+  titleSearch: {
+    justifyContent: "center",
+    textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 15,
+    textAlign: "left",
+    color: "#FF7E00",
+    paddingLeft: 0,
+    fontWeight: "bold",
+  },
+
   searchContainer: {
-    height: "100%",
+    justifyContent: "space-evenly",
   },
 });
