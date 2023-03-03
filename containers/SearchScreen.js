@@ -25,9 +25,6 @@ const SearchScreen = () => {
   const handleColor = (color) => {
     setColor(color);
   };
-  console.log("variable name name : ", name);
-  console.log("variable brand : ", brand);
-  console.log("variable color : ", color);
 
   useEffect(() => {
     const fetchSneakers = async () => {
@@ -36,7 +33,6 @@ const SearchScreen = () => {
           `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
-        console.log("resultat recherche sneakers : ", sneakers);
 
         setErrorMessage("");
         setIsLoading(false);
