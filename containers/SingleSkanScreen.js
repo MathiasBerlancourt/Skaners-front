@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import axios from "axios";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
   const data = route.params.elem;
@@ -45,42 +46,44 @@ const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={{ height: 200, width: 500 }}
-        source={{ uri: data.pictureUrl }}
-        resizeMode="cover"
-      />
-      <View style={styles.inputBox}>
-        <TextInput
-          onChangeText={(e) => {
-            setName(e);
-          }}
-          value={name}
-          style={styles.input}
-          placeholder={"Nom de la paire"}
+    <KeyboardAwareScrollView>
+      <View style={styles.container}>
+        <Image
+          style={{ height: 200, width: 500 }}
+          source={{ uri: data.pictureUrl }}
+          resizeMode="cover"
         />
-        <TextInput
-          onChangeText={(e) => {
-            setLink(e);
-          }}
-          value={link}
-          style={styles.input}
-          placeholder={"Lien de la paire"}
-        />
-        <TextInput
-          onChangeText={(e) => {
-            setDesc(e);
-          }}
-          value={desc}
-          style={styles.textArea}
-          placeholder={"Description de la paire"}
-        />
+        <View style={styles.inputBox}>
+          <TextInput
+            onChangeText={(e) => {
+              setName(e);
+            }}
+            value={name}
+            style={styles.input}
+            placeholder={"Nom de la paire"}
+          />
+          <TextInput
+            onChangeText={(e) => {
+              setLink(e);
+            }}
+            value={link}
+            style={styles.input}
+            placeholder={"Lien de la paire"}
+          />
+          <TextInput
+            onChangeText={(e) => {
+              setDesc(e);
+            }}
+            value={desc}
+            style={styles.textArea}
+            placeholder={"Description de la paire"}
+          />
+        </View>
+        <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
+          <Text style={styles.btnCheckTxt}>CHECK</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
-        <Text style={styles.btnCheckTxt}>CHECK</Text>
-      </TouchableOpacity>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
