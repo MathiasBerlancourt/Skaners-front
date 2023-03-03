@@ -8,7 +8,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ProfileScreen({ setToken, setId, userId }) {
+export default function ProfileScreen({ setToken, setId, refresh }) {
   const [data, setData] = useState({});
 
   const navigation = useNavigation();
@@ -33,21 +33,21 @@ export default function ProfileScreen({ setToken, setId, userId }) {
     } catch (error) {
       console.log(error.message);
     }
-  }, []);
+  }, [refresh]);
 
   return (
     <View style={styles.container}>
-      {/* {data.adminRank && (
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            navigation.navigate("SkansCheck", { id: data._id });
-          }}
-        >
-          <Text style={styles.btnTxt}>Admin Panel</Text>
-        </TouchableOpacity>
-      )} */}
       <View>
+        {data.adminRank > 0 && (
+          <TouchableOpacity
+            style={styles.btnAdmin}
+            onPress={() => {
+              navigation.navigate("SkansCheck", { id: data._id });
+            }}
+          >
+            <Text style={styles.btnAdminTxt}>ADMIN</Text>
+          </TouchableOpacity>
+        )}
         <View style={styles.avatarBox}>
           <Image
             source={
@@ -83,6 +83,15 @@ export default function ProfileScreen({ setToken, setId, userId }) {
             <Text>{data.favoriteBrand}</Text>
           </View>
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("UpdateProfile", {
+              elem: data,
+            });
+          }}
+        >
+          <Text style={styles.updateText}>Mettre à jour les informations</Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity
@@ -113,6 +122,21 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderColor: "#717171",
     borderWidth: 2,
+  },
+
+  btnAdmin: {
+    position: "absolute",
+    zIndex: 1,
+    padding: hp("2%"),
+    borderRadius: wp("2%"),
+    right: 0,
+    top: hp("2%"),
+    backgroundColor: "red",
+  },
+
+  btnAdminTxt: {
+    color: "white",
+    fontWeight: "bold",
   },
 
   name: {
@@ -164,5 +188,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+  },
+
+  updateText: {
+    fontSize: hp("2%"),
+    textAlign: "center",
+    fontWeight: 500,
+    textDecorationLine: "underline",
   },
 });

@@ -23,6 +23,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
+import UpdateProfileScreen from "./containers/UpdateProfileScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const setToken = async (token) => {
     if (token) {
@@ -150,25 +152,41 @@ export default function App() {
                         >
                           {(props) => <PictureHomeView {...props} />}
                         </Stack.Screen>
-                        <Stack.Screen
-                          name="Profile"
-                          options={{
-                            title: "User Profile",
-                          }}
-                        >
+                        <Stack.Screen name="Profile">
                           {() => (
                             <ProfileScreen
                               setToken={setToken}
                               setId={setId}
-                              userId={userId}
+                              refresh={refresh}
+                            />
+                          )}
+                        </Stack.Screen>
+                        <Stack.Screen name="UpdateProfile">
+                          {(props) => (
+                            <UpdateProfileScreen
+                              {...props}
+                              setRefresh={setRefresh}
+                              refresh={refresh}
                             />
                           )}
                         </Stack.Screen>
                         <Stack.Screen name="SkansCheck">
-                          {() => <SkansCheckScreen />}
+                          {(props) => (
+                            <SkansCheckScreen
+                              {...props}
+                              setRefresh={setRefresh}
+                              refresh={refresh}
+                            />
+                          )}
                         </Stack.Screen>
                         <Stack.Screen name="SingleSkan">
-                          {() => <SingleSkanScreen />}
+                          {(props) => (
+                            <SingleSkanScreen
+                              {...props}
+                              setRefresh={setRefresh}
+                              refresh={refresh}
+                            />
+                          )}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

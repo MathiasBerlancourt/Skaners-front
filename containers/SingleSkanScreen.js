@@ -6,22 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
-  LogBox,
 } from "react-native";
-import { useRoute, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
 
-const SingleSkanScreen = () => {
-  LogBox.ignoreLogs([
-    "EventEmitter.removeListener('url', ...): Method has been deprecated. Please instead use `remove()` on the subscription returned by `EventEmitter.addListener`.",
-    "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
-  ]);
-  const { params } = useRoute();
-  const navigation = useNavigation();
-  const data = params.elem;
-  const refresh = params.refresh;
-  const setRefresh = params.setRefresh;
+const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
+  const data = route.params.elem;
 
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
