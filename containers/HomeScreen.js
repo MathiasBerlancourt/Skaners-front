@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     color: "tomato",
     fontWeight: "bold",
+    fontFamily: "LemonMilkBold",
   },
   pictureContainer: {
     paddingHorizontal: 40,

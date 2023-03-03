@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
+    fontFamily: "LouisGeorge",
     fontSize: 20,
     textAlign: "center",
     marginVertical: 20,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
   },
 
   btnTxt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     fontWeight: "bold",

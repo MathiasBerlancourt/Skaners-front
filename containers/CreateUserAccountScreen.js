@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   title: {
+    fontFamily: "LemonMilkBold",
     fontSize: 25,
     fontWeight: "bold",
     marginHorizontal: 30,
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
     height: 30,
     borderRadius: 20,
@@ -185,11 +187,13 @@ const styles = StyleSheet.create({
   },
 
   signUpTxt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
   },
   errorTxt: {
+    fontFamily: "LouisGeorge",
     color: "#F86F00",
     marginHorizontal: 20,
     fontWeight: "bold",

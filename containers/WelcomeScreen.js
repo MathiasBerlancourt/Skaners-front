@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   },
 
   txt: {
+    fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
   },

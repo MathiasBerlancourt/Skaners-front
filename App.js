@@ -23,11 +23,24 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [loaded] = useFonts({
+    LouisGeorge: require("./assets/fonts/louis_george_caf/LouisGeorgeCafe.ttf"),
+    LouisGeorgeBold: require("./assets/fonts/louis_george_caf/LouisGeorgeCafeBold.ttf"),
+    LouisGeorgeBoldItalic: require("./assets/fonts/louis_george_caf/LouisGeorgeCafeBoldItalic.ttf"),
+    LouisGeorgeItalic: require("./assets/fonts/louis_george_caf/LouisGeorgeCafeItalic.ttf"),
+    LouisGeorgeLight: require("./assets/fonts/louis_george_caf/LouisGeorgeCafeLight.ttf"),
+    LouisGeorgeLightItalic: require("./assets/fonts/louis_george_caf/LouisGeorgeCafeLightItalic.ttf"),
+    LemonMilk: require("./assets/fonts/lemon_milk/LEMONMILK-Regular.otf"),
+    LemonMilkMedium: require("./assets/fonts/lemon_milk/LEMONMILK-Medium.otf"),
+    LemonMilkBold: require("./assets/fonts/lemon_milk/LEMONMILK-Bold.otf"),
+  });
+
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -68,6 +81,10 @@ export default function App() {
 
     bootstrapAsync();
   }, []);
+
+  if (!loaded) {
+    return null;
+  }
 
   if (isLoading === true) {
     // We haven't finished checking for the token yet
