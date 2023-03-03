@@ -118,7 +118,7 @@ export default function App() {
                 <Tab.Navigator
                   screenOptions={{
                     headerShown: false,
-                    tabBarActiveTintColor: "tomato",
+                    tabBarActiveTintColor: "#FF7E00",
                     tabBarInactiveTintColor: "gray",
                   }}
                 >
@@ -146,6 +146,9 @@ export default function App() {
                           }}
                         >
                           {(...props) => <HomeScreen {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen name="Collection">
+                          {() => <CollectionScreen />}
                         </Stack.Screen>
                         <Stack.Screen
                           name="HomeView"
