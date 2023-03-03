@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Text,
   TextInput,
@@ -6,36 +6,37 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import imagesAvatar from "../assets/Json/avatar-url.json";
-import Avatar from "../components/Avatars";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
-const CreateUserAccountScreen = ({ setToken, setId }) => {
+const CreateUserAccountScreen = () => {
   const [email, setEmail] = useState("");
   const [userName, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [sex, setSex] = useState("");
-  const [favoriteBrand, setFavoriteBrand] = useState();
-  const [shoeSize, setShoeSize] = useState("");
-  const [username, setUserName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [isSelected, setIsSelected] = useState(false);
-
-  const [submit, setSubmit] = useState(false);
+  // const [dateOfBirth, setDateOfBirth] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const navigation = useNavigation();
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [displaymode, setMode] = useState("date");
+  const [isDisplayDate, setShow] = useState(false);
+  const changeSelectedDate = (event, selectedDate) => {
+    const currentDate = selectedDate || dateOfBirth;
+    setDateOfBirth(currentDate);
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const displayDatepicker = () => {
+    showMode("date");
+  };
+  console.log("date of birth : ", dateOfBirth);
   return (
-    <View>
+    <KeyboardAwareScrollView>
       <Text style={styles.title}>Inscris toi !</Text>
       <View style={styles.createContainer}>
         <TextInput
@@ -72,37 +73,61 @@ const CreateUserAccountScreen = ({ setToken, setId }) => {
           }}
           secureTextEntry={true}
         />
-        <View />
+
+        <Text style={styles.txtDoB}>Date of birth</Text>
+
+        {/* <TouchableOpacity onPress={displayDatepicker}>
+          {isDisplayDate && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateOfBirth}
+              mode={displaymode}
+              is24Hour={true}
+              display="default"
+              onChange={changeSelectedDate}
+            />
+          )}
+        </TouchableOpacity> */}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Date de naissance (format mm-jj-aaaa)"
+          placeholderTextColor="whitesmoke"
+          onChangeText={(input) => {
+            setDateOfBirth(input);
+          }}
+        />
       </View>
+
+      <View />
+
       <TouchableOpacity
         style={styles.signUpBtn}
-        disabled={submit}
         onPress={() => {
-          if (!email || !userName || !password || !confirmPassword) {
+          if (
+            !email ||
+            !userName ||
+            !password ||
+            !confirmPassword ||
+            !dateOfBirth
+          ) {
             return setErrorMessage("Remplissez tous les champs");
           }
           if (password !== confirmPassword) {
             return setErrorMessage("Mot de passe différents");
           }
-          // setSubmit(true);
-          //METTRE UN NAVIGATION VERS LA SUITE
-        }}
-      >
-        <Text style={styles.signUpTxt}>CONTINUER</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
           navigation.navigate("Finalize User Account", {
             email: email,
             userName: userName,
             password: password,
+            dateOfBirth: dateOfBirth,
           });
         }}
       >
-        <Text>BOUTTON TEST</Text>
+        <Text style={styles.signUpTxt}>CONTINUER</Text>
       </TouchableOpacity>
       <Text style={styles.errorTxt}>{errorMessage}</Text>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -121,6 +146,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 20,
+  },
+
+  containerDoB: {
+    backgroundColor: "lightgray",
+    flexDirection: "row",
+    height: 30,
+    borderRadius: 20,
+    marginVertical: 15,
+    marginHorizontal: 20,
+    paddingLeft: 10,
+    width: "25%",
+  },
+  txtDoB: {
+    color: "whitesmoke",
+    paddingVertical: 6,
+  },
+  DateTimePicker: {
+    // marginRight: 30,
+    // paddingBottom: 50,
   },
 
   input: {
