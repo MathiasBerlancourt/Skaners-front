@@ -140,11 +140,11 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LemonMilkBold",
     fontSize: hp("3%"),
     textAlign: "center",
     color: "#515151",
-    marginTop: 20,
+    marginTop: hp("1%"),
     fontWeight: "bold",
     textTransform: "uppercase",
   },
@@ -172,6 +172,8 @@ const styles = StyleSheet.create({
 
   labelColor: {
     color: "#717171",
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
   },
 
   btn: {
@@ -193,9 +195,10 @@ const styles = StyleSheet.create({
   },
 
   updateText: {
-    fontSize: hp("2%"),
+    fontSize: hp("2.3%"),
     textAlign: "center",
     fontWeight: 500,
+    fontFamily: "LouisGeorge",
     textDecorationLine: "underline",
   },
 });

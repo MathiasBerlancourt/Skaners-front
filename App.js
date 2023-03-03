@@ -154,9 +154,6 @@ export default function App() {
                         <Stack.Screen
                           name="Home"
                           options={{
-                            title: "Home",
-                            headerStyle: { backgroundColor: "red" },
-                            headerTitleStyle: { color: "white" },
                             headerRight: () => {
                               return <ProfileButton />;
                             },

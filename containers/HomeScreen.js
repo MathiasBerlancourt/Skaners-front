@@ -47,7 +47,7 @@ export default function HomeScreen() {
   } else
     return (
       <ScrollView>
-        <View style={{ paddingTop: height * 0.05 }}>
+        <View style={{ paddingTop: 10 }}>
           <Text style={styles.title}>MES DERNIERS LIKES</Text>
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: "#FF7E00",
     paddingLeft: 15,
+    fontFamily: "LouisGeorge",
   },
   pictureContainer: {
     paddingHorizontal: 0,
