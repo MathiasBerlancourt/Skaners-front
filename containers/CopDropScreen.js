@@ -8,13 +8,15 @@ import {
 } from "react-native";
 import TinderCard from "react-tinder-card";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CopDropScreen = () => {
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState("");
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
   const [idLike, setIdLike] = useState();
-  const idUser = "63fe08486bf6b17f08cf4a0d";
+  const [idUser, setIdUser] = useState();
+
   useEffect(() => {
     const sendLike = async () => {
       try {
@@ -26,6 +28,7 @@ const CopDropScreen = () => {
           { skanId: idLike, userId: idUser }
         );
         console.log(response.data);
+        setLastDirection("");
       } catch (error) {
         console.log(error.message);
       }
@@ -37,6 +40,8 @@ const CopDropScreen = () => {
         );
 
         // condition isCheck puis filter du tableau pr afficher seulement les skans valider
+        // condition parcourir le tab skans du user (req) et faire un filter include des skans valider qui sont pas like
+
         setData(response.data);
 
         setIsLoad(true);
@@ -44,6 +49,11 @@ const CopDropScreen = () => {
         console.log(error.message);
       }
     };
+    const getId = async () => {
+      const idUser = await AsyncStorage.getItem("userId");
+      setIdUser(idUser);
+    };
+    getId();
     fetchData();
     sendLike();
   }, [lastDirection]);
