@@ -23,6 +23,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
+import ProductCardScreenSkan from "./containers/ProductCardScreenSkan";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -232,6 +233,9 @@ export default function App() {
                       <Stack.Navigator>
                         <Stack.Screen name="Collection">
                           {() => <CollectionScreen />}
+                        </Stack.Screen>
+                        <Stack.Screen name="ProductCardSkan">
+                          {() => <ProductCardScreenSkan />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

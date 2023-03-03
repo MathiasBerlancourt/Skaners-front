@@ -44,7 +44,7 @@ export default function ProfileScreen({ setToken, setId, userId }) {
         />
         <Text style={styles.name}>{data.userName}</Text>
       </View>
-      {data.adminRank && (
+      {data.adminRank > 0 && (
         <TouchableOpacity
           style={styles.btn}
           onPress={() => {

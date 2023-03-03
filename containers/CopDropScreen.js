@@ -38,11 +38,15 @@ const CopDropScreen = () => {
         const response = await axios.get(
           "https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans"
         );
+        if (!idUser) {
+          return;
+        }
+        // je filtre le tableau une premiere fois pour avoir que les skans validés
+        const tempTab = response.data.filter((sneaker) => sneaker.isChecked);
 
-        // condition isCheck puis filter du tableau pr afficher seulement les skans valider
-        // condition parcourir le tab skans du user (req) et faire un filter include des skans valider qui sont pas like
+        // je filtre une 2 eme fois pour avoir que les skans validés qui ne viennent pas de notre user et je setData
 
-        setData(response.data);
+        setData(tempTab.filter((sneaker) => sneaker.userId !== idUser));
 
         setIsLoad(true);
       } catch (error) {
@@ -56,7 +60,7 @@ const CopDropScreen = () => {
     getId();
     fetchData();
     sendLike();
-  }, [lastDirection]);
+  }, [lastDirection, idUser]);
 
   const swiped = (direction, id) => {
     setLastDirection(direction);
@@ -68,16 +72,20 @@ const CopDropScreen = () => {
   return isLoad ? (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
-        {data.map((shoe) => (
-          <TinderCard key={shoe._id} onSwipe={(dir) => swiped(dir, shoe._id)}>
-            <View style={styles.card}>
-              <ImageBackground
-                style={styles.cardImage}
-                source={{ uri: shoe.pictureUrl }}
-              ></ImageBackground>
-            </View>
-          </TinderCard>
-        ))}
+        {data.length > 0 ? (
+          data.map((shoe) => (
+            <TinderCard key={shoe._id} onSwipe={(dir) => swiped(dir, shoe._id)}>
+              <View style={styles.card}>
+                <ImageBackground
+                  style={styles.cardImage}
+                  source={{ uri: shoe.pictureUrl }}
+                ></ImageBackground>
+              </View>
+            </TinderCard>
+          ))
+        ) : (
+          <Text>Quel crack t'as swipe toutes les paires</Text>
+        )}
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.copText}>COP</Text>
