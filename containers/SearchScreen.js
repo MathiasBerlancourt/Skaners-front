@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { TextInput } from "react-native-paper";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import axios from "axios";
-import { FlatList } from "react-native-web";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -46,7 +49,7 @@ const SearchScreen = () => {
   }, [name, brand, color]);
 
   return (
-    <KeyboardAwareScrollView>
+    <ScrollView>
       <View style={styles.searchContainer}>
         <TextInput
           placeholderTextColor="whitesmoke"
@@ -70,10 +73,9 @@ const SearchScreen = () => {
           value={color}
         ></TextInput>
       </View>
-      <View>
-        <FlatList data={sneakers} />
-      </View>
-    </KeyboardAwareScrollView>
+      {/* ce n'est pas possible de mettre une FlatList comme ça, ça affiche un msg d'erreur */}
+      <View>{/* <FlatList data={sneakers} /> */}</View>
+    </ScrollView>
   );
 };
 export default SearchScreen;

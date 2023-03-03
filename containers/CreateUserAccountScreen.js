@@ -5,19 +5,14 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
-  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DateTimePicker from "@react-native-community/datetimepicker";
-
 const CreateUserAccountScreen = () => {
   const [email, setEmail] = useState("");
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [dateOfBirth, setDateOfBirth] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigation = useNavigation();
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
@@ -31,10 +26,13 @@ const CreateUserAccountScreen = () => {
     setShow(true);
     setMode(currentMode);
   };
+
+  // ne crée pas de fonctions si tu ne les utilises pas, ça réduit la lisibilité
+
   const displayDatepicker = () => {
     showMode("date");
   };
-  console.log("date of birth : ", dateOfBirth);
+
   return (
     <KeyboardAwareScrollView>
       <Text style={styles.title}>Inscris toi !</Text>

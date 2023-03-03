@@ -26,23 +26,10 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
 
   useEffect(() => {
     const signUp = async () => {
-      // //Debut du test
-      // console.log("email: ", accountInfos.email);
-      // console.log("userName: ", accountInfos.userName);
-      // console.log("password: ", accountInfos.password);
-      // console.log("firstName:", accountInfos.firstName);
-      // console.log("lastName: ", accountInfos.lastName);
-      // console.log("dateOfBirth:", accountInfos.dateOfBirth);
-      // console.log(" phoneNumber:", accountInfos.phoneNumber);
-      // console.log("sex:", accountInfos.sex);
-      // console.log("favoriteBrand:", accountInfos.favoriteBrand);
-      // return;
-      // //fin du test
       try {
         if (submit) {
           const response = await axios.post(
             "https://site--skaners-back--jhlzj9jljvpm.code.run/signup",
-            // "http://localhost:3310/signup",
             {
               email: accountInfos.email,
               userName: accountInfos.userName,
@@ -65,17 +52,6 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
           }
         }
       } catch (error) {
-        console.log("error message server : ", error.message);
-        console.log("email: ", accountInfos.email);
-        console.log("userName: ", accountInfos.userName);
-        console.log("password: ", accountInfos.password);
-        console.log("firstName:", accountInfos.firstName);
-        console.log("lastName: ", accountInfos.lastName);
-        console.log("dateOfBirth:", accountInfos.dateOfBirth);
-        console.log(" phoneNumber:", accountInfos.phoneNumber);
-        console.log("sex:", accountInfos.sex);
-        console.log("favoriteBrand:", accountInfos.favoriteBrand);
-
         setErrorMessage("Adresse email ou userName déjà utilisé");
         setSubmit(false);
       }

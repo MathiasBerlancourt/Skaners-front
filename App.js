@@ -7,7 +7,6 @@ import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
-// import SignUpScreen from "./containers/SignUpScreen";
 import CreateUserAccountScreen from "./containers/CreateUserAccountScreen";
 import FinalizeUserAccountScreen from "./containers/FinalizeUserAccountScreen";
 import ChooseUserAvatarScreen from "./containers/ChooseUserAvatarScreen";
@@ -24,7 +23,6 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PIctureHomeView";
-import ChooseYourAvatarScreens from "./containers/ChooseUserAvatarScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -33,8 +31,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
-  console.log("usertoken : ", userToken);
-  console.log("userId : ", userId);
+
   const setToken = async (token) => {
     if (token) {
       await AsyncStorage.setItem("userToken", token);
