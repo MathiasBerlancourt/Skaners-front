@@ -48,21 +48,21 @@ const SearchScreen = () => {
     <ScrollView>
       <View style={styles.searchContainer}>
         <TextInput
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Modele"
           style={styles.input}
           onChangeText={handleName}
           value={name}
         ></TextInput>
         <TextInput
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Marque"
           style={styles.input}
           onChangeText={handleBrand}
           value={brand}
         ></TextInput>
         <TextInput
-          placeholderTextColor="whitesmoke"
+          placeholderTextColor="#717171"
           placeholder="Couleur"
           style={styles.input}
           onChangeText={handleColor}

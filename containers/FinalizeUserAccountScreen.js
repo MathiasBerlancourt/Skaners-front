@@ -44,7 +44,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <TextInput
             style={styles.inputWithTitle}
             placeholder="Michael"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             onChangeText={(input) => {
               setFirstName(input);
             }}
@@ -56,7 +56,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <TextInput
             style={styles.inputWithTitle}
             placeholder="Jordan"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             onChangeText={(input) => {
               setLastName(input);
             }}
@@ -68,7 +68,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <Text style={styles.inputTitle}>Numéro de téléphone</Text>
           <TextInput
             placeholder="07-XX-XX-XX-XX"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             value={phoneNumber}
             style={styles.inputWithTitle}
             onChangeText={(input) => {
@@ -80,7 +80,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <Text style={styles.inputTitle}>Sexe</Text>
           <TextInput
             placeholder="M"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             style={styles.inputWithTitle}
             onChangeText={(input) => {
               setSex(input);
@@ -92,7 +92,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <Text style={styles.inputTitle}>Marque(s) favorite(s)</Text>
           <TextInput
             placeholder="Air Jordan"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             style={styles.inputWithTitle}
             onChangeText={(input) => {
               setFavoriteBrand(input);
@@ -104,7 +104,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
           <Text style={styles.inputTitle}>Pointure</Text>
           <TextInput
             placeholder="43"
-            placeholderTextColor="whitesmoke"
+            placeholderTextColor="#717171"
             style={styles.inputWithTitle}
             onChangeText={(input) => {
               setShoeSize(input);
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "orange",
+    borderBottomColor: "#FF7E00",
     borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 20,

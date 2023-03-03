@@ -40,6 +40,7 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
               phoneNumber: accountInfos.phoneNumber,
               sex: accountInfos.sex,
               favoriteBrand: accountInfos.favoriteBrand,
+              shoeSize: accountInfos.shoeSize,
               pictureUrl: avatar,
             }
           );
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "orange",
+    borderBottomColor: "#FF7E00",
     borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 20,
