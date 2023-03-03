@@ -22,7 +22,7 @@ export default function ProfileScreen({ setToken, setId, userId }) {
           setData(response.data);
           setId(id);
         } else {
-          alert("Noooooo");
+          alert("Bad request");
         }
       };
       fetchData();
@@ -30,6 +30,8 @@ export default function ProfileScreen({ setToken, setId, userId }) {
       console.log(error.message);
     }
   }, []);
+
+  console.log(data);
 
   return (
     <View style={styles.container}>
@@ -48,7 +50,7 @@ export default function ProfileScreen({ setToken, setId, userId }) {
         <TouchableOpacity
           style={styles.btn}
           onPress={() => {
-            navigation.navigate("SkansCheck", { id: userId });
+            navigation.navigate("SkansCheck", { id: data._id });
           }}
         >
           <Text style={styles.btnTxt}>Admin Panel</Text>

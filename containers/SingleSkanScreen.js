@@ -1,30 +1,95 @@
-import { Text, TextInput, Image, View, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import {
+  Text,
+  TextInput,
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  LogBox,
+} from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
 
 const SingleSkanScreen = () => {
+  LogBox.ignoreLogs([
+    "EventEmitter.removeListener('url', ...): Method has been deprecated. Please instead use `remove()` on the subscription returned by `EventEmitter.addListener`.",
+    "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+  ]);
   const { params } = useRoute();
+  const navigation = useNavigation();
+  const data = params.elem;
+  const refresh = params.refresh;
+  const setRefresh = params.setRefresh;
 
-  console.log(params);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [link, setLink] = useState("");
 
-  const sendSkanResponse = async () => {};
+  const updateCheck = {
+    skanId: data._id,
+    sneakerName: name,
+    description: desc,
+    linkUrl: link,
+  };
+
+  const sendSkanResponse = async () => {
+    try {
+      await axios.put(
+        "https://site--skaners-back--jhlzj9jljvpm.code.run/checkSkan",
+        updateCheck
+      );
+      const createTwoButtonAlert = () =>
+        Alert.alert("Message", "Le skan a été checké", [
+          { text: "OK", onPress: () => navigation.navigate("SkansCheck") },
+        ]);
+
+      setRefresh(!refresh);
+
+      createTwoButtonAlert();
+    } catch (error) {
+      console.log(error.message);
+      alert("Votre requête a échoué");
+    }
+  };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Image
         style={{ height: 200, width: 500 }}
-        source={{ uri: params.picture }}
-        resizeMode="stretch"
+        source={{ uri: data.pictureUrl }}
+        resizeMode="cover"
       />
       <View style={styles.inputBox}>
-        <TextInput style={styles.input} placeholder={"Nom de la paire"} />
-        <TextInput style={styles.input} placeholder={"Lien de la paire"} />
         <TextInput
+          onChangeText={(e) => {
+            setName(e);
+          }}
+          value={name}
+          style={styles.input}
+          placeholder={"Nom de la paire"}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            setLink(e);
+          }}
+          value={link}
+          style={styles.input}
+          placeholder={"Lien de la paire"}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            setDesc(e);
+          }}
+          value={desc}
           style={styles.textArea}
           placeholder={"Description de la paire"}
         />
       </View>
+      <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
+        <Text style={styles.btnCheckTxt}>CHECK</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -45,19 +110,32 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontSize: "18em",
+    fontSize: 18,
     padding: 10,
     marginVertical: 15,
     borderWidth: 2,
     position: "relative",
   },
   textArea: {
-    fontSize: "18em",
+    fontSize: 18,
     paddingBottom: 10,
     paddingHorizontal: 10,
     marginVertical: 25,
     height: 100,
     borderColor: "black",
     borderWidth: 2,
+  },
+
+  btnCheck: {
+    backgroundColor: "green",
+    height: 50,
+    width: 300,
+    justifyContent: "center",
+  },
+
+  btnCheckTxt: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 20,
   },
 });

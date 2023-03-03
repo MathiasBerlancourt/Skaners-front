@@ -205,7 +205,10 @@ export default function App() {
                   >
                     {() => (
                       <Stack.Navigator>
-                        <Stack.Screen name="Camera">
+                        <Stack.Screen
+                          name="Camera"
+                          options={{ headerShown: false }}
+                        >
                           {() => <CameraScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>

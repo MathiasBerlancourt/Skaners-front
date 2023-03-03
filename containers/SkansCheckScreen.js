@@ -25,7 +25,7 @@ const SkansCheckScreen = () => {
             `https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans`
           );
 
-          setData(response.data);
+          setData(response.data.reverse());
         } else {
           alert("Noooooo");
         }
@@ -58,7 +58,9 @@ const SkansCheckScreen = () => {
                 style={{ flexDirection: "row", alignItems: "center" }}
                 onPress={() => {
                   navigation.navigate("SingleSkan", {
-                    picture: elem.pictureUrl,
+                    elem,
+                    setRefresh,
+                    refresh,
                   });
                 }}
                 key={i}
