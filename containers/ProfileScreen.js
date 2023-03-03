@@ -31,8 +31,6 @@ export default function ProfileScreen({ setToken, setId, userId }) {
     }
   }, []);
 
-  console.log(data);
-
   return (
     <View style={styles.container}>
       <View style={styles.avatarBox}>
@@ -44,7 +42,7 @@ export default function ProfileScreen({ setToken, setId, userId }) {
           }
           style={styles.avatar}
         />
-        <Text style={styles.name}>{data.username}</Text>
+        <Text style={styles.name}>{data.userName}</Text>
       </View>
       {data.adminRank && (
         <TouchableOpacity

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 export default function SignInScreen({ setToken, setId }) {
-  const [email, setEmail] = useState("admin678@mail.com");
+  const [email, setEmail] = useState("admin6780@mail.com");
   const [password, setPassword] = useState("azerty");
   const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");

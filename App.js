@@ -22,7 +22,7 @@ import ProfileButton from "./components/ProfileButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import PictureHomeView from "./components/PIctureHomeView";
+import PictureHomeView from "./components/PictureHomeView";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
