@@ -119,7 +119,6 @@ const SearchScreen = () => {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                style={{ backgroundColor: "red" }}
                 onPress={() => {
                   navigation.navigate("ProductScreen", { id: item._id });
                 }}
@@ -129,6 +128,11 @@ const SearchScreen = () => {
                     height: "auto",
                     alignItems: "center",
                     backgroundColor: "white",
+
+                    borderRadius: 30,
+                    paddingVertical: 15,
+                    marginVertical: 3,
+                    marginHorizontal: 10,
                   }}
                 >
                   <Text style={{ fontWeight: "bold", color: "gray" }}>

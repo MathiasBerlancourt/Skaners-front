@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   containerNameAndLike: {
     flexDirection: "row",
-    marginHorizontal: 10,
+    marginHorizontal: "10%",
     alignItems: "flex-start",
   },
   sneakerName: {
