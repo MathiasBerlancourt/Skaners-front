@@ -188,14 +188,18 @@ export default function CameraScreen({ navigation }) {
               }}
             >
               <Button
-                title="Recommencer"
+                title="Annuler"
                 onPress={() => setImage(null)}
-                icon="retweet"
+                icon="trash"
               />
               <Button title="Skanner" onPress={savePicture} icon="check" />
             </View>
           ) : (
-            <ActivityIndicator style={styles.indicator} size={"large"} />
+            <ActivityIndicator
+              style={styles.indicator}
+              color={"#FF7E00"}
+              size={"large"}
+            />
           )}
         </View>
       )}

@@ -4,14 +4,12 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  ScrollView,
   Text,
   Image,
   Dimensions,
 } from "react-native";
 import axios from "axios";
-import { FontAwesome } from "@expo/vector-icons";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -21,10 +19,8 @@ const SearchScreen = () => {
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [sneakers, setSneakers] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
   const navigation = useNavigation();
@@ -47,11 +43,9 @@ const SearchScreen = () => {
         );
         setSneakers(response.data);
 
-        setErrorMessage("");
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
-        setErrorMessage(error);
+        console.log(error.message);
       }
     };
     fetchSneakers();
@@ -117,34 +111,39 @@ const SearchScreen = () => {
           ></TextInput>
         </View>
       )}
-      <FlatList
-        data={sneakers}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("product screen", { id: item._id });
-              }}
-            >
-              <View
-                style={{
-                  height: "auto",
-                  alignItems: "center",
-                  backgroundColor: "whitesmoke",
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={sneakers}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                style={{ backgroundColor: "red" }}
+                onPress={() => {
+                  navigation.navigate("ProductScreen", { id: item._id });
                 }}
               >
-                <Text style={{ fontWeight: "bold", color: "gray" }}>
-                  {item.name}
-                </Text>
-                <Image
-                  source={{ uri: item.picture }}
-                  style={{ width: 200, height: 200 }}
-                />
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+                <View
+                  style={{
+                    height: "auto",
+                    alignItems: "center",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold", color: "gray" }}>
+                    {item.name}
+                  </Text>
+                  <Image
+                    source={{ uri: item.picture }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      )}
     </View>
   );
 };

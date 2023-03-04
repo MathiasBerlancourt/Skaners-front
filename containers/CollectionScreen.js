@@ -34,9 +34,9 @@ const CollectionScreen = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
+    { key: "skans", title: "Skans" },
     { key: "favorites", title: "Favorites" },
     { key: "likes", title: "Likes" },
-    { key: "skans", title: "Skans" },
   ]);
   return (
     <TabView

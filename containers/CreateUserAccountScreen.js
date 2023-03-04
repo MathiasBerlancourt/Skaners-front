@@ -30,15 +30,13 @@ const CreateUserAccountScreen = () => {
     setMode(currentMode);
   };
 
-  // ne crée pas de fonctions si tu ne les utilises pas, ça réduit la lisibilité
-
   const displayDatepicker = () => {
     showMode("date");
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <Text style={styles.title}>Inscris toi !</Text>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
+      <Text style={styles.title}>CRÉER MON COMPTE</Text>
       <View style={styles.createContainer}>
         <TextInput
           style={styles.input}

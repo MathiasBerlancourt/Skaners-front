@@ -58,7 +58,7 @@ export default function UpdateProfileScreen({ route, navigation }) {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.container}>
         <View>
           <View style={styles.avatarBox}>
@@ -143,6 +143,8 @@ const styles = StyleSheet.create({
   },
 
   txtInput: {
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
     borderBottomWidth: 1,
     borderBottomColor: "#515151",
     paddingVertical: 3,
@@ -188,7 +190,8 @@ const styles = StyleSheet.create({
 
   labelColor: {
     color: "#717171",
-    marginBottom: hp("1%"),
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
   },
 
   btn: {
@@ -205,13 +208,6 @@ const styles = StyleSheet.create({
   btnTxt: {
     color: "white",
     fontSize: 20,
-    fontWeight: "bold",
-  },
-
-  updateText: {
-    fontSize: hp("2%"),
-    textAlign: "center",
-    fontWeight: 500,
-    textDecorationLine: "underline",
+    fontFamily: "LouisGeorge",
   },
 });

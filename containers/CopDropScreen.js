@@ -24,11 +24,10 @@ const CopDropScreen = () => {
         if (lastDirection !== "right") {
           return;
         }
-        const response = await axios.put(
+        await axios.put(
           "https://site--skaners-back--jhlzj9jljvpm.code.run/user/likeSkan",
           { skanId: idLike, userId: idUser }
         );
-        console.log(response.data);
         setLastDirection("");
       } catch (error) {
         console.log(error.message);

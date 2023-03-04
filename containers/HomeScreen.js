@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import Loading from "../components/Loading";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,15 +25,16 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchPictures = async () => {
       try {
+        const userId = await AsyncStorage.getItem("userId");
         const [responseParcourir, responseLikes] = await Promise.all([
           axios.get(
             "https://site--skaners-back--jhlzj9jljvpm.code.run/pictures"
           ),
           axios.get(
-            "https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans"
+            `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
           ),
         ]);
-        setSkans(responseLikes.data);
+        setSkans(responseLikes.data.skans.reverse());
         setPictures(responseParcourir.data);
         setIsLoading(false);
       } catch (error) {

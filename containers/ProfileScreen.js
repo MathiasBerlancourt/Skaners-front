@@ -42,16 +42,6 @@ export default function ProfileScreen({ navigation, setToken }) {
   ) : (
     <View style={styles.container}>
       <View>
-        {data.adminRank > 0 && (
-          <TouchableOpacity
-            style={styles.btnAdmin}
-            onPress={() => {
-              navigation.navigate("SkansCheck", { id: data._id });
-            }}
-          >
-            <Text style={styles.btnAdminTxt}>ADMIN</Text>
-          </TouchableOpacity>
-        )}
         <View style={styles.avatarBox}>
           <Image
             source={
@@ -61,30 +51,32 @@ export default function ProfileScreen({ navigation, setToken }) {
             }
             style={styles.avatar}
           />
-          <Text style={styles.name}>{data.firstName}</Text>
-          <Text>{data.userName}</Text>
+          <Text style={styles.name}>
+            {data.firstName ? data.firstName : data.userName}
+          </Text>
+          <Text style={styles.txt}>{data.firstName && data.userName}</Text>
         </View>
         <View style={styles.parameters}>
           <Text style={styles.paramsTitle}>PARAMETRES</Text>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Nom d'utilisateur</Text>
-            <Text>{data.userName}</Text>
+            <Text style={styles.txt}>{data.userName}</Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Adresse e-mail</Text>
-            <Text>{data.email}</Text>
+            <Text style={styles.txt}>{data.email}</Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Numéro de téléphone</Text>
-            <Text>{data.phoneNumber}</Text>
+            <Text style={styles.txt}>{data.phoneNumber}</Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Pointure</Text>
-            <Text>{data.shoeSize} EU</Text>
+            <Text style={styles.txt}>{data.shoeSize} EU</Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Marque favorite</Text>
-            <Text>{data.favoriteBrand}</Text>
+            <Text style={styles.txt}>{data.favoriteBrand}</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -98,6 +90,17 @@ export default function ProfileScreen({ navigation, setToken }) {
         </TouchableOpacity>
       </View>
 
+      {data.adminRank > 0 && (
+        <TouchableOpacity
+          style={styles.btnAdmin}
+          onPress={() => {
+            navigation.navigate("SkansCheck", { id: data._id });
+          }}
+        >
+          <Text style={styles.btnAdminTxt}>Check the Skans</Text>
+        </TouchableOpacity>
+      )}
+
       <TouchableOpacity
         style={styles.btn}
         onPress={() => {
@@ -106,7 +109,7 @@ export default function ProfileScreen({ navigation, setToken }) {
           AsyncStorage.removeItem("userPfp");
         }}
       >
-        <Text style={styles.btnTxt}>Deconnexion</Text>
+        <Text style={styles.btnTxt}>Déconnexion</Text>
       </TouchableOpacity>
     </View>
   );
@@ -120,6 +123,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
+  txt: {
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
+  },
+
   avatar: {
     height: 100,
     width: 100,
@@ -130,18 +138,14 @@ const styles = StyleSheet.create({
   },
 
   btnAdmin: {
-    position: "absolute",
-    zIndex: 1,
-    padding: hp("2%"),
+    padding: hp("1.5%"),
     borderRadius: wp("2%"),
-    right: 0,
-    top: hp("2%"),
     backgroundColor: "red",
   },
 
   btnAdminTxt: {
     color: "white",
-    fontWeight: "bold",
+    fontFamily: "LouisGeorge",
   },
 
   name: {
@@ -185,24 +189,22 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#000",
     borderRadius: 15,
-    width: "80%",
+    width: wp(80),
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,
-    marginVertical: 40,
+    marginVertical: hp("2.5%"),
   },
 
   btnTxt: {
     fontFamily: "LouisGeorge",
     color: "white",
     fontSize: 20,
-    fontWeight: "bold",
   },
 
   updateText: {
     fontSize: hp("2.3%"),
     textAlign: "center",
-    fontWeight: 500,
     fontFamily: "LouisGeorge",
     textDecorationLine: "underline",
   },

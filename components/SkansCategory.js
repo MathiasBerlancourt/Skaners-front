@@ -25,7 +25,7 @@ const SkansCategory = () => {
         const response = await axios.get(
           `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
         );
-        setData(response.data.skans);
+        setData(response.data.skans.reverse());
 
         setIsLoad(true);
       } catch (error) {

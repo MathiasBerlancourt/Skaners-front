@@ -23,6 +23,10 @@ import ProfileButton from "./components/ProfileButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
 import { Image, StyleSheet } from "react-native";
 import ProductScreen from "./containers/ProductScreen";
@@ -81,6 +85,8 @@ export default function App() {
       resizeMode: "contain",
     },
   });
+
+  // console.log(useWindowDimensions());
 
   return (
     <NavigationContainer>
@@ -213,12 +219,35 @@ export default function App() {
                         >
                           {(...props) => <HomeScreen {...props} />}
                         </Stack.Screen>
-                        <Stack.Screen name="Collection">
+                        <Stack.Screen
+                          name="Collection"
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
+                        >
                           {() => <CollectionScreen />}
                         </Stack.Screen>
                         <Stack.Screen
                           name="HomeView"
-                          options={{ title: "Picture Home View" }}
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
                         >
                           {(props) => <PictureHomeView {...props} />}
                         </Stack.Screen>
@@ -322,8 +351,21 @@ export default function App() {
                         >
                           {(props) => <SearchScreen {...props} />}
                         </Stack.Screen>
-                        <Stack.Screen name="product screen">
-                          {() => <ProductScreen />}
+                        <Stack.Screen
+                          name="ProductScreen"
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
+                        >
+                          {(props) => <ProductScreen {...props} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
@@ -335,7 +377,6 @@ export default function App() {
                       tabBarLabel: "",
                       tabBarStyle: { display: "none" },
                       tabBarIcon: ({ color, size }) => (
-                        // <FontAwesome5 name="camera" size={35} color={color} />
                         <Ionicons name="aperture" size={35} color={"#FF7E00"} />
                       ),
                     }}
@@ -357,7 +398,7 @@ export default function App() {
                       tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
                         <MaterialIcons
-                          name="collections"
+                          name="favorite"
                           size={size}
                           color={color}
                         />
@@ -382,7 +423,20 @@ export default function App() {
                         >
                           {(props) => <CollectionScreen {...props} />}
                         </Stack.Screen>
-                        <Stack.Screen name="ProductCardSkanScreen">
+                        <Stack.Screen
+                          name="ProductCardSkanScreen"
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
+                        >
                           {(props) => <ProductCardSkanScreen {...props} />}
                         </Stack.Screen>
                       </Stack.Navigator>
@@ -393,8 +447,8 @@ export default function App() {
                     options={{
                       tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons
-                          name="shoe-sneaker"
+                        <MaterialIcons
+                          name="inventory"
                           size={size}
                           color={color}
                         />
