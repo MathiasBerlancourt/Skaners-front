@@ -6,12 +6,14 @@ import {
 } from "react-native-responsive-screen";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
+import Loading from "../components/Loading";
 
-export default function ProfileScreen({ setToken, setId, refresh }) {
+export default function ProfileScreen({ navigation, setToken }) {
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     try {
@@ -24,18 +26,20 @@ export default function ProfileScreen({ setToken, setId, refresh }) {
           );
 
           setData(response.data);
-          setId(id);
         } else {
           alert("Bad request");
         }
       };
       fetchData();
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
     }
-  }, [refresh]);
+  }, [isFocused]);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <View style={styles.container}>
       <View>
         {data.adminRank > 0 && (
@@ -98,7 +102,8 @@ export default function ProfileScreen({ setToken, setId, refresh }) {
         style={styles.btn}
         onPress={() => {
           setToken(null);
-          setId(null);
+          AsyncStorage.removeItem("userId");
+          AsyncStorage.removeItem("userPfp");
         }}
       >
         <Text style={styles.btnTxt}>Deconnexion</Text>

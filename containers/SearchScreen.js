@@ -11,10 +11,10 @@ import {
 } from "react-native";
 import axios from "axios";
 import { FontAwesome } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const SearchScreen = () => {
@@ -46,7 +46,6 @@ const SearchScreen = () => {
           `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
-        console.log("sneakers :", sneakers);
 
         setErrorMessage("");
         setIsLoading(false);
@@ -118,7 +117,6 @@ const SearchScreen = () => {
           ></TextInput>
         </View>
       )}
-
       <FlatList
         data={sneakers}
         renderItem={({ item }) => {

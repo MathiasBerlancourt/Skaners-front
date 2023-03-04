@@ -8,29 +8,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
+import Loading from "./Loading";
 
 const SkansCategory = () => {
-  const [idUser, setIdUser] = useState(null);
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
-  const [refreshData, setRefreshData] = useState(false);
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    const getId = async () => {
-      const idUser = await AsyncStorage.getItem("userId");
-      setIdUser(idUser);
-    };
-
     const fetchData = async () => {
+      const userId = await AsyncStorage.getItem("userId");
       try {
-        if (!idUser) {
-          return;
-        }
         const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${idUser}`
+          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
         );
         setData(response.data.skans);
 
@@ -39,25 +32,20 @@ const SkansCategory = () => {
         console.log(error.message);
       }
     };
-
-    getId();
     fetchData();
-  }, [idUser, refreshData]);
+  }, [isFocused]);
 
   return isLoad ? (
     <View style={styles.background}>
       <ScrollView>
         <View style={styles.skanContainer}>
-          {data.map((skan) => {
+          {data.map((skan, index) => {
             return (
               <TouchableOpacity
-                key={skan._id}
+                key={index}
                 onPress={() => {
-                  navigation.navigate("ProductCardSkan", {
+                  navigation.navigate("ProductCardSkanScreen", {
                     product: skan,
-                    idUser: idUser,
-                    setRefreshData: setRefreshData,
-                    refreshData: refreshData,
                   });
                 }}
               >
@@ -69,7 +57,7 @@ const SkansCategory = () => {
       </ScrollView>
     </View>
   ) : (
-    <Text>Is loading</Text>
+    <Loading />
   );
 };
 const styles = StyleSheet.create({

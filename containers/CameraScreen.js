@@ -1,21 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as ImageManipulator from "expo-image-manipulator";
 import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/PhotoButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native-paper";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(false);
   const cameraRef = useRef(null);
   const isFocused = useIsFocused();
+
+  const height = useWindowDimensions().height;
+  const width = useWindowDimensions().width;
 
   useEffect(() => {
     (async () => {
@@ -28,35 +43,38 @@ export default function CameraScreen() {
   }, []);
 
   const takePicture = async () => {
+    setLoading(true);
     if (cameraRef) {
       try {
-        const data = await cameraRef.current.takePictureAsync();
-
-        setImage(data.uri);
+        const data = await cameraRef.current.takePictureAsync({
+          skipProcessing: true,
+        });
+        const manip = await ImageManipulator.manipulateAsync(
+          data.uri,
+          [{ resize: { width: width * 2, height: height * 2 } }],
+          { compress: 1, format: "jpeg" }
+        );
+        setImage(manip.uri);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }
   };
 
   const savePicture = async () => {
+    setLoading(true);
     if (image) {
       try {
-        const asset = await MediaLibrary.createAssetAsync(image);
-        const lastIndex = asset.uri.lastIndexOf(".");
-
-        const ext = asset.uri.slice(lastIndex + 1);
         const formData = new FormData();
-        console.log(ext);
-
         formData.append("picture", {
           uri: image,
-          name: `my-pic.${ext}`,
-          type: `photo/${ext}`,
+          name: `my-pic.jpg`,
+          type: `photo/jpg`,
         });
         formData.append("userId", id);
 
-        // console.log(formData);
         const response = await axios.post(
           "https://site--skaners-back--jhlzj9jljvpm.code.run/user/addSkan",
           formData,
@@ -67,12 +85,24 @@ export default function CameraScreen() {
           }
         );
 
-        console.log(response.data);
+        const createTwoButtonAlert = () =>
+          Alert.alert(
+            "Message",
+            "Le skan a été envoyé, tu recevras bientôt une réponse",
+            [{ text: "OK" }]
+          );
 
-        alert("Picture saved! 🎉");
+        createTwoButtonAlert();
         setImage(null);
-        console.log("saved successfully");
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
+        const createTwoButtonAlert = () =>
+          Alert.alert("Message", "Échec de l'envoi, réessaie plus tard", [
+            { text: "OK" },
+          ]);
+
+        createTwoButtonAlert();
         console.log(error.message);
       }
     }
@@ -90,60 +120,85 @@ export default function CameraScreen() {
           type={type}
           ref={cameraRef}
           flashMode={flash}
+          focusDepth={1}
+          ratio={"16:9"}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 30,
-            }}
-          >
-            <Button
-              title=""
-              icon="retweet"
-              onPress={() => {
-                setType(
-                  type === CameraType.back ? CameraType.front : CameraType.back
-                );
+          <View style={styles.btnBox}>
+            <View
+              style={{
+                alignItems: "flex-end",
+                paddingHorizontal: 30,
               }}
-            />
-            <Button
-              onPress={() =>
-                setFlash(
-                  flash === Camera.Constants.FlashMode.off
-                    ? Camera.Constants.FlashMode.on
-                    : Camera.Constants.FlashMode.off
-                )
-              }
-              icon="flash"
-              color={flash === Camera.Constants.FlashMode.off ? "gray" : "#fff"}
-            />
+            >
+              <Button
+                title=""
+                icon="cross"
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            </View>
+            <View style={styles.rightBtns}>
+              <Button
+                onPress={() =>
+                  setFlash(
+                    flash === Camera.Constants.FlashMode.off
+                      ? Camera.Constants.FlashMode.on
+                      : Camera.Constants.FlashMode.off
+                  )
+                }
+                icon="flash"
+                color={
+                  flash === Camera.Constants.FlashMode.off ? "gray" : "#fff"
+                }
+              />
+              <Button
+                title=""
+                icon="retweet"
+                onPress={() => {
+                  setType(
+                    type === CameraType.back
+                      ? CameraType.front
+                      : CameraType.back
+                  );
+                }}
+              />
+            </View>
+          </View>
+          <View style={styles.controlsPhoto}>
+            {!loading && (
+              <TouchableOpacity onPress={takePicture}>
+                <Ionicons name="aperture" size={70} color={"#FF7E00"} />
+              </TouchableOpacity>
+            )}
           </View>
         </Camera>
       ) : (
         <Image source={{ uri: image }} style={styles.camera} />
       )}
 
-      <View style={styles.controls}>
-        {image ? (
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 50,
-            }}
-          >
-            <Button
-              title="Re-take"
-              onPress={() => setImage(null)}
-              icon="retweet"
-            />
-            <Button title="Save" onPress={savePicture} icon="check" />
-          </View>
-        ) : (
-          <Button title="Take a picture" onPress={takePicture} icon="camera" />
-        )}
-      </View>
+      {image && (
+        <View style={styles.controls}>
+          {!loading ? (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingHorizontal: 50,
+              }}
+            >
+              <Button
+                title="Recommencer"
+                onPress={() => setImage(null)}
+                icon="retweet"
+              />
+              <Button title="Skanner" onPress={savePicture} icon="check" />
+            </View>
+          ) : (
+            <ActivityIndicator style={styles.indicator} size={"large"} />
+          )}
+        </View>
+      )}
     </View>
   );
 }
@@ -156,7 +211,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
   controls: {
-    flex: 0.5,
+    flex: 0.6,
+  },
+  controlsPhoto: {
+    alignItems: "center",
+    paddingVertical: 30,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginTop: 20,
   },
   button: {
     height: 40,
@@ -164,6 +229,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  rightBtns: {
+    alignItems: "flex-end",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    borderRadius: 20,
+    justifyContent: "space-between",
+    marginHorizontal: 30,
+    paddingHorizontal: 7,
   },
   text: {
     fontWeight: "bold",
@@ -174,8 +247,12 @@ const styles = StyleSheet.create({
   camera: {
     flex: 5,
     borderRadius: 20,
+    justifyContent: "space-between",
   },
   topControls: {
     flex: 1,
+  },
+  indicator: {
+    marginTop: 10,
   },
 });

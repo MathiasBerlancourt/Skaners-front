@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,7 @@ export default function HomeScreen() {
         setPictures(responseParcourir.data);
         setIsLoading(false);
       } catch (error) {
-        console.log("error : ", error);
+        console.log("error : ", error.message);
       }
     };
 
@@ -43,11 +44,11 @@ export default function HomeScreen() {
   }, []);
 
   if (isLoading === true) {
-    return <ActivityIndicator />;
+    return <Loading />;
   } else
     return (
       <ScrollView>
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ paddingTop: 10, backgroundColor: "white" }}>
           <Text style={styles.title}>MES DERNIERS LIKES</Text>
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>

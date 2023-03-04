@@ -49,11 +49,7 @@ export default function CameraScreen() {
 
   const sendPicture = async () => {
     setIsLoading(true);
-    const lastIndex = selectedPicture.lastIndexOf(".");
 
-    const ext = selectedPicture.slice(lastIndex + 1);
-    console.log(selectedPicture);
-    console.log(ext);
     try {
       const id = await AsyncStorage.getItem("userId");
       const formData = new FormData();

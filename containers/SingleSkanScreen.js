@@ -11,7 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
+const SingleSkanScreen = ({ route, navigation }) => {
   const data = route.params.elem;
 
   const [name, setName] = useState("");
@@ -36,8 +36,6 @@ const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
           { text: "OK", onPress: () => navigation.navigate("SkansCheck") },
         ]);
 
-      setRefresh(!refresh);
-
       createTwoButtonAlert();
     } catch (error) {
       console.log(error.message);
@@ -46,12 +44,16 @@ const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.container}>
         <Image
-          style={{ height: 200, width: 500 }}
+          style={{
+            height: 350,
+            width: 500,
+            backgroundColor: "black",
+          }}
           source={{ uri: data.pictureUrl }}
-          resizeMode="cover"
+          resizeMode="contain"
         />
         <View style={styles.inputBox}>
           <TextInput
@@ -64,19 +66,19 @@ const SingleSkanScreen = ({ route, navigation, refresh, setRefresh }) => {
           />
           <TextInput
             onChangeText={(e) => {
+              setDesc(e);
+            }}
+            value={desc}
+            style={styles.input}
+            placeholder={"Description de la paire"}
+          />
+          <TextInput
+            onChangeText={(e) => {
               setLink(e);
             }}
             value={link}
             style={styles.input}
             placeholder={"Lien de la paire"}
-          />
-          <TextInput
-            onChangeText={(e) => {
-              setDesc(e);
-            }}
-            value={desc}
-            style={styles.textArea}
-            placeholder={"Description de la paire"}
           />
         </View>
         <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
@@ -106,23 +108,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 10,
     marginVertical: 15,
-    borderWidth: 2,
+    borderBottomWidth: 1,
     position: "relative",
-  },
-  textArea: {
-    fontSize: 18,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-    marginVertical: 25,
-    height: 100,
-    borderColor: "black",
-    borderWidth: 2,
   },
 
   btnCheck: {
     backgroundColor: "green",
     height: 50,
     width: 300,
+    marginBottom: 25,
     justifyContent: "center",
   },
 

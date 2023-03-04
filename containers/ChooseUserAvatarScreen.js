@@ -4,8 +4,9 @@ import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
+const ChooseUserAvatarScreens = ({ route, setToken }) => {
   const [avatar, setAvatar] = useState(
     "https://cdn.shopify.com/s/files/1/2358/2817/products/air-jordan-1-retro-high-85-og-black-white-1_2000x.png?v=1676450597"
   );
@@ -22,6 +23,7 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
     dateOfBirth: route.params.dateOfBirth,
     phoneNumber: route.params.phoneNumber,
     sex: route.params.sex,
+    shoeSize: route.params.shoeSize,
     favoriteBrand: route.params.favoriteBrand,
     pictureUrl: avatar,
   };
@@ -50,8 +52,11 @@ const ChooseUserAvatarScreens = ({ route, setToken, setId }) => {
           setErrorMessage("");
           if (response.data.token) {
             setToken(response.data.token);
-            setId(response.data.user._id);
-            alert("Connexion réussie");
+            await AsyncStorage.setItem("userId", response.data.user._id);
+            await AsyncStorage.setItem(
+              "userPfp",
+              response.data.user.pictureUrl
+            );
           }
         }
       } catch (error) {
