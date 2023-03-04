@@ -20,13 +20,8 @@ import SingleSkanScreen from "./containers/SingleSkanScreen";
 import UpdateProfileScreen from "./containers/UpdateProfileScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import ProfileButton from "./components/ProfileButton";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
 import { Image, StyleSheet } from "react-native";
 import ProductScreen from "./containers/ProductScreen";
@@ -217,23 +212,7 @@ export default function App() {
                             },
                           }}
                         >
-                          {(...props) => <HomeScreen {...props} />}
-                        </Stack.Screen>
-                        <Stack.Screen
-                          name="Collection"
-                          options={{
-                            title: "",
-                            headerRight: () => {
-                              return (
-                                <Image
-                                  style={styles.navLogo}
-                                  source={require("./assets/Images/navLogo.png")}
-                                />
-                              );
-                            },
-                          }}
-                        >
-                          {() => <CollectionScreen />}
+                          {(props) => <HomeScreen {...props} />}
                         </Stack.Screen>
                         <Stack.Screen
                           name="HomeView"

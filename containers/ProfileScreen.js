@@ -72,7 +72,9 @@ export default function ProfileScreen({ navigation, setToken }) {
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Pointure</Text>
-            <Text style={styles.txt}>{data.shoeSize} EU</Text>
+            <Text style={styles.txt}>
+              {data.shoeSize && `${data.shoeSize} EU`}{" "}
+            </Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Marque favorite</Text>

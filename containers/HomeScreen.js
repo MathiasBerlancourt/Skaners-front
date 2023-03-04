@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
 import {
   Text,
@@ -6,7 +5,6 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
@@ -14,11 +12,10 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [pictures, setPictures] = useState([]);
   const [skans, setSkans] = useState([]);
-  const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
 
@@ -60,7 +57,9 @@ export default function HomeScreen() {
                     <TouchableOpacity
                       key={index}
                       onPress={() => {
-                        navigation.navigate("Collection");
+                        navigation.navigate("HomeView", {
+                          url: skan.pictureUrl,
+                        });
                       }}
                     >
                       <Image
