@@ -13,6 +13,7 @@ import axios from "axios";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { TouchableOpacity } from "react-native";
+import Loading from "../components/Loading";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -41,7 +42,6 @@ const SearchScreen = () => {
           `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
-        console.log("sneakers :", sneakers);
 
         setErrorMessage("");
         setIsLoading(false);
@@ -54,7 +54,7 @@ const SearchScreen = () => {
   }, [name, brand, color]);
 
   return (
-    <View style={{ height: height }}>
+    <View style={{ height: height, backgroundColor: "whitesmoke" }}>
       <View style={styles.titleContainer}>
         <FontAwesome name="search" size={18} color="#FF7E00" />
         <Text style={styles.titleSearch}> Rechercher</Text>
@@ -88,24 +88,26 @@ const SearchScreen = () => {
         ></TextInput>
       </View>
 
-      <FlatList
-        data={sneakers}
-        renderItem={({ item }) => {
-          return (
-            <View
-              style={{ alignItems: "center", backgroundColor: "whitesmoke" }}
-            >
-              <Text style={{ fontWeight: "bold", color: "gray" }}>
-                {item.name}
-              </Text>
-              <Image
-                source={{ uri: item.picture }}
-                style={{ width: 200, height: 200 }}
-              />
-            </View>
-          );
-        }}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={sneakers}
+          renderItem={({ item }) => {
+            return (
+              <View style={{ alignItems: "center", backgroundColor: "white" }}>
+                <Text style={{ fontWeight: "bold", color: "gray" }}>
+                  {item.name}
+                </Text>
+                <Image
+                  source={{ uri: item.picture }}
+                  style={{ width: 200, height: 200 }}
+                />
+              </View>
+            );
+          }}
+        />
+      )}
     </View>
   );
 };

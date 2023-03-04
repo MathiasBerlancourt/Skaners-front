@@ -9,6 +9,7 @@ import {
 import TinderCard from "react-tinder-card";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loading from "../components/Loading";
 
 const CopDropScreen = () => {
   const [lastDirection, setLastDirection] = useState("");
@@ -93,7 +94,7 @@ const CopDropScreen = () => {
       </View>
     </View>
   ) : (
-    <Text>Loading</Text>
+    <Loading />
   );
 };
 

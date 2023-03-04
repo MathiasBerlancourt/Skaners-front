@@ -1,34 +1,39 @@
 import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import logo from "../assets/Images/skanerslogoS.png";
 import { useNavigation } from "@react-navigation/native";
-import LottieView from "lottie-react-native";
-import { useRef } from "react";
 
 export default function SplashScreen() {
   const navigation = useNavigation();
-  const animation = useRef(null);
+
+  setTimeout(() => {
+    navigation.navigate("Tab");
+  }, 2000);
 
   return (
-    <View style={styles.background}>
-      <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
-      </View>
-      <Text style={styles.txt}>Hello Crack,</Text>
-      <Text style={styles.txt}>Bienvenue sur Skaners !</Text>
-      <View style={styles.skipContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Tab");
-          }}
-        >
-          <Text style={styles.txtSkip}>SKIP</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.background}>
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo} />
+        </View>
+        <Text style={styles.txt}>Hello Crack,</Text>
+        <Text style={styles.txt}>Bienvenue sur Skaners !</Text>
+        <View style={styles.skipContainer}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.txtSkip}>SKIP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+
+    backgroundColor: "black",
+  },
   logo: {
     height: 150,
     width: 150,
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
 
   txtSkip: {
     fontFamily: "LouisGeorge",
-    color: "white",
+    color: "black",
     fontSize: 15,
     marginRight: 25,
     marginBottom: 15,
@@ -67,7 +72,6 @@ const styles = StyleSheet.create({
   },
 
   background: {
-    flex: 1,
-    backgroundColor: "black",
+    marginBottom: 100,
   },
 });

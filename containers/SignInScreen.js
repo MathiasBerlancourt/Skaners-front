@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignInScreen({ setToken, setId }) {
   const [email, setEmail] = useState("admin6780@mail.com");
@@ -27,8 +28,11 @@ export default function SignInScreen({ setToken, setId }) {
 
           if (response.data.token) {
             setToken(response.data.token);
-            setId(response.data.user._id);
-            alert("Connexion réussie");
+            await AsyncStorage.setItem("userId", response.data.user._id);
+            await AsyncStorage.setItem(
+              "userPfp",
+              response.data.user.pictureUrl
+            );
           }
         }
       } catch (error) {

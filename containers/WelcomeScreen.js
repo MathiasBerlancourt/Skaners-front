@@ -15,24 +15,25 @@ const WelcomeScreen = () => {
           resizeMode="contain"
         />
       </View>
+      <View style={styles.btnBox}>
+        <TouchableOpacity
+          style={styles.signUpBtn}
+          onPress={() => {
+            navigation.navigate("Create User Account");
+          }}
+        >
+          <Text style={styles.txt}>S'inscrire</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.signUpBtn}
-        onPress={() => {
-          navigation.navigate("Create User Account");
-        }}
-      >
-        <Text style={styles.txt}>S'inscrire</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.signInBtn}
-        onPress={() => {
-          navigation.navigate("SignIn");
-        }}
-      >
-        <Text style={styles.txt}>Se connecter</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.signInBtn}
+          onPress={() => {
+            navigation.navigate("SignIn");
+          }}
+        >
+          <Text style={styles.txt}>Se connecter</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -45,13 +46,17 @@ const styles = StyleSheet.create({
     marginTop: 45,
   },
   skanersLogo: {
-    width: 250,
+    width: 280,
     height: 75,
     marginTop: 20,
   },
   picutreContainer: {
     alignItems: "center",
+    flex: 4.3,
+
+    justifyContent: "flex-end",
   },
+  btnBox: { flex: 2, justifyContent: "center", marginTop: 130 },
 
   signInBtn: {
     height: 50,
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 50,
-    marginBottom: 20,
+    marginBottom: 80,
   },
   signUpBtn: {
     height: 50,
@@ -81,6 +86,7 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: "white",
     flex: 1,
+    justifyContent: "center",
   },
 });
 

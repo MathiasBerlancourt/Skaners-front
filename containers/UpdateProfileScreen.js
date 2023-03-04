@@ -15,12 +15,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
 
-export default function UpdateProfileScreen({
-  route,
-  navigation,
-  refresh,
-  setRefresh,
-}) {
+export default function UpdateProfileScreen({ route, navigation }) {
   const data = route.params.elem;
   const [userName, setUserName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
@@ -53,7 +48,6 @@ export default function UpdateProfileScreen({
         );
         const createTwoButtonAlert = () =>
           Alert.alert("Message", "Vos informations ont été mises à jour");
-        setRefresh(!refresh);
 
         createTwoButtonAlert();
         navigation.goBack();

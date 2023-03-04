@@ -3,71 +3,87 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
   StyleSheet,
+  View,
 } from "react-native";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
+import Loading from "../components/Loading";
 
-const SkansCheckScreen = ({ route, navigation, refresh, setRefresh }) => {
-  const [data, setData] = useState({});
+const SkansCheckScreen = ({ navigation }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [deleted, setDeleted] = useState(false);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     try {
       const fetchData = async () => {
-        if (route.params.id) {
-          const response = await axios.get(
-            `https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans`
-          );
+        const response = await axios.get(
+          `https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans`
+        );
 
-          setData(response.data.reverse());
-        } else {
-          alert("Noooooo");
+        const newTab = [];
+
+        for (let i = 0; i < response.data.length; i++) {
+          if (!response.data[i].isChecked) {
+            newTab.unshift(response.data[i]);
+          }
         }
+
+        setData(newTab);
+        setLoading(false);
       };
       fetchData();
     } catch (error) {
       console.log(error.message);
     }
-  }, [refresh]);
+  }, [isFocused, deleted]);
 
   const handleSkanDelete = async (id) => {
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `https://site--skaners-back--jhlzj9jljvpm.code.run/deleteSkan/${id}`
       );
-      setRefresh(!refresh);
+      setDeleted(!deleted);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  return (
-    <ScrollView>
-      <Text>Nombre d'éléments à skanner : {data.length}</Text>
+  return loading ? (
+    <Loading />
+  ) : data.length <= 0 ? (
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <Text style={styles.textCheck}>Tous les skans ont été checkés</Text>
+    </View>
+  ) : (
+    <ScrollView style={{ backgroundColor: "white" }}>
+      <Text style={styles.textCheck}>
+        Il reste {data.length} skan{data.length > 1 && "s"} à checker
+      </Text>
       {Array.isArray(data) &&
         data.map((elem, i) => {
           return (
             elem.isChecked === false && (
-              <TouchableOpacity
+              <View
                 style={{ flexDirection: "row", alignItems: "center" }}
-                onPress={() => {
-                  navigation.navigate("SingleSkan", {
-                    elem,
-                  });
-                }}
                 key={i}
               >
-                <Image
-                  style={{
-                    height: 200,
-                    width: 300,
-                    borderColor: "#717171",
-                    borderWidth: 3,
-                    marginVertical: 10,
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("SingleSkan", {
+                      elem,
+                    });
                   }}
-                  source={{ uri: elem.pictureUrl }}
-                />
+                >
+                  <Image
+                    style={styles.skan}
+                    source={{ uri: elem.pictureUrl }}
+                  />
+                </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.btnDelete}
                   onPress={() => {
@@ -76,7 +92,7 @@ const SkansCheckScreen = ({ route, navigation, refresh, setRefresh }) => {
                 >
                   <Text style={styles.btnDeleteTxt}>Delete</Text>
                 </TouchableOpacity>
-              </TouchableOpacity>
+              </View>
             )
           );
         })}
@@ -85,6 +101,7 @@ const SkansCheckScreen = ({ route, navigation, refresh, setRefresh }) => {
 };
 
 const styles = StyleSheet.create({
+  textCheck: { textAlign: "center", marginTop: 10 },
   btnDelete: {
     backgroundColor: "red",
     flex: 1,
@@ -96,6 +113,14 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 20,
+  },
+
+  skan: {
+    height: 200,
+    width: 300,
+    borderColor: "#717171",
+    borderWidth: 3,
+    marginVertical: 10,
   },
 });
 
