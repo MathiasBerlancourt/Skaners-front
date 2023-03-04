@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
 
     justifyContent: "space-between",
-    backgroundColor: "lightgray",
+    backgroundColor: "white",
   },
   titleSearch: {
     justifyContent: "center",
