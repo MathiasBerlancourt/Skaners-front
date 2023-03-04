@@ -24,8 +24,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
-
 import { Image, StyleSheet } from "react-native";
+import ProductScreen from "./containers/ProductScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -321,6 +321,9 @@ export default function App() {
                           }}
                         >
                           {(props) => <SearchScreen {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen name="product screen">
+                          {() => <ProductScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
