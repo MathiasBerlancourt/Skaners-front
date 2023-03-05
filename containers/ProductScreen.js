@@ -55,7 +55,6 @@ const ProductScreen = () => {
               style={{
                 width: wp("100%"),
                 height: wp("100%"),
-                borderWidth: 3,
               }}
             />
             <View style={styles.priceContainer}>
