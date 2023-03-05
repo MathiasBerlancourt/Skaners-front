@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Date } from "react";
 import {
   Text,
   TextInput,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 const CreateUserAccountScreen = () => {
@@ -14,128 +15,136 @@ const CreateUserAccountScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const navigation = useNavigation();
-  //imports pour le datePicker qui en en cours de dev
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
-  const [displaymode, setMode] = useState("date");
-  const [isDisplayDate, setShow] = useState(false);
-  const changeSelectedDate = (event, selectedDate) => {
-    const currentDate = selectedDate || dateOfBirth;
+  //DATE PICKER-------
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    //Fin import pour le datePicker
-    setDateOfBirth(currentDate);
-  };
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
-  const displayDatepicker = () => {
-    showMode("date");
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
   };
+
+  const handleConfirm = (date) => {
+    setDateOfBirth(date);
+
+    hideDatePicker();
+  };
+  //DATE PICKER------
 
   return (
-    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
-      <Text style={styles.title}>CRÉER MON COMPTE</Text>
-      <View style={styles.createContainer}>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#717171"
-          placeholder="Adresse email"
-          onChangeText={(input) => {
-            setEmail(input);
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#717171"
-          placeholder="Username"
-          onChangeText={(input) => {
-            setUsername(input);
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#717171"
-          placeholder="Mot de Passe"
-          onChangeText={(input) => {
-            setPassword(input);
-          }}
-          secureTextEntry={true}
-        />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#717171"
-          placeholder="Confirme le mot de passe"
-          onChangeText={(input) => {
-            setConfirmPassword(input);
-          }}
-          secureTextEntry={true}
-        />
+    <View style={styles.createUserContainer}>
+      <KeyboardAwareScrollView>
+        <View>
+          <Text style={styles.title}>CRÉER MON COMPTE</Text>
+        </View>
+        <View style={styles.formContainer}>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#717171"
+            placeholder="Adresse email"
+            onChangeText={(input) => {
+              setEmail(input);
+            }}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#717171"
+            placeholder="Username"
+            onChangeText={(input) => {
+              setUsername(input);
+            }}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#717171"
+            placeholder="Mot de Passe"
+            onChangeText={(input) => {
+              setPassword(input);
+            }}
+            secureTextEntry={true}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#717171"
+            placeholder="Confirme le mot de passe"
+            onChangeText={(input) => {
+              setConfirmPassword(input);
+            }}
+            secureTextEntry={true}
+          />
 
-        <Text style={styles.txtDoB}>Date of birth</Text>
-
-        {/* <TouchableOpacity onPress={displayDatepicker}>
-          {isDisplayDate && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={dateOfBirth}
-              mode={displaymode}
-              is24Hour={true}
-              display="default"
-              onChange={changeSelectedDate}
+          <View style={styles.containerDoB}>
+            <TouchableOpacity onPress={showDatePicker}>
+              <Text style={styles.txtDoB}>Date de naissance :</Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              locale="fr_FR"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
             />
-          )}
-        </TouchableOpacity> */}
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Date de naissance (format mm-jj-aaaa)"
-          placeholderTextColor="#717171"
-          onChangeText={(input) => {
-            setDateOfBirth(input);
-          }}
-        />
-      </View>
-
-      <View />
-
-      <TouchableOpacity
-        style={styles.signUpBtn}
-        onPress={() => {
-          if (
-            !email ||
-            !userName ||
-            !password ||
-            !confirmPassword ||
-            !dateOfBirth
-          ) {
-            return setErrorMessage("Remplissez tous les champs");
-          }
-          if (password !== confirmPassword) {
-            return setErrorMessage("Mot de passe différents");
-          }
-          navigation.navigate("Finalize User Account", {
-            email: email,
-            userName: userName,
-            password: password,
-            dateOfBirth: dateOfBirth,
-          });
+      {/* ANCIEN TEXT INPUT A CONSERVER AU CAS OU LE DATE PICKER NE FONCTIONNE PAS
+      
+      <TextInput
+        style={styles.input}
+        placeholder="Date de naissance (format mm-jj-aaaa)"
+        placeholderTextColor="#717171"
+        onChangeText={(input) => {
+          setDateOfBirth(input);
         }}
-      >
-        <Text style={styles.signUpTxt}>CONTINUER</Text>
-      </TouchableOpacity>
-      <Text style={styles.errorTxt}>{errorMessage}</Text>
-    </KeyboardAwareScrollView>
+      /> */}
+      {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)}
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.signUpBtn}
+          onPress={() => {
+            if (
+              !email ||
+              !userName ||
+              !password ||
+              !confirmPassword ||
+              !dateOfBirth
+            ) {
+              return setErrorMessage("Remplissez tous les champs");
+            }
+            if (password !== confirmPassword) {
+              return setErrorMessage("Mot de passe différents");
+            }
+            navigation.navigate("Finalize User Account", {
+              email: email,
+              userName: userName,
+              password: password,
+              dateOfBirth: dateOfBirth,
+            });
+          }}
+        >
+          <Text style={styles.signUpTxt}>CONTINUER</Text>
+        </TouchableOpacity>
+        <Text style={styles.errorTxt}>{errorMessage}</Text>
+      </View>
+    </View>
   );
 };
 
 export default CreateUserAccountScreen;
 
 const styles = StyleSheet.create({
-  createContainer: {
+  createUserContainer: {
+    height: "100%",
+    justifyContent: "space-between",
+  },
+  formContainer: {
     height: "65%",
-    justifyContent: "space-evenly",
   },
   title: {
     fontFamily: "LemonMilkBold",
@@ -156,15 +165,12 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 20,
     paddingLeft: 10,
-    width: "25%",
+    width: "40%",
   },
   txtDoB: {
-    color: "whitesmoke",
-    paddingVertical: 6,
-  },
-  DateTimePicker: {
-    // marginRight: 30,
-    // paddingBottom: 50,
+    color: "#717171",
+
+    paddingVertical: 5,
   },
 
   input: {
