@@ -418,6 +418,22 @@ export default function App() {
                         >
                           {(props) => <ProductCardSkanScreen {...props} />}
                         </Stack.Screen>
+                        <Stack.Screen
+                          name="ProductCardLikeScreen"
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
+                        >
+                          {(props) => <ProductCardSkanScreen {...props} />}
+                        </Stack.Screen>
                       </Stack.Navigator>
                     )}
                   </Tab.Screen>
