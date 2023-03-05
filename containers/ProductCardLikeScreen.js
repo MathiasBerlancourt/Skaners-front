@@ -9,6 +9,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const ProductCardLikeScreen = ({ route, navigation }) => {
   const product = route.params.product;
@@ -53,28 +54,39 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
     );
   };
   return (
-    <View>
-      <View style={styles.imgContainer}>
-        <View>
+    <KeyboardAwareScrollView>
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.pictureUrl }} />
+          <TouchableOpacity
+            onPress={() => {
+              showAlert();
+            }}
+          >
+            <Entypo
+              style={styles.delete}
+              name="cross"
+              size={size}
+              color="#F86F00"
+            />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            showAlert();
-          }}
-        >
-          <Entypo
-            style={styles.delete}
-            name="cross"
-            size={size}
-            color="#F86F00"
-          />
-        </TouchableOpacity>
       </View>
-      {/* <Text>Marque : {product.sneakerName}</Text>
-      <Text>Description : {product.description}</Text>
-      <Text>Lien : {product.linkUrl}</Text> */}
-    </View>
+      {/* <View style={styles.infosContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Marque :</Text>
+          <Text style={styles.text}>{product.sneakerName}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Description : </Text>
+          <Text style={styles.text}>{product.description}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Lien : </Text>
+          <Text style={styles.text}>{product.linkUrl}</Text>
+        </View>
+      </View> */}
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -83,24 +95,48 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
   },
-  imgContainer: {
+  container: {
     alignContent: "center",
     justifyContent: "center",
     height: 400,
-    marginTop: 50,
+    marginTop: hp("5%"),
   },
-  img: {
-    width: 300,
-    height: 400,
+  imgContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
+  img: {
+    width: wp("80%"),
+    height: hp("60%"),
     resizeMode: "cover",
     borderRadius: 20,
-    marginLeft: 50,
+  },
+  infosContainer: {
+    width: wp("90%"),
+    marginHorizontal: 20,
+    marginTop: hp("7%"),
   },
   delete: {
     position: "absolute",
-    bottom: 350,
-    left: 300,
+    bottom: hp("50%"),
+    left: wp("25%"),
+  },
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: hp("2.5%"),
+  },
+
+  text: {
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
+  },
+
+  labelColor: {
+    color: "#717171",
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
   },
 });
 
