@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
 
   btnTxt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
     fontSize: 20,
   },

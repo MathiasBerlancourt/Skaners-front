@@ -145,10 +145,13 @@ const styles = StyleSheet.create({
   txtInput: {
     fontSize: hp("2%"),
     fontFamily: "LouisGeorge",
-    borderBottomWidth: 1,
-    borderBottomColor: "#515151",
-    paddingVertical: 3,
+    paddingVertical: 5,
+    backgroundColor: "lightgray",
+    borderRadius: 20,
+    paddingLeft: 20,
   },
+
+  input: {},
 
   avatar: {
     height: 100,

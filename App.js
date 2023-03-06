@@ -23,7 +23,7 @@ import ProfileButton from "./components/ProfileButton";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Platform } from "react-native";
 import ProductScreen from "./containers/ProductScreen";
 
 const Tab = createBottomTabNavigator();
@@ -80,8 +80,6 @@ export default function App() {
       resizeMode: "contain",
     },
   });
-
-  // console.log(useWindowDimensions());
 
   return (
     <NavigationContainer>
@@ -179,6 +177,15 @@ export default function App() {
                 <Tab.Navigator
                   screenOptions={{
                     headerShown: false,
+
+                    tabBarItemStyle: {
+                      height: Platform.OS === "ios" ? 70 : 80,
+                    },
+                    tabBarStyle: {
+                      height: Platform.OS === "ios" ? 60 : 70,
+                      paddingBottom: Platform.OS === "ios" ? 75 : 0,
+                      backgroundColor: "white",
+                    },
                     tabBarActiveTintColor: "#FF7E00",
                     tabBarInactiveTintColor: "#717171",
                   }}
@@ -189,7 +196,7 @@ export default function App() {
                       headerShown: false,
                       tabBarLabel: "",
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name={"ios-home"} size={size} color={color} />
+                        <Ionicons name={"ios-home"} size={30} color={color} />
                       ),
                     }}
                   >
@@ -306,7 +313,7 @@ export default function App() {
                       tabBarIcon: ({ color, size }) => (
                         <Ionicons
                           name={"search-sharp"}
-                          size={size}
+                          size={35}
                           color={color}
                         />
                       ),
@@ -356,7 +363,7 @@ export default function App() {
                       tabBarLabel: "",
                       tabBarStyle: { display: "none" },
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="aperture" size={35} color={"#FF7E00"} />
+                        <Ionicons name="aperture" size={55} color={"#FF7E00"} />
                       ),
                     }}
                   >
@@ -378,7 +385,7 @@ export default function App() {
                       tabBarIcon: ({ color, size }) => (
                         <MaterialIcons
                           name="favorite"
-                          size={size}
+                          size={35}
                           color={color}
                         />
                       ),
@@ -444,7 +451,7 @@ export default function App() {
                       tabBarIcon: ({ color, size }) => (
                         <MaterialIcons
                           name="inventory"
-                          size={size}
+                          size={30}
                           color={color}
                         />
                       ),

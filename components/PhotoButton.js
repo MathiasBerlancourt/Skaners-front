@@ -6,7 +6,7 @@ export default function PhotoButton({ title, onPress, icon, color }) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
       <Entypo name={icon} size={30} color={color ? color : "#f1f1f1"} />
-      <Text style={styles.text}>{title}</Text>
+      {title && <Text style={styles.text}>{title}</Text>}
     </TouchableOpacity>
   );
 }
