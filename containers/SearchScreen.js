@@ -248,19 +248,31 @@ const SearchScreen = () => {
                   >
                     <Text
                       style={{
-                        fontWeight: "bold",
                         color: "gray",
-                        fontSize: 12,
+                        fontSize: 10,
                         paddingHorizontal: 8,
+                        paddingBottom: 5,
                       }}
-                      numberOfLines={2}
+                      numberOfLines={1}
                     >
                       {item.name}
                     </Text>
                     <Image
                       source={{ uri: item.picture }}
-                      style={{ width: wp("33%"), height: hp("10%") }}
+                      style={{ width: wp("37%"), height: hp("12%") }}
                     />
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        color: "gray",
+                        fontSize: 12,
+                        paddingRight: 75,
+                        marginTop: 10,
+                      }}
+                      numberOfLines={1}
+                    >
+                      {item.brand.toUpperCase()}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               );
@@ -284,10 +296,8 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     flexDirection: "row",
-
-    height: 35,
-    alignItems: "baseline",
-
+    height: hp("7%"),
+    alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "white",
   },
@@ -298,7 +308,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: "#FF7E00",
     fontWeight: "bold",
-    marginTop: 4,
+    paddingVertical: hp("2%"),
+
     fontFamily: "LouisGeorge",
     paddingHorizontal: 15,
   },
