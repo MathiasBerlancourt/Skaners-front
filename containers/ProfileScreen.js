@@ -8,22 +8,27 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
+import { API_URL } from "@env";
 
-export default function ProfileScreen({ navigation, setToken }) {
+export default function ProfileScreen({ navigation, setToken, token }) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   const isFocused = useIsFocused();
-
+  //https://site--skaners-back--jhlzj9jljvpm.code.run
   useEffect(() => {
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
     try {
       const fetchData = async () => {
         const id = await AsyncStorage.getItem("userId");
-
         if (id) {
-          const response = await axios.get(
-            `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${id}`
-          );
+          const response = await axios({
+            method: "GET",
+            url: `${API_URL}/user/info/${id}`,
+            headers: headers,
+          });
 
           setData(response.data);
         } else {

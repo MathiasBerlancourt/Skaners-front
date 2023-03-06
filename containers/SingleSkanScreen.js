@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { API_URL } from "@env";
 
 const SingleSkanScreen = ({ route, navigation }) => {
   const data = route.params.elem;
@@ -27,10 +28,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
 
   const sendSkanResponse = async () => {
     try {
-      await axios.put(
-        "https://site--skaners-back--jhlzj9jljvpm.code.run/checkSkan",
-        updateCheck
-      );
+      await axios.put(`${API_URL}/checkSkan`, updateCheck);
       const createTwoButtonAlert = () =>
         Alert.alert("Message", "Le skan a été checké", [
           { text: "OK", onPress: () => navigation.navigate("SkansCheck") },

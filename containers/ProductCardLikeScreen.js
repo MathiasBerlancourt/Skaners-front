@@ -10,6 +10,7 @@ import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { API_URL } from "@env";
 
 const ProductCardLikeScreen = ({ route, navigation }) => {
   const product = route.params.product;
@@ -19,10 +20,17 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
   const sendData = async () => {
     try {
       const userId = await AsyncStorage.getItem("userId");
-      await axios.put(
-        "https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikePicture",
-        { userId: userId, skanId: product._id }
-      );
+      const token = await AsyncStorage.getItem("userToken");
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
+
+      await axios({
+        method: "PUT",
+        url: `${API_URL}/user/unlikePicture`,
+        data: { userId: userId, skanId: product._id },
+        headers: headers,
+      });
     } catch (error) {
       console.log(error.message);
     }

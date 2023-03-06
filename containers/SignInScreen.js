@@ -9,6 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_URL } from "@env";
 
 export default function SignInScreen({ setToken, setId }) {
   const [email, setEmail] = useState("admin6780@mail.com");
@@ -21,10 +22,10 @@ export default function SignInScreen({ setToken, setId }) {
       try {
         if (submit) {
           setErrorMessage("");
-          const response = await axios.post(
-            `https://site--skaners-back--jhlzj9jljvpm.code.run/signin`,
-            { email: email, password: password }
-          );
+          const response = await axios.post(`${API_URL}/signin`, {
+            email: email,
+            password: password,
+          });
 
           if (response.data.token) {
             setToken(response.data.token);
