@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useState } from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -48,7 +52,6 @@ const SingleSkanScreen = ({ route, navigation }) => {
           style={{
             height: 350,
             width: 500,
-            backgroundColor: "black",
           }}
           source={{ uri: data.pictureUrl }}
           resizeMode="contain"
@@ -60,7 +63,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={name}
             style={styles.input}
-            placeholder={"Nom de la paire"}
+            placeholder={"Marque de la paire"}
           />
           <TextInput
             onChangeText={(e) => {
@@ -68,7 +71,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={desc}
             style={styles.input}
-            placeholder={"Description de la paire"}
+            placeholder={"Modèle de la paire"}
           />
           <TextInput
             onChangeText={(e) => {
@@ -99,27 +102,31 @@ const styles = StyleSheet.create({
   inputBox: {
     paddingHorizontal: "10%",
     width: "100%",
-    marginBottom: "4%",
   },
 
   input: {
-    fontSize: 18,
+    fontSize: hp("2%"),
+    fontFamily: "LouisGeorge",
     padding: 10,
-    marginVertical: 15,
-    borderBottomWidth: 1,
-    position: "relative",
+    marginVertical: hp("1.5%"),
+    backgroundColor: "lightgray",
+    borderRadius: 20,
   },
 
   btnCheck: {
-    backgroundColor: "green",
     height: 50,
-    width: 300,
-    marginBottom: 25,
+    backgroundColor: "green",
+    borderRadius: 15,
+    width: wp(80),
     justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginVertical: hp("2.5%"),
   },
 
   btnCheckTxt: {
     color: "white",
+    fontFamily: "LouisGeorge",
     textAlign: "center",
     fontSize: 20,
   },
