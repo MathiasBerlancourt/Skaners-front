@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { API_URL } from "react-native-dotenv";
-const ProductScreen = () => {
+const ProductScreen = ({ token }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const route = useRoute();
@@ -66,7 +66,9 @@ const ProductScreen = () => {
       try {
         const [response, responseLikes] = await Promise.all([
           axios.get(`${API_URL}/sneakers/${route.params.id}`),
-          axios.get(`${API_URL}/user/info/${userId}`),
+          axios.get(`${API_URL}/user/info/${userId}`, {
+            headers: { Authorization: "Bearer " + token },
+          }),
         ]);
         setData(response.data);
         setSneakersLikedList(responseLikes.data.sneakers);

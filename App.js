@@ -371,7 +371,9 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => <ProductScreen {...props} />}
+                          {(props) => (
+                            <ProductScreen token={userToken} {...props} />
+                          )}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

@@ -15,7 +15,7 @@ export default function ProfileScreen({ navigation, setToken }) {
   const [loading, setLoading] = useState(true);
 
   const isFocused = useIsFocused();
-  //https://site--skaners-back--jhlzj9jljvpm.code.run
+
   useEffect(() => {
     try {
       const fetchData = async () => {
