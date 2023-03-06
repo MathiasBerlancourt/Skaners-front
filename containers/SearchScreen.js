@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import SelectDropdown from "react-native-select-dropdown";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
@@ -29,6 +30,17 @@ const SearchScreen = () => {
   const height = Dimensions.get("window").height;
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
   const navigation = useNavigation();
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const brands = [
+    "Air Jordan",
+    "adidas",
+    "Converse",
+    "Champion",
+    "Gucci",
+    "Nike",
+    "Vans",
+  ];
 
   const handleName = (name) => {
     setName(name);
@@ -96,6 +108,48 @@ const SearchScreen = () => {
             styles.searchContainer,
           ]}
         >
+          <SelectDropdown
+            search="true"
+            data={brands}
+            buttonStyle={styles.input}
+            buttonTextStyle={styles.inputText}
+            dropdownStyle={styles.input}
+            dropdownOverlayColor="transparent"
+            dropdownBackgroundColor="#717171"
+            rowStyle={{
+              height: hp("3%"),
+              backgroundColor: "whitesmoke",
+              borderStartWidth: 0,
+              borderStyle: "none",
+            }}
+            rowTextStyle={{
+              fontSize: 14,
+              color: "#717171",
+              textAlign: "left",
+            }}
+            buttonTextStyle={{
+              color: "#717171",
+              textAlign: "left",
+              fontSize: 14,
+            }}
+            searchInputStyle={{ height: hp("3%"), width: wp("80%") }}
+            searchPlaceHolder="Marque..."
+            dropdownIconPosition="right"
+            dropdownStyle={styles.dropdownStyle}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+              setBrand(selectedItem);
+            }}
+            defaultButtonText={"Marque..."}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
+          />
           <TextInput
             placeholderTextColor="#717171"
             placeholder="Modele..."
@@ -110,6 +164,7 @@ const SearchScreen = () => {
             onChangeText={handleBrand}
             value={brand}
           ></TextInput>
+
           <TextInput
             placeholderTextColor="#717171"
             placeholder="Couleur..."
@@ -122,12 +177,12 @@ const SearchScreen = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <FlatList
-          horizontal
-          data={sneakers}
-          renderItem={({ item }) => {
-            return (
-              <View style={{ flexWrap: "wrap" }}>
+        <View style={{ paddingHorizontal: 9 }}>
+          <FlatList
+            data={sneakers}
+            numColumns={2}
+            renderItem={({ item }) => {
+              return (
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate("ProductScreen", {
@@ -141,14 +196,23 @@ const SearchScreen = () => {
                       alignItems: "center",
                       backgroundColor: "white",
                       width: wp("45%"),
-                      borderRadius: 30,
+                      borderRadius: 8,
+                      borderRadius: 10,
                       paddingVertical: 15,
-                      marginVertical: 3,
-                      marginHorizontal: 10,
+                      marginVertical: 5,
+                      marginHorizontal: 5,
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text style={{ fontWeight: "bold", color: "gray" }}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        color: "gray",
+                        fontSize: 12,
+                        paddingHorizontal: 8,
+                      }}
+                      numberOfLines={2}
+                    >
                       {item.name}
                     </Text>
                     <Image
@@ -157,10 +221,10 @@ const SearchScreen = () => {
                     />
                   </View>
                 </TouchableOpacity>
-              </View>
-            );
-          }}
-        />
+              );
+            }}
+          />
+        </View>
       )}
     </View>
   );
