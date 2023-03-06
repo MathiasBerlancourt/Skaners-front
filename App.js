@@ -23,6 +23,8 @@ import ProfileButton from "./components/ProfileButton";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
+import ProductCardFavoriteScreen from "./containers/ProductCardFavoriteScreen";
+import ProductCardLikeScreen from "./containers/ProductCardLikeScreen";
 import { Image, StyleSheet, Platform } from "react-native";
 import ProductScreen from "./containers/ProductScreen";
 
@@ -439,7 +441,23 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => <ProductCardSkanScreen {...props} />}
+                          {(props) => <ProductCardLikeScreen {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen
+                          name="ProductCardFavoriteScreen"
+                          options={{
+                            title: "",
+                            headerRight: () => {
+                              return (
+                                <Image
+                                  style={styles.navLogo}
+                                  source={require("./assets/Images/navLogo.png")}
+                                />
+                              );
+                            },
+                          }}
+                        >
+                          {(props) => <ProductCardFavoriteScreen {...props} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

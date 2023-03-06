@@ -10,6 +10,10 @@ import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { API_URL } from "react-native-dotenv";
 
 const ProductCardFavoriteScreen = ({ route, navigation }) => {
@@ -64,7 +68,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
     <KeyboardAwareScrollView>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image style={styles.img} source={{ uri: product.pictureUrl }} />
+          <Image style={styles.img} source={{ uri: product.picture }} />
           <TouchableOpacity
             onPress={() => {
               showAlert();
@@ -79,20 +83,20 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* <View style={styles.infosContainer}>
-      <View style={styles.textContainer}>
-        <Text style={styles.labelColor}>Marque :</Text>
-        <Text style={styles.text}>{product.sneakerName}</Text>
+      <View style={styles.infosContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Marque :</Text>
+          <Text style={styles.text}>{product.brand}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Nom : </Text>
+          <Text style={styles.text}>{product.name}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.labelColor}>Prix : </Text>
+          <Text style={styles.text}>{product.price}</Text>
+        </View>
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.labelColor}>Description : </Text>
-        <Text style={styles.text}>{product.description}</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.labelColor}>Lien : </Text>
-        <Text style={styles.text}>{product.linkUrl}</Text>
-      </View>
-    </View> */}
     </KeyboardAwareScrollView>
   );
 };
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
   img: {
     width: wp("80%"),
     height: hp("60%"),
-    resizeMode: "cover",
+    resizeMode: "contain",
     borderRadius: 20,
   },
   infosContainer: {

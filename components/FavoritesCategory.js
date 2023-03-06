@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
+  Image,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -57,10 +58,7 @@ const FavoritesCategory = () => {
                   });
                 }}
               >
-                <Image
-                  style={styles.img}
-                  source={{ uri: sneaker.pictureUrl }}
-                />
+                <Image style={styles.img} source={{ uri: sneaker.picture }} />
               </TouchableOpacity>
             );
           })}
