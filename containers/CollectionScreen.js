@@ -1,6 +1,6 @@
 import * as React from "react";
-import { View, Text, useWindowDimensions } from "react-native";
-import { TabView, SceneMap } from "react-native-tab-view";
+import { View, Text, useWindowDimensions, StyleSheet } from "react-native";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { LogBox } from "react-native";
 import SkansCategory from "../components/SkansCategory";
 import LikesCategory from "../components/LikesCategory";
@@ -31,9 +31,9 @@ const CollectionScreen = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "skans", title: "Skans" },
-    { key: "favorites", title: "Favorites" },
-    { key: "likes", title: "Likes" },
+    { key: "favorites", title: "MES FAVORITES" },
+    { key: "skans", title: "MES SKANS" },
+    { key: "likes", title: "MES LIKES" },
   ]);
   return (
     <TabView
@@ -45,18 +45,27 @@ const CollectionScreen = () => {
       inactiveColor={"black"}
       swipeEnabled={true}
       selectedTabTextColor={"green"}
-      sceneContainerStyle={{ color: "red", backgroundColor: "red" }}
+      renderTabBar={(props) => (
+        <TabBar
+          {...props}
+          indicatorStyle={styles.navigatorSelector}
+          style={styles.navigatorBackground}
+          renderLabel={({ route }) => (
+            <Text style={styles.text}>{route.title}</Text>
+          )}
+        />
+      )}
     />
   );
-
-  // <View>
-  //   <Text>Je suis la collectionScreen</Text>
-  //   <TopTab.Navigator>
-  //     <TopTab.Screen name="Favorites" component={FavoritesCategory} />
-  //     <TopTab.Screen name="Likes" component={LikesCategory} />
-  //     <TopTab.Screen name="Skans" component={SkansCategory} />
-  //   </TopTab.Navigator>
-  // </View>
 };
+const styles = StyleSheet.create({
+  text: {
+    color: "black",
+    fontFamily: "LouisGeorgeBoldItalic",
+    fontSize: 15,
+  },
+  navigatorBackground: { backgroundColor: "white" },
+  navigatorSelector: { backgroundColor: "#FF7E00" },
+});
 
 export default CollectionScreen;

@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_URL } from "react-native-dotenv";
 
 const ChooseUserAvatarScreens = ({ route, setToken }) => {
   const [avatar, setAvatar] = useState(
@@ -32,22 +33,19 @@ const ChooseUserAvatarScreens = ({ route, setToken }) => {
     const signUp = async () => {
       try {
         if (submit) {
-          const response = await axios.post(
-            "https://site--skaners-back--jhlzj9jljvpm.code.run/signup",
-            {
-              email: accountInfos.email,
-              userName: accountInfos.userName,
-              password: accountInfos.password,
-              firstName: accountInfos.firstName,
-              lastName: accountInfos.lastName,
-              dateOfBirth: accountInfos.dateOfBirth,
-              phoneNumber: accountInfos.phoneNumber,
-              sex: accountInfos.sex,
-              favoriteBrand: accountInfos.favoriteBrand,
-              shoeSize: accountInfos.shoeSize,
-              pictureUrl: avatar,
-            }
-          );
+          const response = await axios.post(`${API_URL}/signup`, {
+            email: accountInfos.email,
+            userName: accountInfos.userName,
+            password: accountInfos.password,
+            firstName: accountInfos.firstName,
+            lastName: accountInfos.lastName,
+            dateOfBirth: accountInfos.dateOfBirth,
+            phoneNumber: accountInfos.phoneNumber,
+            sex: accountInfos.sex,
+            favoriteBrand: accountInfos.favoriteBrand,
+            shoeSize: accountInfos.shoeSize,
+            pictureUrl: avatar,
+          });
 
           setErrorMessage("");
           if (response.data.token) {

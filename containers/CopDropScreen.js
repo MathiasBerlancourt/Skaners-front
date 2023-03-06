@@ -1,33 +1,47 @@
 import React, { useEffect, useState } from "react";
-import {
-  ImageBackground,
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { ImageBackground, Text, View, StyleSheet, Image } from "react-native";
 import TinderCard from "react-tinder-card";
 import axios from "axios";
+import logo from "../assets/Images/skanerslogoS.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import LottieView from "lottie-react-native";
+import sparks from "../assets/Json/effectSparksCopDrop.json";
+import { useRef } from "react";
+import { API_URL } from "react-native-dotenv";
 
-const CopDropScreen = () => {
+const CopDropScreen = ({ token }) => {
   const [lastDirection, setLastDirection] = useState("");
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
   const [idLike, setIdLike] = useState();
   const [idUser, setIdUser] = useState();
+  const [playAnimation, setPlayAnimation] = useState(false);
+  const animation = useRef(null);
 
   useEffect(() => {
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
     const sendLike = async () => {
       try {
         if (lastDirection !== "right") {
           return;
         }
-        await axios.put(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/user/likeSkan",
-          { skanId: idLike, userId: idUser }
-        );
+        await axios({
+          method: "PUT",
+          url: `${API_URL}/user/likeSkan`,
+          data: {
+            skanId: idLike,
+            userId: idUser,
+          },
+          headers: headers,
+        });
+        setPlayAnimation(false);
         setLastDirection("");
       } catch (error) {
         console.log(error.message);
@@ -35,9 +49,11 @@ const CopDropScreen = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans"
-        );
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/allSkans`,
+          headers: headers,
+        });
         if (!idUser) {
           return;
         }
@@ -60,11 +76,12 @@ const CopDropScreen = () => {
     getId();
     fetchData();
     sendLike();
-  }, [lastDirection, idUser]);
+  }, [lastDirection, idUser, playAnimation]);
 
   const swiped = (direction, id) => {
     setLastDirection(direction);
     if (direction === "right") {
+      setPlayAnimation(true);
       setIdLike(id);
     }
   };
@@ -88,8 +105,24 @@ const CopDropScreen = () => {
         )}
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.copText}>COP</Text>
         <Text style={styles.dropText}>DROP</Text>
+        <View>
+          <Text style={styles.copText}>COP</Text>
+          <View style={styles.sparksContainer}>
+            {lastDirection === "right" ? (
+              <LottieView
+                ref={animation}
+                autoPlay
+                loop={false}
+                style={styles.sparks}
+                source={sparks}
+              />
+            ) : null}
+          </View>
+        </View>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={logo} />
+        </View>
       </View>
     </View>
   ) : (
@@ -99,77 +132,88 @@ const CopDropScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
     flex: 1,
   },
   cardContainer: {
-    height: 500,
-    width: Dimensions.get("screen").width,
+    backgroundColor: "white",
   },
   card: {
-    marginVertical: Dimensions.get("screen").height / 8,
-    marginHorizontal: Dimensions.get("screen").width / 12,
     position: "absolute",
-    width: 300,
-    height: 300,
-    resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-    borderRadius: 20,
+    width: wp("100%"),
+    height: hp("100%"),
   },
 
   cardImage: {
-    width: 300,
-    height: 300,
-    overflow: "hidden",
-    borderLeftColor: "black",
-    borderRightColor: "orange",
-    borderTopColor: "orange",
-    borderBottomColor: "black",
-    borderWidth: 3,
-    borderStyle: "solid",
-    borderRadius: 20,
+    flex: 1,
   },
   textContainer: {
     flexDirection: "row",
+    flex: 1,
+    position: "absolute",
+    bottom: hp("2%"),
+    left: wp("20%"),
   },
   copText: {
-    backgroundColor: "orange",
-    borderRadius: 10,
+    backgroundColor: "#FF7E00",
+    borderRadius: 20,
     fontSize: 30,
-    width: 110,
-    height: 60,
-    textAlign: "center",
-    textAlignVertical: "center",
-    marginBottom: 10,
-  },
-
-  dropText: {
-    backgroundColor: "black",
-    borderRadius: 15,
-    fontSize: 30,
-    width: 110,
-    height: 60,
+    width: wp("31%"),
+    height: hp("7%"),
+    lineHeight: hp("7%"),
     color: "white",
     textAlign: "center",
     textAlignVertical: "center",
     marginBottom: 10,
+    fontFamily: "LouisGeorge",
+    paddingLeft: 20,
   },
 
-  infoText: {
-    height: 28,
-    justifyContent: "center",
-    // zIndex: -100,
-    backgroundColor: "yellow",
+  dropText: {
+    backgroundColor: "black",
+    borderRadius: 20,
+    fontSize: 30,
+    width: wp("31%"),
+    height: hp("7%"),
+    lineHeight: hp("7%"),
+    color: "white",
+    textAlign: "center",
+    textAlignVertical: "center",
+    marginBottom: 10,
+    fontFamily: "LouisGeorge",
+    paddingRight: hp("3%"),
   },
+
+  logo: {
+    width: wp("12%"),
+    height: hp("6%"),
+  },
+  logoContainer: {
+    borderStyle: "solid",
+    borderColor: "white",
+    borderWidth: 6,
+    borderRadius: 200,
+    position: "absolute",
+    left: wp("24%"),
+    bottom: hp("1%"),
+  },
+
+  sparksContainer: {
+    position: "absolute",
+    left: wp("7%"),
+    bottom: hp("0.01%"),
+  },
+  sparks: {
+    // flex: 1,
+    width: 250,
+    height: 100,
+  },
+  // infoText: {
+  //   height: 28,
+  //   justifyContent: "center",
+  //   // zIndex: -100,
+  //   backgroundColor: "yellow",
+  // },
 });
 
 export default CopDropScreen;

@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import Loading from "../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_URL } from "react-native-dotenv";
 
 export default function HomeScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,15 +23,21 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     const fetchPictures = async () => {
       try {
+        const token = await AsyncStorage.getItem("userToken");
+        const headers = {
+          Authorization: "Bearer " + token,
+        };
         const userId = await AsyncStorage.getItem("userId");
         const [responseParcourir, responseLikes] = await Promise.all([
-          axios.get(
-            "https://site--skaners-back--jhlzj9jljvpm.code.run/pictures"
-          ),
-          axios.get(
-            `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
-          ),
+          axios.get(`${API_URL}/pictures`),
+          axios({
+            method: "GET",
+            url: `${API_URL}/user/info/${userId}`,
+            headers: headers,
+          }),
         ]);
+        //TODO CHECK HERE
+
         setSkans(responseLikes.data.skans.reverse());
         setPictures(responseParcourir.data);
         setIsLoading(false);

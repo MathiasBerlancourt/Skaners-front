@@ -18,6 +18,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { API_URL } from "react-native-dotenv";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -43,7 +44,7 @@ const SearchScreen = () => {
     const fetchSneakers = async () => {
       try {
         const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
+          `${API_URL}/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
 

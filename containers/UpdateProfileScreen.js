@@ -14,14 +14,19 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
+import { API_URL } from "react-native-dotenv";
 
-export default function UpdateProfileScreen({ route, navigation }) {
+export default function UpdateProfileScreen({ route, navigation, token }) {
   const data = route.params.elem;
   const [userName, setUserName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber);
   const [shoeSize, setShoeSize] = useState(data.shoeSize);
   const [favoriteBrand, setFavoriteBrand] = useState(data.favoriteBrand);
+
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
 
   const bodyParams = {
     userName,
@@ -42,10 +47,12 @@ export default function UpdateProfileScreen({ route, navigation }) {
       ) {
         navigation.goBack();
       } else {
-        axios.put(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/update/${data._id}`,
-          bodyParams
-        );
+        axios({
+          method: "PUT",
+          url: `${API_URL}/user/update/${data._id}`,
+          headers: headers,
+          data: bodyParams,
+        });
         const createTwoButtonAlert = () =>
           Alert.alert("Message", "Vos informations ont été mises à jour");
 
