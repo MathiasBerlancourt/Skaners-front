@@ -22,36 +22,59 @@ const ProductScreen = () => {
   const [check, setCheck] = useState("false");
   const [like, setLike] = useState("false");
   const [sneakersLiked, setSneakersLiked] = useState([]);
-  console.log("etat de seakersliked APRES onpress:", sneakersLiked);
+  const [sneakersLikedlist, setSneakersLikedList] = useState([]);
+  const [heartStyle, setHeartStyle] = useState("heart");
 
-  const reccordLikes = async () => {
+  const likeSneaker = async () => {
     const userId = await AsyncStorage.getItem("userId");
     try {
       const response = await axios.put(
-        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/update/${userId}`,
+        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/likeSneaker`,
         {
-          sneakers: sneakersLiked,
+          userId: userId,
+          sneakerId: route.params.id,
         }
       );
-      console.log("response : ", response.data.user.sneakers);
     } catch (error) {
       console.log(error.response);
     }
   };
+  const unlikeSneaker = async () => {
+    const userId = await AsyncStorage.getItem("userId");
+    try {
+      const response = await axios.put(
+        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikeSneaker`,
+        {
+          userId: userId,
+          sneakerId: route.params.id,
+        }
+      );
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
+      const userId = await AsyncStorage.getItem("userId");
       try {
-        response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers/${route.params.id}`
-        );
+        const [response, responseLikes] = await Promise.all([
+          axios.get(
+            `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers/${route.params.id}`
+          ),
+          axios.get(
+            `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
+          ),
+        ]);
         setData(response.data);
+        setSneakersLikedList(responseLikes.data.sneakers);
         setIsLoading(false);
       } catch (error) {
         console.log("error : ", error);
       }
     };
     fetchData();
-  }, []);
+  }, [like]);
   if (isLoading) {
     return (
       <View>
@@ -96,25 +119,29 @@ const ProductScreen = () => {
             <View style={styles.containerNameAndLike}>
               <TouchableOpacity
                 onPress={() => {
-                  console.log(
-                    "etat de seakersliked avant onpress:",
-                    sneakersLiked
-                  );
-                  const newTab = [...sneakersLiked];
-                  if (newTab.includes(route.params.id)) {
-                    newTab.splice(newTab.indexOf(route.params.id), 1);
+                  setLike(!like);
+                  if (like) {
+                    likeSneaker();
                   } else {
-                    newTab.push(route.params.id);
+                    unlikeSneaker();
                   }
-                  setSneakersLiked(newTab);
-                  reccordLikes();
                 }}
               >
-                <AntDesign
-                  name={check ? "hearto" : "heart"}
-                  size={30}
-                  style={{ paddingBottom: 10, color: "#FF7E00" }}
-                />
+                {sneakersLikedlist.includes((sneaker) => {
+                  sneaker._id === route.params.id;
+                }) ? (
+                  <AntDesign
+                    name="heart"
+                    size={30}
+                    style={{ paddingBottom: 10, color: "#FF7E00" }}
+                  />
+                ) : (
+                  <AntDesign
+                    name="hearto"
+                    size={30}
+                    style={{ paddingBottom: 10, color: "#FF7E00" }}
+                  />
+                )}
               </TouchableOpacity>
               <Text style={styles.sneakerName}>
                 {"     "}

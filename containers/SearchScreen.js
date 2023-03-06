@@ -14,6 +14,10 @@ import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -84,7 +88,10 @@ const SearchScreen = () => {
       {displaySearchBar && (
         <View
           style={[
-            { height: 0.2 * height, alignItems: "center" },
+            {
+              height: 0.2 * height,
+              alignItems: "center",
+            },
             styles.searchContainer,
           ]}
         >
@@ -127,14 +134,15 @@ const SearchScreen = () => {
               >
                 <View
                   style={{
-                    height: "auto",
+                    height: hp("20%"),
                     alignItems: "center",
                     backgroundColor: "white",
-
+                    width: wp("45%"),
                     borderRadius: 30,
                     paddingVertical: 15,
                     marginVertical: 3,
                     marginHorizontal: 10,
+                    justifyContent: "space-between",
                   }}
                 >
                   <Text style={{ fontWeight: "bold", color: "gray" }}>
@@ -142,7 +150,7 @@ const SearchScreen = () => {
                   </Text>
                   <Image
                     source={{ uri: item.picture }}
-                    style={{ width: 200, height: 200 }}
+                    style={{ width: wp("33%"), height: hp("10%") }}
                   />
                 </View>
               </TouchableOpacity>
