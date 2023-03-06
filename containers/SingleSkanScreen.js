@@ -64,6 +64,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             value={name}
             style={styles.input}
             placeholder={"Marque de la paire"}
+            placeholderTextColor="#414141"
           />
           <TextInput
             onChangeText={(e) => {
@@ -71,6 +72,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={desc}
             style={styles.input}
+            placeholderTextColor="#414141"
             placeholder={"Modèle de la paire"}
           />
           <TextInput
@@ -79,11 +81,12 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={link}
             style={styles.input}
+            placeholderTextColor="#414141"
             placeholder={"Lien de la paire"}
           />
         </View>
         <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
-          <Text style={styles.btnCheckTxt}>CHECK</Text>
+          <Text style={styles.btnCheckTxt}>Check</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>
@@ -126,8 +129,8 @@ const styles = StyleSheet.create({
 
   btnCheckTxt: {
     color: "white",
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 23,
   },
 });

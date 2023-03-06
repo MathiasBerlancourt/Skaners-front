@@ -12,7 +12,7 @@ import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
 import { API_URL } from "react-native-dotenv";
 
-const SkansCheckScreen = ({ navigation }) => {
+const SkansCheckScreen = ({ navigation, token }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
@@ -21,8 +21,15 @@ const SkansCheckScreen = ({ navigation }) => {
 
   useEffect(() => {
     try {
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
       const fetchData = async () => {
-        const response = await axios.get(`${API_URL}/allSkans`);
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/allSkans`,
+          headers: headers,
+        });
 
         const newTab = [];
 
@@ -105,12 +112,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 5,
+    marginHorizontal: 5,
   },
 
   btnDeleteTxt: {
     color: "white",
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     textAlign: "center",
     fontSize: 20,
   },

@@ -189,7 +189,7 @@ export default function App() {
                       backgroundColor: "white",
                     },
                     tabBarActiveTintColor: "#FF7E00",
-                    tabBarInactiveTintColor: "#717171",
+                    tabBarInactiveTintColor: "black",
                   }}
                 >
                   <Tab.Screen
@@ -203,7 +203,15 @@ export default function App() {
                     }}
                   >
                     {() => (
-                      <Stack.Navigator>
+                      <Stack.Navigator
+                        screenOptions={{
+                          headerStyle: styles.header,
+                          contentStyle: {
+                            borderTopColor: "#717171",
+                            borderTopWidth: 1,
+                          },
+                        }}
+                      >
                         <Stack.Screen
                           name="Home"
                           options={{
@@ -287,7 +295,9 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => <SkansCheckScreen {...props} />}
+                          {(props) => (
+                            <SkansCheckScreen token={userToken} {...props} />
+                          )}
                         </Stack.Screen>
                         <Stack.Screen
                           name="SingleSkan"
@@ -322,7 +332,15 @@ export default function App() {
                     }}
                   >
                     {() => (
-                      <Stack.Navigator>
+                      <Stack.Navigator
+                        screenOptions={{
+                          headerStyle: styles.header,
+                          contentStyle: {
+                            borderTopColor: "#717171",
+                            borderTopWidth: 1,
+                          },
+                        }}
+                      >
                         <Stack.Screen
                           name="Search"
                           options={{
@@ -394,7 +412,15 @@ export default function App() {
                     }}
                   >
                     {() => (
-                      <Stack.Navigator>
+                      <Stack.Navigator
+                        screenOptions={{
+                          headerStyle: styles.header,
+                          contentStyle: {
+                            borderTopColor: "#717171",
+                            borderTopWidth: 1,
+                          },
+                        }}
+                      >
                         <Stack.Screen
                           name="Collection"
                           options={{
@@ -476,7 +502,15 @@ export default function App() {
                     }}
                   >
                     {() => (
-                      <Stack.Navigator>
+                      <Stack.Navigator
+                        screenOptions={{
+                          headerStyle: styles.header,
+                          contentStyle: {
+                            borderTopColor: "#717171",
+                            borderTopWidth: 1,
+                          },
+                        }}
+                      >
                         <Stack.Screen
                           name="CopDrop"
                           options={{
