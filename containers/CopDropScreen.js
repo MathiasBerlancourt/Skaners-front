@@ -41,7 +41,7 @@ const CopDropScreen = ({ token }) => {
           },
           headers: headers,
         });
-setPlayAnimation(false);
+        setPlayAnimation(false);
         setLastDirection("");
       } catch (error) {
         console.log(error.message);
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: wp("31%"),
     height: hp("7%"),
+    lineHeight: hp("7%"),
     color: "white",
     textAlign: "center",
     textAlignVertical: "center",
@@ -174,6 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: wp("31%"),
     height: hp("7%"),
+    lineHeight: hp("7%"),
     color: "white",
     textAlign: "center",
     textAlignVertical: "center",
