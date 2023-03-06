@@ -21,9 +21,17 @@ const SkansCategory = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = await AsyncStorage.getItem("userToken");
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
       const userId = await AsyncStorage.getItem("userId");
       try {
-        const response = await axios.get(`${API_URL}/user/info/${userId}`);
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/user/info/${userId}`,
+          headers: headers,
+        });
         setData(response.data.skans.reverse());
 
         setIsLoad(true);
