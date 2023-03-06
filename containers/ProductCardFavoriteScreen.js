@@ -9,13 +9,9 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const ProductCardScreenSkan = ({ route, navigation }) => {
+const ProductCardFavoriteScreen = ({ route, navigation }) => {
   const product = route.params.product;
 
   const size = 50;
@@ -24,8 +20,8 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
     try {
       const userId = await AsyncStorage.getItem("userId");
       await axios.put(
-        "https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikeSkan",
-        { userId: userId, skanId: product._id }
+        "https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikeSneaker",
+        { userId: userId, sneakerId: product._id }
       );
     } catch (error) {
       console.log(error.message);
@@ -57,7 +53,6 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
       }
     );
   };
-
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -77,23 +72,24 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.infosContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Marque :</Text>
-          <Text style={styles.text}>{product.sneakerName}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Description : </Text>
-          <Text style={styles.text}>{product.description}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Lien : </Text>
-          <Text style={styles.text}>{product.linkUrl}</Text>
-        </View>
+      {/* <View style={styles.infosContainer}>
+      <View style={styles.textContainer}>
+        <Text style={styles.labelColor}>Marque :</Text>
+        <Text style={styles.text}>{product.sneakerName}</Text>
       </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.labelColor}>Description : </Text>
+        <Text style={styles.text}>{product.description}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.labelColor}>Lien : </Text>
+        <Text style={styles.text}>{product.linkUrl}</Text>
+      </View>
+    </View> */}
     </KeyboardAwareScrollView>
   );
 };
+
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "white",
@@ -144,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductCardScreenSkan;
+export default ProductCardFavoriteScreen;
