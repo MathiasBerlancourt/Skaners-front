@@ -41,7 +41,6 @@ const CopDropScreen = ({ token }) => {
           },
           headers: headers,
         });
-        setPlayAnimation(false);
         setLastDirection("");
       } catch (error) {
         console.log(error.message);
@@ -63,8 +62,10 @@ const CopDropScreen = ({ token }) => {
         // je filtre une 2 eme fois pour avoir que les skans validés qui ne viennent pas de notre user et je setData
 
         setData(tempTab.filter((sneaker) => sneaker.userId !== idUser));
-
         setIsLoad(true);
+        setTimeout(() => {
+          setPlayAnimation(false);
+        }, 500);
       } catch (error) {
         console.log(error.message);
       }
@@ -81,7 +82,7 @@ const CopDropScreen = ({ token }) => {
   const swiped = (direction, id) => {
     setLastDirection(direction);
     if (direction === "right") {
-      setPlayAnimation(true);
+      setPlayAnimation(!playAnimation);
       setIdLike(id);
     }
   };
@@ -109,11 +110,12 @@ const CopDropScreen = ({ token }) => {
         <View>
           <Text style={styles.copText}>COP</Text>
           <View style={styles.sparksContainer}>
-            {lastDirection === "right" ? (
+            {console.log(playAnimation)}
+            {playAnimation ? (
               <LottieView
                 ref={animation}
                 autoPlay
-                loop={false}
+                loop={playAnimation}
                 style={styles.sparks}
                 source={sparks}
               />

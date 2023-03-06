@@ -10,6 +10,10 @@ import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { API_URL } from "react-native-dotenv";
 
 const ProductCardLikeScreen = ({ route, navigation }) => {

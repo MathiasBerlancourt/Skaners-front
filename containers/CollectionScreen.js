@@ -8,7 +8,7 @@ import FavoritesCategory from "../components/FavoritesCategory";
 LogBox.ignoreLogs(["Sending..."]);
 
 const FavoritesCategoryRoute = () => (
-  <View style={{ flex: 1 }}>{/* <FavoritesCategory /> */}</View>
+  <View style={{ flex: 1 }}>{<FavoritesCategory />}</View>
 );
 
 const LikesCategoryRoute = () => (
@@ -31,7 +31,7 @@ const CollectionScreen = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "favorites", title: "MES FAVORITES" },
+    { key: "favorites", title: "MES FAVORIS" },
     { key: "skans", title: "MES SKANS" },
     { key: "likes", title: "MES LIKES" },
   ]);

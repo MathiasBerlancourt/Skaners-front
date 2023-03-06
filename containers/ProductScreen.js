@@ -64,12 +64,8 @@ const ProductScreen = ({ token }) => {
       const userId = await AsyncStorage.getItem("userId");
       try {
         const [response, responseLikes] = await Promise.all([
-          axios.get(
-            `${API_URL}/sneakers/${route.params.id}`
-          ),
-          axios.get(
-            `${API_URL}/user/info/${userId}`
-          ),
+          axios.get(`${API_URL}/sneakers/${route.params.id}`),
+          axios.get(`${API_URL}/user/info/${userId}`),
         ]);
         setData(response.data);
         setSneakersLikedList(responseLikes.data.sneakers);
