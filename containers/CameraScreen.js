@@ -12,6 +12,7 @@ import { useIsFocused } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
@@ -43,19 +44,40 @@ export default function CameraScreen({ navigation }) {
     })();
   }, []);
 
+  const getPermissionAndGetPicture = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status === "granted") {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [3, 4],
+        quality: 0.5,
+      });
+      if (result.canceled !== true) {
+        setImage(result.assets[0].uri);
+      }
+    } else {
+      alert("Permission refusée");
+    }
+  };
+
   const takePicture = async () => {
     setLoading(true);
     if (cameraRef) {
       try {
-        const data = await cameraRef.current.takePictureAsync({
-          skipProcessing: true,
-        });
-        const manip = await ImageManipulator.manipulateAsync(
-          data.uri,
-          [{ resize: { width: width * 2, height: height * 2 } }],
-          { compress: 1, format: "jpeg" }
-        );
-        setImage(manip.uri);
+        const options = { quality: 0.5, base64: true, skipProcessing: true };
+        const data = await cameraRef.current.takePictureAsync(options);
+        const cropImage = async () => {
+          const manipResult = await ImageManipulator.manipulateAsync(
+            data.uri,
+            [],
+            {
+              compress: 0.5,
+              format: "jpeg",
+            }
+          );
+          setImage(manipResult.uri);
+        };
+        cropImage();
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -118,13 +140,11 @@ export default function CameraScreen({ navigation }) {
           ref={cameraRef}
           flashMode={flash}
           focusDepth={1}
-          ratio={"16:9"}
         >
           <View style={styles.btnBox}>
             <View
               style={{
-                alignItems: "flex-end",
-                paddingHorizontal: 30,
+                paddingHorizontal: 20,
               }}
             >
               <Button
@@ -164,14 +184,34 @@ export default function CameraScreen({ navigation }) {
           </View>
           <View style={styles.controlsPhoto}>
             {!loading && (
-              <TouchableOpacity onPress={takePicture}>
-                <Ionicons name="aperture" size={70} color={"#FF7E00"} />
-              </TouchableOpacity>
+              <View style={styles.apertureBox}>
+                <View
+                  style={{
+                    paddingHorizontal: 30,
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    title=""
+                    icon="image"
+                    onPress={getPermissionAndGetPicture}
+                  />
+                </View>
+                <TouchableOpacity style={styles.aperture} onPress={takePicture}>
+                  <Ionicons name="aperture" size={70} color={"#FF7E00"} />
+                </TouchableOpacity>
+              </View>
             )}
           </View>
         </Camera>
       ) : (
-        <Image source={{ uri: image }} style={styles.camera} />
+        <View style={styles.camera}>
+          <Image
+            style={styles.image}
+            source={{ uri: image }}
+            resizeMode={"contain"}
+          />
+        </View>
       )}
 
       {image && (
@@ -211,13 +251,17 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#000",
   },
-  controls: {
-    flex: 0.6,
-  },
   controlsPhoto: {
-    alignItems: "center",
+    width: "100%",
     paddingVertical: 30,
   },
+  apertureBox: {
+    flexDirection: "row",
+    width: "60%",
+    justifyContent: "space-between",
+  },
+
+  image: { flex: 1, width: "100%" },
   btnBox: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -246,8 +290,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   camera: {
-    flex: 5,
+    width: "100%",
     borderRadius: 20,
+    height: "85%",
     justifyContent: "space-between",
   },
   topControls: {

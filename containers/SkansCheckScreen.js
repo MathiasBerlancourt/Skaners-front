@@ -79,6 +79,7 @@ const SkansCheckScreen = ({ navigation }) => {
                   <Image
                     style={styles.skan}
                     source={{ uri: elem.pictureUrl }}
+                    resizeMode="contain"
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -104,10 +105,12 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     justifyContent: "center",
+    borderRadius: 20,
   },
 
   btnDeleteTxt: {
     color: "white",
+    fontFamily: "LouisGeorge",
     textAlign: "center",
     fontSize: 20,
   },
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
   skan: {
     height: 200,
     width: 300,
-    borderColor: "#717171",
+    backgroundColor: "black",
     borderWidth: 3,
     marginVertical: 10,
   },
