@@ -31,7 +31,7 @@ const CollectionScreen = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "favorites", title: "MES FAVORITES" },
+    { key: "favorites", title: "MES FAVORIS" },
     { key: "skans", title: "MES SKANS" },
     { key: "likes", title: "MES LIKES" },
   ]);

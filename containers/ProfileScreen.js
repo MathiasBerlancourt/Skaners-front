@@ -78,7 +78,7 @@ export default function ProfileScreen({ navigation, setToken, token }) {
           <View style={styles.infoBox}>
             <Text style={styles.labelColor}>Pointure</Text>
             <Text style={styles.txt}>
-              {data.shoeSize && `${data.shoeSize} EU`}{" "}
+              {data.shoeSize && `${data.shoeSize} EU`}
             </Text>
           </View>
           <View style={styles.infoBox}>
@@ -152,7 +152,8 @@ const styles = StyleSheet.create({
 
   btnAdminTxt: {
     color: "white",
-    fontFamily: "LouisGeorge",
+    fontSize: 18,
+    fontFamily: "LouisGeorgeBold",
   },
 
   name: {
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
   btnTxt: {
     fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
+    fontSize: 23,
   },
 
   updateText: {
