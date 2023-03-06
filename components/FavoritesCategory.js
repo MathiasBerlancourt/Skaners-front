@@ -21,11 +21,19 @@ const FavoritesCategory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = await AsyncStorage.getItem("userToken");
+        const headers = {
+          Authorization: "Bearer " + token,
+        };
         const userId = await AsyncStorage.getItem("userId");
         if (!userId) {
           return;
         }
-        const response = await axios.get(`${API_URL}/user/info/${userId}`);
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/user/info/${userId}`,
+          headers: headers,
+        });
         setData(response.data.sneakers.reverse());
 
         setIsLoad(true);
