@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
+import { API_URL } from "@env";
 
 const SkansCheckScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -21,9 +22,7 @@ const SkansCheckScreen = ({ navigation }) => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans`
-        );
+        const response = await axios.get(`${API_URL}/allSkans`);
 
         const newTab = [];
 
@@ -44,9 +43,7 @@ const SkansCheckScreen = ({ navigation }) => {
 
   const handleSkanDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://site--skaners-back--jhlzj9jljvpm.code.run/deleteSkan/${id}`
-      );
+      await axios.delete(`${API_URL}/deleteSkan/${id}`);
       setDeleted(!deleted);
     } catch (error) {
       console.log(error.message);

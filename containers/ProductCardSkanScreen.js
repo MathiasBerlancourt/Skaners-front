@@ -14,6 +14,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { API_URL } from "@env";
 
 const ProductCardScreenSkan = ({ route, navigation }) => {
   const product = route.params.product;
@@ -23,10 +24,16 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
   const sendData = async () => {
     try {
       const userId = await AsyncStorage.getItem("userId");
-      await axios.put(
-        "https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikeSkan",
-        { userId: userId, skanId: product._id }
-      );
+      const token = await AsyncStorage.getItem("userToken");
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
+      await axios({
+        method: "PUT",
+        url: `${API_URL}/user/unlikeSkan`,
+        data: { userId: userId, skanId: product._id },
+        headers: headers,
+      });
     } catch (error) {
       console.log(error.message);
     }

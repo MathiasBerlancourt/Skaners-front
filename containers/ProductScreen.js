@@ -15,24 +15,29 @@ import {
 } from "react-native-responsive-screen";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
-const ProductScreen = () => {
+import { API_URL } from "@env";
+const ProductScreen = ({ token }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const route = useRoute();
   const [check, setCheck] = useState("false");
   const [like, setLike] = useState("false");
   const [sneakersLiked, setSneakersLiked] = useState([]);
-  console.log("etat de seakersliked APRES onpress:", sneakersLiked);
 
   const reccordLikes = async () => {
     const userId = await AsyncStorage.getItem("userId");
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
     try {
-      const response = await axios.put(
-        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/update/${userId}`,
-        {
+      const response = await axios({
+        method: "PUT",
+        url: `${API_URL}/user/update/${userId}`,
+        data: {
           sneakers: sneakersLiked,
-        }
-      );
+        },
+        headers: headers,
+      });
       console.log("response : ", response.data.user.sneakers);
     } catch (error) {
       console.log(error.response);
@@ -41,8 +46,8 @@ const ProductScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers/${route.params.id}`
+        const response = await axios.get(
+          `${API_URL}/sneakers/${route.params.id}`
         );
         setData(response.data);
         setIsLoading(false);

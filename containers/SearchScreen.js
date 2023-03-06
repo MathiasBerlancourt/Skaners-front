@@ -14,6 +14,7 @@ import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");
@@ -39,7 +40,7 @@ const SearchScreen = () => {
     const fetchSneakers = async () => {
       try {
         const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/sneakers?name=${name}&brand=${brand}&color=${color}`
+          `${API_URL}/sneakers?name=${name}&brand=${brand}&color=${color}`
         );
         setSneakers(response.data);
 

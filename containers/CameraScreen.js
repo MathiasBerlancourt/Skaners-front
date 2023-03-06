@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/PhotoButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator } from "react-native-paper";
+import { API_URL } from "@env";
 
 export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -75,15 +76,11 @@ export default function CameraScreen({ navigation }) {
         });
         formData.append("userId", id);
 
-        const response = await axios.post(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/user/addSkan",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await axios.post(`${API_URL}/user/addSkan`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
         const createTwoButtonAlert = () =>
           Alert.alert(
