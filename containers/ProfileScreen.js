@@ -10,18 +10,19 @@ import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
 import { API_URL } from "react-native-dotenv";
 
-export default function ProfileScreen({ navigation, setToken, token }) {
+export default function ProfileScreen({ navigation, setToken }) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   const isFocused = useIsFocused();
   //https://site--skaners-back--jhlzj9jljvpm.code.run
   useEffect(() => {
-    const headers = {
-      Authorization: "Bearer " + token,
-    };
     try {
       const fetchData = async () => {
+        const token = await AsyncStorage.getItem("userToken");
+        const headers = {
+          Authorization: "Bearer " + token,
+        };
         const id = await AsyncStorage.getItem("userId");
         if (id) {
           const response = await axios({

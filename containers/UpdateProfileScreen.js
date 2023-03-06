@@ -15,18 +15,15 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
 import { API_URL } from "react-native-dotenv";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function UpdateProfileScreen({ route, navigation, token }) {
+export default function UpdateProfileScreen({ route, navigation }) {
   const data = route.params.elem;
   const [userName, setUserName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber);
   const [shoeSize, setShoeSize] = useState(data.shoeSize);
   const [favoriteBrand, setFavoriteBrand] = useState(data.favoriteBrand);
-
-  const headers = {
-    Authorization: "Bearer " + token,
-  };
 
   const bodyParams = {
     userName,
@@ -36,7 +33,11 @@ export default function UpdateProfileScreen({ route, navigation, token }) {
     favoriteBrand,
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const token = await AsyncStorage.getItem("userToken");
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
     try {
       if (
         userName === data.userName &&

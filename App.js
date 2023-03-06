@@ -252,11 +252,7 @@ export default function App() {
                           }}
                         >
                           {(props) => (
-                            <ProfileScreen
-                              {...props}
-                              token={userToken}
-                              setToken={setToken}
-                            />
+                            <ProfileScreen {...props} setToken={setToken} />
                           )}
                         </Stack.Screen>
                         <Stack.Screen
@@ -273,9 +269,7 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => (
-                            <UpdateProfileScreen {...props} token={userToken} />
-                          )}
+                          {(props) => <UpdateProfileScreen {...props} />}
                         </Stack.Screen>
                         <Stack.Screen
                           name="SkansCheck"
@@ -357,9 +351,7 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => (
-                            <ProductScreen {...props} token={userToken} />
-                          )}
+                          {(props) => <ProductScreen {...props} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { API_URL } from "react-native-dotenv";
-const ProductScreen = ({ token }) => {
+const ProductScreen = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const route = useRoute();
@@ -28,6 +28,7 @@ const ProductScreen = ({ token }) => {
 
   const likeSneaker = async () => {
     const userId = await AsyncStorage.getItem("userId");
+    const token = await AsyncStorage.getItem("userToken");
     const headers = {
       Authorization: "Bearer " + token,
     };
@@ -64,12 +65,8 @@ const ProductScreen = ({ token }) => {
       const userId = await AsyncStorage.getItem("userId");
       try {
         const [response, responseLikes] = await Promise.all([
-          axios.get(
-            `${API_URL}/sneakers/${route.params.id}`
-          ),
-          axios.get(
-            `${API_URL}/user/info/${userId}`
-          ),
+          axios.get(`${API_URL}/sneakers/${route.params.id}`),
+          axios.get(`${API_URL}/user/info/${userId}`),
         ]);
         setData(response.data);
         setSneakersLikedList(responseLikes.data.sneakers);
