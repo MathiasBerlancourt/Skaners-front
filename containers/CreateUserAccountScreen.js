@@ -6,6 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -102,7 +106,8 @@ const CreateUserAccountScreen = () => {
           setDateOfBirth(input);
         }}
       /> */}
-      {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)}
+      {/* {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)} */}
+      {/* Commentaire de controle de la date de naissance */}
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -144,7 +149,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   formContainer: {
-    height: "65%",
+    height: "100%",
+    justifyContent: "space-between",
   },
   title: {
     fontFamily: "LemonMilkBold",

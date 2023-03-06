@@ -1,4 +1,5 @@
 import { useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
   Text,
@@ -18,12 +19,25 @@ const ProductScreen = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const route = useRoute();
+  const [check, setCheck] = useState("false");
   const [like, setLike] = useState("false");
+  const [sneakersLiked, setSneakersLiked] = useState([]);
+  console.log("etat de seakersliked APRES onpress:", sneakersLiked);
 
-  const handleLike = () => {
-    setLike(!like);
+  const reccordLikes = async () => {
+    const userId = await AsyncStorage.getItem("userId");
+    try {
+      const response = await axios.put(
+        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/update/${userId}`,
+        {
+          sneakers: sneakersLiked,
+        }
+      );
+      console.log("response : ", response.data.user.sneakers);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -80,9 +94,24 @@ const ProductScreen = () => {
             </View>
 
             <View style={styles.containerNameAndLike}>
-              <TouchableOpacity onPress={handleLike}>
+              <TouchableOpacity
+                onPress={() => {
+                  console.log(
+                    "etat de seakersliked avant onpress:",
+                    sneakersLiked
+                  );
+                  const newTab = [...sneakersLiked];
+                  if (newTab.includes(route.params.id)) {
+                    newTab.splice(newTab.indexOf(route.params.id), 1);
+                  } else {
+                    newTab.push(route.params.id);
+                  }
+                  setSneakersLiked(newTab);
+                  reccordLikes();
+                }}
+              >
                 <AntDesign
-                  name={like ? "hearto" : "heart"}
+                  name={check ? "hearto" : "heart"}
                   size={30}
                   style={{ paddingBottom: 10, color: "#FF7E00" }}
                 />

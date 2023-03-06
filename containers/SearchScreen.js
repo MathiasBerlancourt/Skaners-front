@@ -120,7 +120,9 @@ const SearchScreen = () => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("ProductScreen", { id: item._id });
+                  navigation.navigate("ProductScreen", {
+                    id: item._id,
+                  });
                 }}
               >
                 <View
