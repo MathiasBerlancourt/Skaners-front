@@ -10,6 +10,7 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "./Loading";
 import axios from "axios";
+import { API_URL } from "react-native-dotenv";
 
 const FavoritesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -24,9 +25,7 @@ const FavoritesCategory = () => {
         if (!userId) {
           return;
         }
-        const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
-        );
+        const response = await axios.get(`${API_URL}/user/info/${userId}`);
         setData(response.data.sneakers.reverse());
 
         setIsLoad(true);

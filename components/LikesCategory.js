@@ -10,6 +10,7 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "./Loading";
 import axios from "axios";
+import { API_URL } from "react-native-dotenv";
 
 const LikesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -21,12 +22,19 @@ const LikesCategory = () => {
     const fetchData = async () => {
       try {
         const userId = await AsyncStorage.getItem("userId");
+        const token = await AsyncStorage.getItem("userToken");
+        const headers = {
+          Authorization: "Bearer " + token,
+        };
+
         if (!userId) {
           return;
         }
-        const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
-        );
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/user/info/${userId}`,
+          headers: headers,
+        });
         setData(response.data.likes.reverse());
 
         setIsLoad(true);

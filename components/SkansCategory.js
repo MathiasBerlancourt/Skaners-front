@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import Loading from "./Loading";
+import { API_URL } from "react-native-dotenv";
 
 const SkansCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -22,9 +23,7 @@ const SkansCategory = () => {
     const fetchData = async () => {
       const userId = await AsyncStorage.getItem("userId");
       try {
-        const response = await axios.get(
-          `https://site--skaners-back--jhlzj9jljvpm.code.run/user/info/${userId}`
-        );
+        const response = await axios.get(`${API_URL}/user/info/${userId}`);
         setData(response.data.skans.reverse());
 
         setIsLoad(true);

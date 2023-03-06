@@ -12,8 +12,9 @@ import {
 import LottieView from "lottie-react-native";
 import sparks from "../assets/Json/effectSparksCopDrop.json";
 import { useRef } from "react";
+import { API_URL } from "react-native-dotenv";
 
-const CopDropScreen = () => {
+const CopDropScreen = ({ token }) => {
   const [lastDirection, setLastDirection] = useState("");
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
@@ -23,17 +24,24 @@ const CopDropScreen = () => {
   const animation = useRef(null);
 
   useEffect(() => {
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
     const sendLike = async () => {
       try {
         if (lastDirection !== "right") {
           return;
         }
-        await axios.put(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/user/likeSkan",
-          { skanId: idLike, userId: idUser }
-        );
-        setPlayAnimation(false);
-
+        await axios({
+          method: "PUT",
+          url: `${API_URL}/user/likeSkan`,
+          data: {
+            skanId: idLike,
+            userId: idUser,
+          },
+          headers: headers,
+        });
+setPlayAnimation(false);
         setLastDirection("");
       } catch (error) {
         console.log(error.message);
@@ -41,9 +49,11 @@ const CopDropScreen = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://site--skaners-back--jhlzj9jljvpm.code.run/allSkans"
-        );
+        const response = await axios({
+          method: "GET",
+          url: `${API_URL}/allSkans`,
+          headers: headers,
+        });
         if (!idUser) {
           return;
         }
