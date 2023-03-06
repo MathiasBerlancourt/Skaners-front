@@ -122,38 +122,41 @@ const SearchScreen = () => {
         <Loading />
       ) : (
         <FlatList
+          horizontal
           data={sneakers}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("ProductScreen", {
-                    id: item._id,
-                  });
-                }}
-              >
-                <View
-                  style={{
-                    height: hp("20%"),
-                    alignItems: "center",
-                    backgroundColor: "white",
-                    width: wp("45%"),
-                    borderRadius: 30,
-                    paddingVertical: 15,
-                    marginVertical: 3,
-                    marginHorizontal: 10,
-                    justifyContent: "space-between",
+              <View style={{ flexWrap: "wrap" }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("ProductScreen", {
+                      id: item._id,
+                    });
                   }}
                 >
-                  <Text style={{ fontWeight: "bold", color: "gray" }}>
-                    {item.name}
-                  </Text>
-                  <Image
-                    source={{ uri: item.picture }}
-                    style={{ width: wp("33%"), height: hp("10%") }}
-                  />
-                </View>
-              </TouchableOpacity>
+                  <View
+                    style={{
+                      height: hp("20%"),
+                      alignItems: "center",
+                      backgroundColor: "white",
+                      width: wp("45%"),
+                      borderRadius: 30,
+                      paddingVertical: 15,
+                      marginVertical: 3,
+                      marginHorizontal: 10,
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={{ fontWeight: "bold", color: "gray" }}>
+                      {item.name}
+                    </Text>
+                    <Image
+                      source={{ uri: item.picture }}
+                      style={{ width: wp("33%"), height: hp("10%") }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
             );
           }}
         />
