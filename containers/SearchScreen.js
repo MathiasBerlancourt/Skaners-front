@@ -112,7 +112,6 @@ const SearchScreen = () => {
             search="true"
             data={brands}
             buttonStyle={styles.input}
-            buttonTextStyle={styles.inputText}
             dropdownStyle={styles.input}
             dropdownOverlayColor="transparent"
             dropdownBackgroundColor="#717171"
@@ -135,7 +134,6 @@ const SearchScreen = () => {
             searchInputStyle={{ height: hp("3%"), width: wp("80%") }}
             searchPlaceHolder="Marque..."
             dropdownIconPosition="right"
-            dropdownStyle={styles.dropdownStyle}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
               setBrand(selectedItem);
