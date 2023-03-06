@@ -10,7 +10,7 @@ import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const ProductCardFavoriteScreen = ({ route, navigation }) => {
   const product = route.params.product;

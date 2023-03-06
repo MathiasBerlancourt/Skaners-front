@@ -14,7 +14,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const ProductCardScreenSkan = ({ route, navigation }) => {
   const product = route.params.product;

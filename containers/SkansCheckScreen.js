@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const SkansCheckScreen = ({ navigation }) => {
   const [data, setData] = useState([]);

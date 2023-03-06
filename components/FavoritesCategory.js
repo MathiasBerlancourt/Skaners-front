@@ -10,7 +10,7 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "./Loading";
 import axios from "axios";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const FavoritesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);

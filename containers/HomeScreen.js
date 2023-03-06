@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import Loading from "../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 export default function HomeScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);

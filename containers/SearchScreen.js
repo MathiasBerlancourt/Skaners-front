@@ -14,7 +14,7 @@ import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const SearchScreen = () => {
   const [name, setName] = useState("");

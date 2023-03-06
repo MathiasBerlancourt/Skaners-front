@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 export default function UpdateProfileScreen({ route, navigation, token }) {
   const data = route.params.elem;

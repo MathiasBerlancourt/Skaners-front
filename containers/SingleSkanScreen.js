@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const SingleSkanScreen = ({ route, navigation }) => {
   const data = route.params.elem;

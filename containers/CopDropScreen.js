@@ -10,7 +10,7 @@ import TinderCard from "react-tinder-card";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const CopDropScreen = ({ token }) => {
   const [lastDirection, setLastDirection] = useState("");

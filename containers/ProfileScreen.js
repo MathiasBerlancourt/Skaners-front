@@ -8,7 +8,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 export default function ProfileScreen({ navigation, setToken, token }) {
   const [data, setData] = useState({});

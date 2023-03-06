@@ -18,7 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/PhotoButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator } from "react-native-paper";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);

@@ -9,7 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 export default function SignInScreen({ setToken, setId }) {
   const [email, setEmail] = useState("admin6780@mail.com");

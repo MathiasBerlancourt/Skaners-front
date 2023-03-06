@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import Loading from "./Loading";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 
 const SkansCategory = () => {
   const [isLoad, setIsLoad] = useState(false);

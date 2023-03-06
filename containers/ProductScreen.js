@@ -15,7 +15,7 @@ import {
 } from "react-native-responsive-screen";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
-import { API_URL } from "@env";
+import { API_URL } from "react-native-dotenv";
 const ProductScreen = ({ token }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
