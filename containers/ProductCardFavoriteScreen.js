@@ -65,7 +65,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
     );
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={styles.background}>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.picture }} />
@@ -103,18 +103,22 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "white",
+    backgroundColor: "lightgrey",
     flex: 1,
   },
   container: {
     alignContent: "center",
     justifyContent: "center",
-    height: 400,
-    marginTop: hp("5%"),
+    height: hp("50%"),
+    width: wp("80%"),
+    marginHorizontal: wp("10%"),
+    marginTop: hp("3%"),
+    backgroundColor: "white",
+    borderRadius: 20,
   },
   imgContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 
   img: {
@@ -130,8 +134,8 @@ const styles = StyleSheet.create({
   },
   delete: {
     position: "absolute",
-    bottom: hp("50%"),
-    left: wp("25%"),
+    bottom: hp("46%"),
+    left: wp("60%"),
   },
   textContainer: {
     flexDirection: "row",

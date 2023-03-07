@@ -18,7 +18,6 @@ import { API_URL } from "react-native-dotenv";
 
 const ProductCardScreenSkan = ({ route, navigation }) => {
   const product = route.params.product;
-
   const size = 50;
 
   const sendData = async () => {

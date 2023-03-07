@@ -110,7 +110,6 @@ const CopDropScreen = ({ token }) => {
         <View>
           <Text style={styles.copText}>COP</Text>
           <View style={styles.sparksContainer}>
-            {console.log(playAnimation)}
             {playAnimation ? (
               <LottieView
                 ref={animation}
