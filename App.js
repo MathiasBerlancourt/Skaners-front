@@ -255,7 +255,9 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => <PictureHomeView {...props} />}
+                          {(props) => (
+                            <PictureHomeView token={userToken} {...props} />
+                          )}
                         </Stack.Screen>
                         <Stack.Screen
                           name="Profile"
