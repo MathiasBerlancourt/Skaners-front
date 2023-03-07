@@ -89,15 +89,15 @@ const ProductScreen = ({ token }) => {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.productScreenContainer}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: data.picture }}
-              resizeMode="contain"
-              style={{
-                width: wp("100%"),
-                height: wp("100%"),
-              }}
-            />
+          <Image
+            source={{ uri: data.picture }}
+            resizeMode="cover"
+            style={{
+              width: wp("100%"),
+              height: wp("70%"),
+            }}
+          />
+          <View style={styles.detailsContainer}>
             <View style={styles.priceContainer}>
               <Text
                 style={{
@@ -186,12 +186,10 @@ const styles = StyleSheet.create({
     width: wp("100%"),
     backgroundColor: "white",
   },
-  imageContainer: {
-    justifyContent: "center",
+  detailsContainer: {
+    justifyContent: "space-around",
     alignItems: "center",
-    alignContent: "center",
-    justifyContent: "space-between",
-    height: "100%",
+    flex: 1,
   },
   priceContainer: {
     backgroundColor: "#717171",

@@ -85,7 +85,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: styles.header,
+          contentStyle: {
+            borderTopColor: "#717171",
+            borderTopWidth: 1,
+          },
+          headerTintColor: "black",
+        }}
+      >
         {userToken === null ? (
           // No token found, user isn't signed in
           <>
@@ -210,6 +219,7 @@ export default function App() {
                             borderTopColor: "#717171",
                             borderTopWidth: 1,
                           },
+                          headerTintColor: "black",
                         }}
                       >
                         <Stack.Screen
@@ -339,6 +349,7 @@ export default function App() {
                             borderTopColor: "#717171",
                             borderTopWidth: 1,
                           },
+                          headerTintColor: "black",
                         }}
                       >
                         <Stack.Screen
@@ -421,6 +432,7 @@ export default function App() {
                             borderTopColor: "#717171",
                             borderTopWidth: 1,
                           },
+                          headerTintColor: "black",
                         }}
                       >
                         <Stack.Screen
@@ -511,6 +523,7 @@ export default function App() {
                             borderTopColor: "#717171",
                             borderTopWidth: 1,
                           },
+                          headerTintColor: "black",
                         }}
                       >
                         <Stack.Screen

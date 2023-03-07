@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import logo from "../assets/Images/logo.jpg";
+import logo from "../assets/Images/logo.png";
 import skanersLogo from "../assets/Images/skaners.jpg";
 
 const WelcomeScreen = () => {
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 
   txt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
     fontSize: 20,
   },
