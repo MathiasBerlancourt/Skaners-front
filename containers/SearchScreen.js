@@ -8,10 +8,10 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -21,7 +21,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { API_URL } from "react-native-dotenv";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 const SearchScreen = () => {
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
@@ -94,36 +93,37 @@ const SearchScreen = () => {
         <View
           style={[
             {
-              height: hp("30%"),
+              height: hp("25%"),
               alignItems: "center",
+
+              justifyContent: "space-around",
             },
             styles.searchContainer,
           ]}
         >
-          <View style={styles.inputsContainer}>
-            <TextInput
-              placeholderTextColor="#717171"
-              placeholder="Modele..."
-              style={styles.input}
-              onChangeText={handleName}
-              value={name}
-            ></TextInput>
-            <TextInput
-              placeholderTextColor="#717171"
-              placeholder="Marque..."
-              style={styles.input}
-              onChangeText={handleBrand}
-              value={brand}
-            ></TextInput>
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Modele..."
+            style={styles.input}
+            onChangeText={handleName}
+            value={name}
+          ></TextInput>
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Marque..."
+            style={styles.input}
+            onChangeText={handleBrand}
+            value={brand}
+          ></TextInput>
 
-            <TextInput
-              placeholderTextColor="#717171"
-              placeholder="Couleur..."
-              style={styles.input}
-              onChangeText={handleColor}
-              value={color}
-            ></TextInput>
-          </View>
+          <TextInput
+            placeholderTextColor="#717171"
+            placeholder="Couleur..."
+            style={styles.input}
+            onChangeText={handleColor}
+            value={color}
+          ></TextInput>
+
           <View style={styles.modalButtons}>
             <TouchableOpacity
               onPress={() => {
@@ -133,16 +133,16 @@ const SearchScreen = () => {
               }}
               style={styles.clearButton}
             >
-              <Text>EFFACER</Text>
+              <Text style={styles.clearBtnTxt}>EFFACER</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
+              style={{ paddingRight: wp("3%") }}
               onPress={() => {
                 setDisplaySearchBar(false);
               }}
-              style={styles.validateButton}
             >
-              <Text>FERMER</Text>
+              <AntDesign name="close" size={30} color="#FF7E00" />
             </TouchableOpacity>
           </View>
         </View>
@@ -165,45 +165,61 @@ const SearchScreen = () => {
                 >
                   <View
                     style={{
-                      height: hp("20%"),
-                      alignItems: "center",
-                      backgroundColor: "white",
+                      height: hp("23%"),
+
                       width: wp("45%"),
                       borderRadius: 8,
                       borderRadius: 10,
-                      paddingVertical: 15,
                       marginVertical: 5,
                       marginHorizontal: 5,
-                      justifyContent: "space-between",
+                      backgroundColor: "white",
+
+                      justifyContent: "space-evenly",
                     }}
                   >
-                    <Text
-                      style={{
-                        color: "gray",
-                        fontSize: 10,
-                        paddingHorizontal: 8,
-                        paddingBottom: 5,
-                      }}
-                      numberOfLines={1}
-                    >
-                      {item.name}
-                    </Text>
-                    <Image
-                      source={{ uri: item.picture }}
-                      style={{ width: wp("37%"), height: hp("12%") }}
-                    />
-                    <Text
-                      style={{
-                        fontWeight: "bold",
-                        color: "gray",
-                        fontSize: 12,
-                        paddingRight: 75,
-                        marginTop: 10,
-                      }}
-                      numberOfLines={1}
-                    >
-                      {item.brand.toUpperCase()}
-                    </Text>
+                    <View style={{ alignItems: "center" }}>
+                      <Image
+                        source={{ uri: item.picture }}
+                        style={{
+                          width: wp("40%"),
+                          height: hp("15%"),
+                        }}
+                      />
+                    </View>
+                    <View style={{ justifyContent: "flex-start" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          color: "gray",
+                          fontSize: 12,
+                          paddingHorizontal: wp("2%"),
+                        }}
+                        numberOfLines={1}
+                      >
+                        {item.name}
+                      </Text>
+                      <Text
+                        style={{
+                          color: "gray",
+                          fontSize: 10,
+
+                          paddingHorizontal: wp("2%"),
+                        }}
+                      >
+                        {item.color.toUpperCase()}
+                      </Text>
+                      <Text
+                        style={{
+                          color: "gray",
+                          fontSize: 10,
+                          marginTop: 10,
+                          paddingHorizontal: wp("2%"),
+                        }}
+                        numberOfLines={1}
+                      >
+                        {item.brand.toUpperCase()}
+                      </Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
               );
@@ -217,15 +233,14 @@ const SearchScreen = () => {
 export default SearchScreen;
 
 const styles = StyleSheet.create({
-  inputsContainer: {
-    justifyContent: "space-between",
-  },
+  inputsContainer: {},
   input: {
-    backgroundColor: "lightgray",
-    height: hp("5%"),
+    backgroundColor: "whitesmoke",
+    height: hp("4%"),
     borderRadius: 20,
     paddingLeft: 20,
     width: wp("80%"),
+    fontFamily: "LouisGeorge",
   },
 
   titleContainer: {
@@ -243,7 +258,6 @@ const styles = StyleSheet.create({
     color: "#FF7E00",
     fontWeight: "bold",
     paddingVertical: hp("2%"),
-
     fontFamily: "LouisGeorge",
     paddingHorizontal: 15,
   },
@@ -253,17 +267,14 @@ const styles = StyleSheet.create({
   },
   modalButtons: {
     flexDirection: "row",
+    justifyContent: "space-between",
+
+    width: wp("100%"),
+    height: hp("6%"),
   },
-  validateButton: {
-    height: hp("4%"),
-    backgroundColor: "#FF7E00",
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    // marginHorizontal: 20,
-    // marginTop: 30,
-    // marginBottom: 20,
-    width: wp("20%"),
+  clearBtnTxt: {
+    fontFamily: "LouisGeorge",
+    fontSize: 18,
   },
   clearButton: {
     height: hp("4%"),
@@ -276,6 +287,8 @@ const styles = StyleSheet.create({
     // marginHorizontal: 20,
     // marginTop: 30,
     // marginBottom: 20,
-    width: wp("20%"),
+    marginLeft: wp("10%"),
+    width: wp("40%"),
+    height: "100%",
   },
 });
