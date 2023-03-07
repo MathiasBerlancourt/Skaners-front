@@ -1,4 +1,5 @@
-import { useState, Date } from "react";
+import { useState } from "react";
+
 import {
   Text,
   TextInput,
@@ -19,7 +20,7 @@ const CreateUserAccountScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const navigation = useNavigation();
   //DATE PICKER-------
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -83,7 +84,12 @@ const CreateUserAccountScreen = () => {
 
           <View style={styles.containerDoB}>
             <TouchableOpacity onPress={showDatePicker}>
-              <Text style={styles.txtDoB}>Date de naissance :</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={styles.txtDoB}>Date de naissance :</Text>
+                <Text style={styles.txtDoB}>
+                  {dateOfBirth.toLocaleDateString("fr-FR")}
+                </Text>
+              </View>
             </TouchableOpacity>
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
@@ -93,6 +99,34 @@ const CreateUserAccountScreen = () => {
               onCancel={hideDatePicker}
             />
           </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.signUpBtn}
+            onPress={() => {
+              if (
+                !email ||
+                !userName ||
+                !password ||
+                !confirmPassword ||
+                !dateOfBirth
+              ) {
+                return setErrorMessage("Remplissez tous les champs");
+              }
+              if (password !== confirmPassword) {
+                return setErrorMessage("Mot de passe différents");
+              }
+              navigation.navigate("Finalize User Account", {
+                email: email,
+                userName: userName,
+                password: password,
+                dateOfBirth: dateOfBirth.toLocaleDateString("fr-FR"),
+              });
+            }}
+          >
+            <Text style={styles.signUpTxt}>Valider</Text>
+          </TouchableOpacity>
+          <Text style={styles.errorTxt}>{errorMessage}</Text>
         </View>
       </KeyboardAwareScrollView>
 
@@ -108,35 +142,6 @@ const CreateUserAccountScreen = () => {
       /> */}
       {/* {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)} */}
       {/* Commentaire de controle de la date de naissance */}
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.signUpBtn}
-          onPress={() => {
-            if (
-              !email ||
-              !userName ||
-              !password ||
-              !confirmPassword ||
-              !dateOfBirth
-            ) {
-              return setErrorMessage("Remplissez tous les champs");
-            }
-            if (password !== confirmPassword) {
-              return setErrorMessage("Mot de passe différents");
-            }
-            navigation.navigate("Finalize User Account", {
-              email: email,
-              userName: userName,
-              password: password,
-              dateOfBirth: dateOfBirth,
-            });
-          }}
-        >
-          <Text style={styles.signUpTxt}>CONTINUER</Text>
-        </TouchableOpacity>
-        <Text style={styles.errorTxt}>{errorMessage}</Text>
-      </View>
     </View>
   );
 };
@@ -145,11 +150,14 @@ export default CreateUserAccountScreen;
 
 const styles = StyleSheet.create({
   createUserContainer: {
-    height: "100%",
-    justifyContent: "space-between",
+    paddingTop: hp("7%"),
+    height: hp("90%"),
+    alignContent: "flex-end",
+    backgroundColor: "white",
+    justifyContent: "center",
   },
   formContainer: {
-    height: "100%",
+    paddingTop: hp("2%"),
     justifyContent: "space-between",
   },
   title: {
@@ -171,11 +179,10 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 20,
     paddingLeft: 10,
-    width: "40%",
   },
   txtDoB: {
     color: "#717171",
-
+    fontFamily: "LouisGeorge",
     paddingVertical: 5,
   },
 
@@ -188,10 +195,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingLeft: 10,
   },
+  buttonContainer: {
+    paddingTop: hp("4%"),
+    alignItems: "center",
+  },
   signUpBtn: {
-    height: 50,
+    height: hp("5%"),
+    width: wp("60%"),
     backgroundColor: "#FF7E00",
-    borderRadius: 15,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,

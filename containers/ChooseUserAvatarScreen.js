@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import axios from "axios";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_URL } from "react-native-dotenv";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const ChooseUserAvatarScreens = ({ route, setToken }) => {
   const [avatar, setAvatar] = useState(
@@ -66,10 +69,10 @@ const ChooseUserAvatarScreens = ({ route, setToken }) => {
   }, [submit]);
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={styles.finalizeContainer}>
-        <Text style={styles.title}>Choisis ton avatar</Text>
-
+    <View style={styles.finalizeContainer}>
+      <Text style={styles.title}>Finalise ton inscription !</Text>
+      <View>
+        <Text style={styles.subTitle}>CHOISIS TON AVATAR</Text>
         <View style={styles.avatarsList}>
           {imagesAvatar.avatars.map((img, index) => {
             return (
@@ -87,24 +90,28 @@ const ChooseUserAvatarScreens = ({ route, setToken }) => {
           })}
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.signUpBtn}
-        disabled={submit}
-        onPress={() => {
-          setSubmit(true);
-        }}
-      >
-        <Text style={styles.signUpTxt}>CREER MON COMPTE</Text>
-      </TouchableOpacity>
-      <Text style={styles.errorTxt}>{errorMessage}</Text>
-    </KeyboardAwareScrollView>
+      <View>
+        <TouchableOpacity
+          style={styles.signUpBtn}
+          disabled={submit}
+          onPress={() => {
+            setSubmit(true);
+          }}
+        >
+          <Text style={styles.signUpTxt}>Valider</Text>
+        </TouchableOpacity>
+        <Text style={styles.errorTxt}>{errorMessage}</Text>
+      </View>
+    </View>
   );
 };
 
 export default ChooseUserAvatarScreens;
 const styles = StyleSheet.create({
   finalizeContainer: {
-    height: "80%",
+    height: hp("86%"),
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   avatarsList: {
     flexDirection: "row",
@@ -112,23 +119,36 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   title: {
+    paddingTop: hp("3%"),
+    alignContent: "center",
+    fontSize: 28,
+
     fontFamily: "LemonMilkBold",
-    fontSize: 25,
-    marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
+
+    color: "#FF7E00",
+
+    fontFamily: "LouisGeorge",
+  },
+  subTitle: {
+    fontSize: 23,
+
+    fontFamily: "LemonMilkBold",
     textAlign: "center",
-    marginVertical: 20,
+    color: "#717171",
+
+    fontFamily: "LouisGeorge",
   },
   signUpBtn: {
     height: 50,
     backgroundColor: "#FF7E00",
-    borderRadius: 15,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,
     marginTop: 30,
     marginBottom: 20,
+    height: hp("5%"),
+    width: wp("60%"),
   },
   errorTxt: {
     fontFamily: "LouisGeorge",
