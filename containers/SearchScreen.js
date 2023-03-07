@@ -189,9 +189,9 @@ const SearchScreen = () => {
                     <View style={{ justifyContent: "flex-start" }}>
                       <Text
                         style={{
-                          fontWeight: "bold",
-                          color: "gray",
-                          fontSize: 12,
+                          fontFamily: "LouisGeorgeBold",
+                          color: "black",
+                          fontSize: 14,
                           paddingHorizontal: wp("2%"),
                         }}
                         numberOfLines={1}
@@ -202,7 +202,7 @@ const SearchScreen = () => {
                         style={{
                           color: "gray",
                           fontSize: 10,
-
+                          fontFamily: "LouisGeorge",
                           paddingHorizontal: wp("2%"),
                         }}
                       >
@@ -213,6 +213,7 @@ const SearchScreen = () => {
                           color: "gray",
                           fontSize: 10,
                           marginTop: 10,
+                          fontFamily: "LouisGeorge",
                           paddingHorizontal: wp("2%"),
                         }}
                         numberOfLines={1}
