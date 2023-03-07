@@ -47,48 +47,49 @@ export default function SignInScreen({ setToken, setId }) {
   return (
     <KeyboardAwareScrollView style={styles.background}>
       <View>
-        <View>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            disabled={submit}
-            onPress={() => {
-              if (!email || !password) {
-                return setErrorMessage("Vous devez remplir tous les champs");
-              }
-              setSubmit(true);
-            }}
-          >
-            <Text style={styles.loginTxt}>CONNEXION</Text>
-          </TouchableOpacity>
+        <Text style={styles.title}>CONNEXION</Text>
 
-          <Text style={styles.errorTxt}>{errorMessage}</Text>
+        <Text style={styles.errorTxt}>{errorMessage}</Text>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            onChangeText={(input) => {
-              setEmail(input);
-            }}
-            value={email}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Mot de passe"
-            secureTextEntry={true}
-            onChangeText={(input) => {
-              setPassword(input);
-            }}
-            value={password}
-          />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={"#515151"}
+          onChangeText={(input) => {
+            setEmail(input);
+          }}
+          value={email}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Mot de passe"
+          placeholderTextColor={"#515151"}
+          secureTextEntry={true}
+          onChangeText={(input) => {
+            setPassword(input);
+          }}
+          value={password}
+        />
 
-          <TouchableOpacity
-            onPress={() => {
-              alert("Wesh Crack pourquoi t'as oublié ton mot de passe");
-            }}
-          >
-            <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            alert("Wesh Crack pourquoi t'as oublié ton mot de passe");
+          }}
+        >
+          <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          disabled={submit}
+          onPress={() => {
+            if (!email || !password) {
+              return setErrorMessage("Vous devez remplir tous les champs");
+            }
+            setSubmit(true);
+          }}
+        >
+          <Text style={styles.loginTxt}>Valider</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -97,11 +98,21 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
-    height: 30,
     borderRadius: 20,
-    marginVertical: 15,
+    marginVertical: 10,
     marginHorizontal: 20,
-    paddingLeft: 10,
+    padding: 10,
+  },
+
+  title: {
+    fontFamily: "LemonMilkBold",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginHorizontal: 30,
+    borderBottomColor: "#FF7E00",
+    borderBottomWidth: 2,
+    textAlign: "center",
+    marginVertical: 50,
   },
 
   loginBtn: {

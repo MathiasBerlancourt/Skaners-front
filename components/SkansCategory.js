@@ -33,7 +33,7 @@ const SkansCategory = () => {
           headers: headers,
         });
         setData(response.data.skans.reverse());
-
+        console.log(response.data.skans.length);
         setIsLoad(true);
       } catch (error) {
         console.log(error.message);

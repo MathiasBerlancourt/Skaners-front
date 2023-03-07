@@ -46,8 +46,9 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
       [
         {
           text: "Oui",
-          onPress: () => {
+          onPress: async () => {
             sendData();
+
             navigation.goBack();
           },
           style: "default",
