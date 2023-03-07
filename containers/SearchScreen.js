@@ -155,7 +155,7 @@ const SearchScreen = () => {
               onChangeText={handleBrand}
               value={brand}
             ></TextInput>
-            {/* <AutocompleteDropdown
+            <AutocompleteDropdown
               useFilter={true}
               clearOnFocus={true}
               closeOnBlur={true}
@@ -185,7 +185,7 @@ const SearchScreen = () => {
                 { id: "6", title: "Nike" },
                 { id: "7", title: "Vans" },
               ]}
-            /> */}
+            />
 
             <TextInput
               placeholderTextColor="#717171"
