@@ -40,13 +40,13 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
 
   const showAlert = () => {
     Alert.alert(
-      "Confirmation de suppression",
-      "Es tu sur de vouloir supprimer cette paire?",
+      "Confirmation",
+      "Es-tu sûr de vouloir supprimer ce skan ?",
       [
         {
           text: "Oui",
           onPress: async () => {
-            sendData();
+            await sendData();
 
             navigation.goBack();
           },
@@ -66,7 +66,7 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.pictureUrl }} />

@@ -21,7 +21,6 @@ import { AntDesign } from "@expo/vector-icons";
 const FavoritesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
-  const [refreshData, setRefreshData] = useState();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const brandTab = [];
@@ -50,7 +49,7 @@ const FavoritesCategory = () => {
       }
     };
     fetchData();
-  }, [isFocused, refreshData]);
+  }, [isFocused]);
   return isLoad ? (
     <View style={styles.background}>
       <ScrollView>
@@ -71,8 +70,6 @@ const FavoritesCategory = () => {
                             onPress={() => {
                               navigation.navigate("ProductCardFavoriteScreen", {
                                 product: sneaker,
-                                refreshData: refreshData,
-                                setRefreshData: setRefreshData,
                               });
                             }}
                           >
@@ -118,14 +115,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  brandContainer: { height: hp("22%") },
+  brandContainer: { height: hp("23%") },
 
   textBrand: {
     color: "white",
     backgroundColor: "black",
     height: hp("5%"),
-    paddingHorizontal: 10,
-    paddingVertical: hp("1%"),
+    paddingHorizontal: 15,
+    lineHeight: hp("5%"),
     fontSize: 16,
     fontFamily: "LemonMilk",
   },

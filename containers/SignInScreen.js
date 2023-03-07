@@ -11,9 +11,9 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_URL } from "react-native-dotenv";
 
-export default function SignInScreen({ setToken, setId }) {
-  const [email, setEmail] = useState("admin6780@mail.com");
-  const [password, setPassword] = useState("azerty");
+export default function SignInScreen({ setToken }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [submit, setSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -127,10 +127,9 @@ const styles = StyleSheet.create({
   },
 
   loginTxt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 23,
   },
 
   passwordForgetTxt: {

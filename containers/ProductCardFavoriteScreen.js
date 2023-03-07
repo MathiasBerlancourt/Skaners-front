@@ -41,13 +41,13 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
 
   const showAlert = () => {
     Alert.alert(
-      "Confirmation de suppression",
-      "Es tu sur de vouloir supprimer cette paire?",
+      "Confirmation",
+      "Es-tu sûr de vouloir retirer cette paire de tes favoris ?",
       [
         {
           text: "Oui",
-          onPress: () => {
-            sendData();
+          onPress: async () => {
+            await sendData();
             navigation.goBack();
           },
           style: "default",
@@ -94,7 +94,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.labelColor}>Prix : </Text>
-          <Text style={styles.text}>{product.price}</Text>
+          <Text style={styles.text}>{product.price / 100} €</Text>
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -103,7 +103,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
     flex: 1,
   },
   container: {
