@@ -40,15 +40,14 @@ const CreateUserAccountScreen = () => {
   //DATE PICKER------
 
   return (
-    <View style={styles.createUserContainer}>
-      <KeyboardAwareScrollView>
-        <View>
-          <Text style={styles.title}>CRÉER MON COMPTE</Text>
-        </View>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
+      <View style={styles.createUserContainer}>
+        <Text style={styles.title}>CRÉER MON COMPTE</Text>
+
         <View style={styles.formContainer}>
           <TextInput
             style={styles.input}
-            placeholderTextColor="#717171"
+            placeholderTextColor="#515151"
             placeholder="Adresse email"
             onChangeText={(input) => {
               setEmail(input);
@@ -56,7 +55,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#717171"
+            placeholderTextColor="#515151"
             placeholder="Username"
             onChangeText={(input) => {
               setUsername(input);
@@ -64,7 +63,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#717171"
+            placeholderTextColor="#515151"
             placeholder="Mot de Passe"
             onChangeText={(input) => {
               setPassword(input);
@@ -73,7 +72,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#717171"
+            placeholderTextColor="#515151"
             placeholder="Confirme le mot de passe"
             onChangeText={(input) => {
               setConfirmPassword(input);
@@ -94,64 +93,56 @@ const CreateUserAccountScreen = () => {
             />
           </View>
         </View>
-      </KeyboardAwareScrollView>
 
-      {/* ANCIEN TEXT INPUT A CONSERVER AU CAS OU LE DATE PICKER NE FONCTIONNE PAS
+        {/* ANCIEN TEXT INPUT A CONSERVER AU CAS OU LE DATE PICKER NE FONCTIONNE PAS
       
       <TextInput
         style={styles.input}
         placeholder="Date de naissance (format mm-jj-aaaa)"
-        placeholderTextColor="#717171"
+        placeholderTextColor="#515151"
         onChangeText={(input) => {
           setDateOfBirth(input);
         }}
       /> */}
-      {/* {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)} */}
-      {/* Commentaire de controle de la date de naissance */}
+        {/* {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)} */}
+        {/* Commentaire de controle de la date de naissance */}
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.signUpBtn}
-          onPress={() => {
-            if (
-              !email ||
-              !userName ||
-              !password ||
-              !confirmPassword ||
-              !dateOfBirth
-            ) {
-              return setErrorMessage("Remplissez tous les champs");
-            }
-            if (password !== confirmPassword) {
-              return setErrorMessage("Mot de passe différents");
-            }
-            navigation.navigate("Finalize User Account", {
-              email: email,
-              userName: userName,
-              password: password,
-              dateOfBirth: dateOfBirth,
-            });
-          }}
-        >
-          <Text style={styles.signUpTxt}>CONTINUER</Text>
-        </TouchableOpacity>
-        <Text style={styles.errorTxt}>{errorMessage}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.signUpBtn}
+            onPress={() => {
+              if (
+                !email ||
+                !userName ||
+                !password ||
+                !confirmPassword ||
+                !dateOfBirth
+              ) {
+                return setErrorMessage("Remplissez tous les champs");
+              }
+              if (password !== confirmPassword) {
+                return setErrorMessage("Mot de passe différents");
+              }
+              navigation.navigate("Finalize User Account", {
+                email: email,
+                userName: userName,
+                password: password,
+                dateOfBirth: dateOfBirth,
+              });
+            }}
+          >
+            <Text style={styles.signUpTxt}>CONTINUER</Text>
+          </TouchableOpacity>
+          <Text style={styles.errorTxt}>{errorMessage}</Text>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default CreateUserAccountScreen;
 
 const styles = StyleSheet.create({
-  createUserContainer: {
-    height: "100%",
-    justifyContent: "space-between",
-  },
-  formContainer: {
-    height: "100%",
-    justifyContent: "space-between",
-  },
   title: {
     fontFamily: "LemonMilkBold",
     fontSize: 25,
@@ -160,7 +151,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#FF7E00",
     borderBottomWidth: 2,
     textAlign: "center",
-    marginVertical: 20,
+    marginVertical: 50,
   },
 
   containerDoB: {
@@ -174,7 +165,7 @@ const styles = StyleSheet.create({
     width: "40%",
   },
   txtDoB: {
-    color: "#717171",
+    color: "#515151",
 
     paddingVertical: 5,
   },
@@ -182,11 +173,10 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
-    height: 30,
     borderRadius: 20,
     marginVertical: 15,
     marginHorizontal: 20,
-    paddingLeft: 10,
+    padding: 10,
   },
   signUpBtn: {
     height: 50,
@@ -200,10 +190,9 @@ const styles = StyleSheet.create({
   },
 
   signUpTxt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 23,
   },
   errorTxt: {
     fontFamily: "LouisGeorge",
