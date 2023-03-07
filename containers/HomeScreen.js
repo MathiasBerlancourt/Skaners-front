@@ -93,7 +93,10 @@ export default function HomeScreen({ navigation }) {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
-                      navigation.navigate("HomeView", { url: elem.url });
+                      navigation.navigate("HomeView", {
+                        id: elem._id,
+                        url: elem.url,
+                      });
                     }}
                   >
                     <Image

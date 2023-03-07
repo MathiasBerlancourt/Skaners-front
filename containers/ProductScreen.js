@@ -1,4 +1,3 @@
-import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
@@ -20,7 +19,6 @@ import Loading from "../components/Loading";
 const ProductScreen = ({ route, token }) => {
   const [sneakersData, setSneakersData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [userSneakers, setUserSneakers] = useState();
   const [like, setLike] = useState();
 
   useEffect(() => {
@@ -39,7 +37,6 @@ const ProductScreen = ({ route, token }) => {
           );
         });
         setSneakersData(responseSneakers.data);
-        setUserSneakers(responseUserInfo.data.sneakers);
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);

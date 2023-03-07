@@ -94,53 +94,13 @@ const SearchScreen = () => {
         <View
           style={[
             {
-              height: hp("80%"),
+              height: hp("30%"),
               alignItems: "center",
             },
             styles.searchContainer,
           ]}
         >
-          {/* <SelectDropdown
-            search="true"
-            data={brands}
-            buttonStyle={styles.input}
-            dropdownStyle={styles.input}
-            dropdownOverlayColor="transparent"
-            dropdownBackgroundColor="#717171"
-            rowStyle={{
-              height: hp("3%"),
-              backgroundColor: "whitesmoke",
-              borderStartWidth: 0,
-              borderStyle: "none",
-            }}
-            rowTextStyle={{
-              fontSize: 14,
-              color: "#717171",
-              textAlign: "left",
-            }}
-            buttonTextStyle={{
-              color: "#717171",
-              textAlign: "left",
-              fontSize: 14,
-            }}
-            searchInputStyle={{ height: hp("3%"), width: wp("80%") }}
-            searchPlaceHolder="Marque..."
-            dropdownIconPosition="right"
-            onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index);
-              setBrand(selectedItem);
-            }}
-            defaultButtonText={"Marque..."}
-            buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
-            }}
-            rowTextForSelection={(item, index) => {
-              // text represented for each item in dropdown
-              // if data array is an array of objects then return item.property to represent item in dropdown
-              return item;
-            }}
-          /> */}
-          <View style={{ justifyContent: "space-around" }}>
+          <View style={styles.inputsContainer}>
             <TextInput
               placeholderTextColor="#717171"
               placeholder="Modele..."
@@ -155,37 +115,6 @@ const SearchScreen = () => {
               onChangeText={handleBrand}
               value={brand}
             ></TextInput>
-            <AutocompleteDropdown
-              useFilter={true}
-              clearOnFocus={true}
-              closeOnBlur={true}
-              showClear={false}
-              closeOnSubmit={true}
-              showChevron={false}
-              suggestionsListMaxHeight={hp("20%")}
-              suggestionsListContainerStyle={{}}
-              placeholder={"Marque..."}
-              placeholderTextColor={"#717171"}
-              ref={searchRef}
-              value={brand}
-              containerStyle={{
-                width: wp("80%"),
-                borderRadius: "20",
-                backgroundColor: "#717171",
-              }}
-              controller={(controller) => {
-                dropdownController.current = controller;
-              }}
-              dataSet={[
-                { id: "1", title: "adidas" },
-                { id: "2", title: "Converse" },
-                { id: "3", title: "Air Jordan" },
-                { id: "4", title: "Champion" },
-                { id: "5", title: "Gucci" },
-                { id: "6", title: "Nike" },
-                { id: "7", title: "Vans" },
-              ]}
-            />
 
             <TextInput
               placeholderTextColor="#717171"
@@ -195,25 +124,27 @@ const SearchScreen = () => {
               value={color}
             ></TextInput>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              setBrand("");
-              setColor("");
-              setName("");
-            }}
-            style={styles.clearButton}
-          >
-            <Text>EFFACER</Text>
-          </TouchableOpacity>
+          <View style={styles.modalButtons}>
+            <TouchableOpacity
+              onPress={() => {
+                setBrand("");
+                setColor("");
+                setName("");
+              }}
+              style={styles.clearButton}
+            >
+              <Text>EFFACER</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              setDisplaySearchBar(false);
-            }}
-            style={styles.validateButton}
-          >
-            <Text>TERMINER</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setDisplaySearchBar(false);
+              }}
+              style={styles.validateButton}
+            >
+              <Text>FERMER</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
       {isLoading ? (
@@ -286,6 +217,9 @@ const SearchScreen = () => {
 export default SearchScreen;
 
 const styles = StyleSheet.create({
+  inputsContainer: {
+    justifyContent: "space-between",
+  },
   input: {
     backgroundColor: "lightgray",
     height: hp("5%"),
@@ -315,31 +249,33 @@ const styles = StyleSheet.create({
   },
 
   searchContainer: {
-    justifyContent: "space-evenly",
     backgroundColor: "white",
   },
+  modalButtons: {
+    flexDirection: "row",
+  },
   validateButton: {
-    height: 50,
+    height: hp("4%"),
     backgroundColor: "#FF7E00",
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 20,
-    marginTop: 30,
-    marginBottom: 20,
-    width: wp("50%"),
+    // marginHorizontal: 20,
+    // marginTop: 30,
+    // marginBottom: 20,
+    width: wp("20%"),
   },
   clearButton: {
-    height: 50,
+    height: hp("4%"),
     backgroundColor: "whitesmoke",
     borderWidth: 1,
     borderColor: "#717171",
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 20,
-    marginTop: 30,
-    marginBottom: 20,
-    width: wp("50%"),
+    // marginHorizontal: 20,
+    // marginTop: 30,
+    // marginBottom: 20,
+    width: wp("20%"),
   },
 });
