@@ -16,82 +16,80 @@ import {
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { API_URL } from "react-native-dotenv";
-const ProductScreen = ({ token }) => {
-  const [data, setData] = useState(null);
+import Loading from "../components/Loading";
+const ProductScreen = ({ route, token }) => {
+  const [sneakersData, setSneakersData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const route = useRoute();
-  const [check, setCheck] = useState("false");
-  const [like, setLike] = useState("false");
-  const [sneakersLiked, setSneakersLiked] = useState([]);
-  const [sneakersLikedlist, setSneakersLikedList] = useState([]);
-  const [heartStyle, setHeartStyle] = useState("heart");
-
-  const likeSneaker = async () => {
-    const userId = await AsyncStorage.getItem("userId");
-    const token = await AsyncStorage.getItem("userToken");
-    const headers = {
-      Authorization: "Bearer " + token,
-    };
-    try {
-      const response = await axios({
-        method: "PUT",
-        url: `${API_URL}/user/update/${userId}`,
-        data: {
-          sneakers: sneakersLiked,
-        },
-        headers: headers,
-      });
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-  const unlikeSneaker = async () => {
-    const userId = await AsyncStorage.getItem("userId");
-    try {
-      const response = await axios.put(
-        `https://site--skaners-back--jhlzj9jljvpm.code.run/user/unlikeSneaker`,
-        {
-          userId: userId,
-          sneakerId: route.params.id,
-        }
-      );
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  const [userSneakers, setUserSneakers] = useState();
+  const [like, setLike] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = await AsyncStorage.getItem("userId");
       try {
-        const [response, responseLikes] = await Promise.all([
+        const userId = await AsyncStorage.getItem("userId");
+        const [responseSneakers, responseUserInfo] = await Promise.all([
           axios.get(`${API_URL}/sneakers/${route.params.id}`),
           axios.get(`${API_URL}/user/info/${userId}`, {
             headers: { Authorization: "Bearer " + token },
           }),
         ]);
-        setData(response.data);
-        setSneakersLikedList(responseLikes.data.sneakers);
+        responseUserInfo.data.sneakers.find((sneaker) => {
+          setLike(
+            JSON.stringify(sneaker._id) === JSON.stringify(route.params.id)
+          );
+        });
+        setSneakersData(responseSneakers.data);
+        setUserSneakers(responseUserInfo.data.sneakers);
         setIsLoading(false);
       } catch (error) {
-        console.log("error : ", error);
+        console.log(error.message);
       }
     };
+
     fetchData();
-  }, [like]);
+  }, []);
+
+  const likeSneaker = async () => {
+    try {
+      const userId = await AsyncStorage.getItem("userId");
+      const headers = { Authorization: "Bearer " + token };
+      const bodyParams = { userId: userId, sneakerId: route.params.id };
+      const response = await axios({
+        method: "PUT",
+        url: `${API_URL}/user/likeSneaker`,
+
+        headers: headers,
+        data: bodyParams,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const unlikeSneaker = async () => {
+    try {
+      const userId = await AsyncStorage.getItem("userId");
+      const headers = { Authorization: "Bearer " + token };
+      const bodyParams = { userId: userId, sneakerId: route.params.id };
+      const response = await axios({
+        method: "PUT",
+        url: `${API_URL}/user/unlikeSneaker`,
+        headers: headers,
+        data: bodyParams,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   if (isLoading) {
-    return (
-      <View>
-        <Text>Composant de chargement</Text>
-      </View>
-    );
+    return <Loading />;
   } else {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.productScreenContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={{ uri: data.picture }}
+              source={{ uri: sneakersData.picture }}
               resizeMode="contain"
               style={{
                 width: wp("100%"),
@@ -116,7 +114,7 @@ const ProductScreen = ({ token }) => {
                   fontSize: 18,
                 }}
               >
-                {data.price / 100} €{" "}
+                {sneakersData.price / 100} €{" "}
               </Text>
             </View>
 
@@ -125,15 +123,13 @@ const ProductScreen = ({ token }) => {
                 onPress={() => {
                   setLike(!like);
                   if (like) {
-                    likeSneaker();
-                  } else {
                     unlikeSneaker();
+                  } else {
+                    likeSneaker();
                   }
                 }}
               >
-                {sneakersLikedlist.includes((sneaker) => {
-                  sneaker._id === route.params.id;
-                }) ? (
+                {like ? (
                   <AntDesign
                     name="heart"
                     size={30}
@@ -149,7 +145,7 @@ const ProductScreen = ({ token }) => {
               </TouchableOpacity>
               <Text style={styles.sneakerName}>
                 {"     "}
-                {data.name.toUpperCase()}
+                {sneakersData.name.toUpperCase()}
               </Text>
             </View>
 
@@ -164,10 +160,10 @@ const ProductScreen = ({ token }) => {
               ></View>
               <View>
                 <Text style={styles.brandAndColor}>
-                  MARQUE : {data.brand.toUpperCase()}
+                  MARQUE : {sneakersData.brand.toUpperCase()}
                 </Text>
                 <Text style={styles.brandAndColor}>
-                  COLORIS : {data.color.toUpperCase()}
+                  COLORIS : {sneakersData.color.toUpperCase()}
                 </Text>
               </View>
             </View>
