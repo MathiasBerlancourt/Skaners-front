@@ -69,6 +69,7 @@ const SkansCategory = () => {
                   }}
                 >
                   <Image style={styles.img} source={{ uri: skan.pictureUrl }} />
+                  <Text>{skan.sneakerName}</Text>
                 </TouchableOpacity>
               );
             })}
