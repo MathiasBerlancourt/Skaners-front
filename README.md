@@ -1,4 +1,4 @@
-# 👟 SKANERS
+# 👟 SKANERS-FRONT ![reactNative](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 # 🤳Tester l’application
 
@@ -8,12 +8,9 @@
 
 Pour tester l’application vous devez dans un premier temps télécharger puis installer l’application **Expo Go**  sur votre téléphone :
 
-| ![** [Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)**](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/668d4ac3-113e-4f8b-8cc6-4584daad5cf0/expo-go-iphone.png)
+[![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)](https://itunes.apple.com/app/apple-store/id982107779)    [![ANDROID](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www&pli=1)
 
-** [Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)** | ![**[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)**](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/93fc0b19-a719-4037-9e03-5aaddfab3843/expo-go-android.png)
 
-**[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)** |
-| --- | --- |
 
 Une fois l’application téléchargée vous devrez vous créer un compte.
 
@@ -34,9 +31,12 @@ Ou de cliquer sur ce [lien](http://exp.host/@mathiasb/porjet-test?release-channe
 
 ### 💽 Installer les logiciels nécessaires
 
+
+
+
 Un éditeur de code pour consulter  le code comme Visual Studio Code  
 
-Vous pouvez télécharger Visual Studio Code en cliquant sur ce [lien](https://code.visualstudio.com/download).
+Vous pouvez télécharger Visual Studio Code ici [![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://code.visualstudio.com/download)
 
 ### 📁 Cloner le repository GitHub
 
