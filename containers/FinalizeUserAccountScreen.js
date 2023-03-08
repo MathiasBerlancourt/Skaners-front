@@ -35,7 +35,7 @@ const FinalizeUserAccountScreen = ({ route }) => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.finalizeContainer}>
         <View>
           <Text style={styles.title}>Finalise ton inscription !</Text>
@@ -142,7 +142,6 @@ export default FinalizeUserAccountScreen;
 const styles = StyleSheet.create({
   finalizeContainer: {
     justifyContent: "space-around",
-
     height: hp("85%"),
   },
   notaBene: {
@@ -161,12 +160,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    justifyContent: "center",
-    textAlign: "center",
     fontSize: 28,
-    paddingVertical: 15,
-    fontFamily: "LemonMilkBold",
-    textAlign: "left",
+    paddingVertical: 20,
+    textAlign: "center",
     color: "#FF7E00",
     paddingLeft: 15,
     fontFamily: "LouisGeorge",
@@ -188,7 +184,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    paddingTop: hp("4%"),
     alignItems: "center",
   },
   signUpBtn: {
@@ -199,14 +194,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,
-    marginTop: 30,
-    marginBottom: 20,
+    marginVertical: 20,
   },
 
   signUpTxt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 23,
   },
 });

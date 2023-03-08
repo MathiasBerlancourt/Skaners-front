@@ -110,8 +110,9 @@ export default ChooseUserAvatarScreens;
 const styles = StyleSheet.create({
   finalizeContainer: {
     height: hp("86%"),
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
+    backgroundColor: "white",
   },
   avatarsList: {
     flexDirection: "row",
@@ -122,20 +123,15 @@ const styles = StyleSheet.create({
     paddingTop: hp("3%"),
     alignContent: "center",
     fontSize: 28,
-
-    fontFamily: "LemonMilkBold",
-
     color: "#FF7E00",
 
     fontFamily: "LouisGeorge",
   },
   subTitle: {
     fontSize: 23,
-
     fontFamily: "LemonMilkBold",
     textAlign: "center",
     color: "#717171",
-
     fontFamily: "LouisGeorge",
   },
   signUpBtn: {

@@ -20,7 +20,7 @@ const CreateUserAccountScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [dateOfBirth, setDateOfBirth] = useState("jj/mm/aaaa");
   const navigation = useNavigation();
   //DATE PICKER-------
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -84,9 +84,17 @@ const CreateUserAccountScreen = () => {
           <View style={styles.containerDoB}>
             <TouchableOpacity onPress={showDatePicker}>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.txtDoB}>Date de naissance :</Text>
                 <Text style={styles.txtDoB}>
-                  {dateOfBirth.toLocaleDateString("fr-FR")}
+                  {dateOfBirth instanceof Date ? "" : "Date de naissance :"}
+                </Text>
+                <Text
+                  style={
+                    dateOfBirth instanceof Date ? styles.txtDoA : styles.txtDoB
+                  }
+                >
+                  {dateOfBirth instanceof Date
+                    ? dateOfBirth.toLocaleDateString("fr-FR")
+                    : dateOfBirth}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -127,21 +135,8 @@ const CreateUserAccountScreen = () => {
           </TouchableOpacity>
           <Text style={styles.errorTxt}>{errorMessage}</Text>
         </View>
-      </KeyboardAwareScrollView>
-
-        {/* ANCIEN TEXT INPUT A CONSERVER AU CAS OU LE DATE PICKER NE FONCTIONNE PAS
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Date de naissance (format mm-jj-aaaa)"
-        placeholderTextColor="#515151"
-        onChangeText={(input) => {
-          setDateOfBirth(input);
-        }}
-      /> */}
-      {/* {console.log("CONTROLE DE LA DATE DE NAISSANCE :", dateOfBirth)} */}
-      {/* Commentaire de controle de la date de naissance */}
-    </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -153,7 +148,6 @@ const styles = StyleSheet.create({
     height: hp("90%"),
     alignContent: "flex-end",
     backgroundColor: "white",
-    justifyContent: "center",
   },
   formContainer: {
     paddingTop: hp("2%"),
@@ -167,22 +161,26 @@ const styles = StyleSheet.create({
     borderBottomColor: "#FF7E00",
     borderBottomWidth: 2,
     textAlign: "center",
-    marginVertical: 50,
+    marginVertical: 40,
   },
 
   containerDoB: {
     backgroundColor: "lightgray",
     flexDirection: "row",
-    height: 30,
+    height: 35,
     borderRadius: 20,
     marginVertical: 15,
     marginHorizontal: 20,
     paddingLeft: 10,
   },
   txtDoB: {
-    color: "#717171",
+    color: "#515151",
     fontFamily: "LouisGeorge",
-    paddingVertical: 5,
+    paddingVertical: 10,
+  },
+  txtDoA: {
+    fontFamily: "LouisGeorge",
+    paddingVertical: 10,
   },
 
   input: {

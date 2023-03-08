@@ -49,7 +49,6 @@ export default function SignInScreen({ setToken }) {
   }, [submit]);
 
   return (
-
     <KeyboardAwareScrollView style={styles.background}>
       <View>
         <Text style={styles.title}>CONNEXION</Text>
@@ -140,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     height: hp("5%"),
-    width: wp("60%"),
+    width: wp("90%"),
   },
 
   loginTxt: {
@@ -162,9 +161,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  // background: {
-  //   backgroundColor: "white",
-
-  //   flex: 1,
-  // },
+  background: {
+    backgroundColor: "white",
+    flex: 1,
+  },
 });

@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   txt: {
     fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
+    fontSize: 23,
   },
 
   background: {
