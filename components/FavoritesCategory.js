@@ -24,6 +24,7 @@ const FavoritesCategory = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const brandTab = [];
+  const [userName, setUserName] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,7 @@ const FavoritesCategory = () => {
           headers: headers,
         });
         setData(response.data.sneakers.reverse());
+        setUserName(response.data.userName);
 
         setIsLoad(true);
       } catch (error) {
@@ -51,59 +53,71 @@ const FavoritesCategory = () => {
     fetchData();
   }, [isFocused]);
   return isLoad ? (
-    <View style={styles.background}>
-      <ScrollView>
-        <View>
-          {data.map((sneaker) => {
-            if (!brandTab.includes(sneaker.brand)) brandTab.push(sneaker.brand);
-          })}
-          {brandTab.map((brand, index) => {
-            return (
-              <View key={index} style={styles.brandContainer}>
-                <Text style={styles.textBrand}>{brand.toUpperCase()}</Text>
-                <ScrollView horizontal={true} style={{ flexDirection: "row" }}>
-                  {data.map((sneaker, index) => {
-                    if (sneaker.brand === brand) {
-                      return (
-                        <View key={index} style={styles.sneakerContainer}>
-                          <TouchableOpacity
-                            onPress={() => {
-                              navigation.navigate("ProductCardFavoriteScreen", {
-                                product: sneaker,
-                              });
-                            }}
-                          >
-                            <Image
-                              style={styles.img}
-                              source={{ uri: sneaker.picture }}
-                            />
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                alignItems: "center",
+    data.length === 0 ? (
+      <View style={styles.background}>
+        <Text style={styles.text}>
+          Wesh {userName} tu n'as pas encore de favoris
+        </Text>
+      </View>
+    ) : (
+      <View style={styles.background}>
+        <ScrollView>
+          <View>
+            {data.map((sneaker) => {
+              if (!brandTab.includes(sneaker.brand))
+                brandTab.push(sneaker.brand);
+            })}
+            {brandTab.map((brand, index) => {
+              return (
+                <View key={index} style={styles.brandContainer}>
+                  <Text style={styles.textBrand}>{brand.toUpperCase()}</Text>
+                  <ScrollView
+                    horizontal={true}
+                    style={{ flexDirection: "row" }}
+                  >
+                    {data.map((sneaker, index) => {
+                      if (sneaker.brand === brand) {
+                        return (
+                          <View key={index} style={styles.sneakerContainer}>
+                            <TouchableOpacity
+                              onPress={() => {
+                                navigation.navigate("ProductScreen", {
+                                  id: sneaker._id,
+                                });
                               }}
                             >
-                              <AntDesign
-                                name="heart"
-                                size={18}
-                                color="#FF7E00"
+                              <Image
+                                style={styles.img}
+                                source={{ uri: sneaker.picture }}
                               />
-                              <Text numberOfLines={2} style={styles.textName}>
-                                {sneaker.name}
-                              </Text>
-                            </View>
-                          </TouchableOpacity>
-                        </View>
-                      );
-                    }
-                  })}
-                </ScrollView>
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
-    </View>
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <AntDesign
+                                  name="heart"
+                                  size={18}
+                                  color="#FF7E00"
+                                />
+                                <Text numberOfLines={2} style={styles.textName}>
+                                  {sneaker.name}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          </View>
+                        );
+                      }
+                    })}
+                  </ScrollView>
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
+    )
   ) : (
     <Loading />
   );
@@ -131,7 +145,13 @@ const styles = StyleSheet.create({
     flex: 1,
     width: wp("35%"),
   },
-
+  text: {
+    fontFamily: "LouisGeorge",
+    fontSize: hp(2.5),
+    textAlign: "center",
+    marginTop: hp(2),
+    color: "#FF7E00",
+  },
   textName: {
     textAlign: "center",
     maxWidth: wp("28%"),

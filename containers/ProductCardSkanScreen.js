@@ -95,7 +95,9 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.labelColor}>Lien : </Text>
-          <Text style={styles.text}>{product.linkUrl}</Text>
+          <Text numberOfLines={1} style={styles.text}>
+            {product.linkUrl}
+          </Text>
         </View>
       </View>
     </KeyboardAwareScrollView>
