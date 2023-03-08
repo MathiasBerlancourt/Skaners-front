@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -153,13 +154,11 @@ const styles = StyleSheet.create({
     paddingTop: hp("2%"),
     justifyContent: "space-between",
   },
+
   title: {
     fontFamily: "LemonMilkBold",
     fontSize: 25,
-    fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
     textAlign: "center",
     marginVertical: 40,
   },
@@ -177,6 +176,7 @@ const styles = StyleSheet.create({
     color: "#515151",
     fontFamily: "LouisGeorge",
     paddingVertical: 10,
+    textAlign: "center",
   },
   txtDoA: {
     fontFamily: "LouisGeorge",
@@ -186,10 +186,11 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
-    borderRadius: 20,
-    marginVertical: 15,
+    marginVertical: hp("1.5%"),
+    borderRadius: 40,
     marginHorizontal: 20,
-    padding: 10,
+    fontSize: Platform.OS === "android" ? hp(2) : 0,
+    padding: Platform.OS === "ios" ? 10 : 5,
   },
   buttonContainer: {
     paddingTop: hp("4%"),
