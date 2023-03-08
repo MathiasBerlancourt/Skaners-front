@@ -29,7 +29,13 @@ const PictureHomeView = ({ route, token }) => {
           headers: { Authorization: "Bearer " + token },
         });
         response.data.likes.find((picture) => {
-          setLike(JSON.stringify(picture._id) === JSON.stringify(id));
+          if (JSON.stringify(picture._id) === JSON.stringify(route.params.id)) {
+            setLike(true);
+            return true;
+          } else {
+            setLike(false);
+            return false;
+          }
         });
 
         // setUserLikes(response.data.likes);
@@ -75,10 +81,19 @@ const PictureHomeView = ({ route, token }) => {
   };
 
   return (
-    <View style={{ position: "relative", backgroundColor: "white" }}>
+    <View style={{ position: "relative" }}>
       {id && (
         <TouchableOpacity
-          style={{ position: "absolute", zIndex: 1, top: "90%", left: "85%" }}
+          style={{
+            position: "absolute",
+            zIndex: 1,
+            top: "88%",
+            left: "80%",
+            backgroundColor: "white",
+            padding: 10,
+            borderRadius: 40,
+          }}
+          activeOpacity={1}
           onPress={() => {
             setLike(!like);
             if (like) {
@@ -95,10 +110,7 @@ const PictureHomeView = ({ route, token }) => {
           />
         </TouchableOpacity>
       )}
-      <Image
-        source={{ uri: route.params.url }}
-        style={{ width: windowWidth, height: windowHeight * 0.8 }}
-      />
+      <Image source={{ uri: route.params.url }} style={{ height: "100%" }} />
     </View>
   );
 };

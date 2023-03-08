@@ -7,6 +7,8 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
+  Platform,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -82,49 +84,44 @@ export default function SignInScreen({ setToken }) {
         >
           <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          disabled={submit}
-          onPress={() => {
-            if (!email || !password) {
-              return setErrorMessage("Vous devez remplir tous les champs");
-            }
-            setSubmit(true);
-          }}
-        >
-          <Text style={styles.loginTxt}>Valider</Text>
-        </TouchableOpacity>
+        {!submit ? (
+          <TouchableOpacity
+            style={styles.loginBtn}
+            disabled={submit}
+            onPress={() => {
+              if (!email || !password) {
+                return setErrorMessage("Vous devez remplir tous les champs");
+              }
+              setSubmit(true);
+            }}
+          >
+            <Text style={styles.loginTxt}>Valider</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.load}>
+            <ActivityIndicator color={"#FF7E00"} size={"large"} />
+          </View>
+        )}
       </View>
     </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
-  title: {
-    fontFamily: "LemonMilkBold",
-    fontSize: 25,
-    fontWeight: "bold",
-    marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
-    textAlign: "center",
-    marginVertical: 20,
-  },
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
     borderRadius: 20,
     marginVertical: 10,
     marginHorizontal: 20,
-    padding: 10,
+    padding: Platform.OS === "ios" ? 10 : 7,
+    fontSize: Platform.OS === "android" ? hp(2) : 0,
   },
 
   title: {
     fontFamily: "LemonMilkBold",
     fontSize: 25,
-    fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
+
     textAlign: "center",
     marginVertical: 50,
   },
@@ -141,6 +138,11 @@ const styles = StyleSheet.create({
     height: hp("5%"),
     width: wp("90%"),
   },
+  load: {
+    marginHorizontal: 20,
+    marginTop: 30,
+    marginBottom: 20,
+  },
 
   loginTxt: {
     fontFamily: "LouisGeorgeBold",
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
 
   passwordForgetTxt: {
     fontFamily: "LouisGeorge",
+    fontSize: Platform.OS === "android" ? hp(2) : 0,
     marginHorizontal: 35,
     color: "grey",
   },

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -23,6 +24,14 @@ export default function HomeScreen({ navigation }) {
   const [skans, setSkans] = useState([]);
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const fetchPictures = async () => {
@@ -51,15 +60,25 @@ export default function HomeScreen({ navigation }) {
     };
 
     fetchPictures();
-  }, []);
+  }, [refreshing]);
 
   if (isLoading === true) {
     return <Loading />;
   } else
     return (
-      <ScrollView style={{ backgroundColor: "white" }}>
+      <ScrollView
+        style={{ backgroundColor: "white" }}
+        refreshControl={
+          <RefreshControl
+            size={"large"}
+            tintColor={"#FF7E00"}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
         <View style={{ paddingTop: 10 }}>
-          <Text style={styles.title}>MES DERNIERS LIKES</Text>
+          <Text style={styles.title}>MES DERNIERS SKANS</Text>
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>
               {Array.isArray(skans) &&
@@ -72,6 +91,7 @@ export default function HomeScreen({ navigation }) {
                           url: skan.pictureUrl,
                         });
                       }}
+                      activeOpacity={0.8}
                     >
                       <Image
                         source={{ uri: skan?.pictureUrl }}
@@ -81,12 +101,24 @@ export default function HomeScreen({ navigation }) {
                           width: 0.6 * width,
                           borderRadius: 10,
                         }}
-                      />
-                    </TouchableOpacity>
-                  );
-                })}
-            </View>
-          </ScrollView>
+                      >
+                        <Image
+                          source={{ uri: skan?.pictureUrl }}
+                          key={skan.id}
+                          style={{
+                            height: 0.13 * height,
+                            width: 0.6 * width,
+                            borderRadius: 10,
+                            marginHorizontal: 3,
+                            marginVertical: 5,
+                          }}
+                        />
+                      </TouchableOpacity>
+                    );
+                  })}
+              </View>
+            </ScrollView>
+          )}
           <Text style={styles.title}>PARCOURIR</Text>
           <View style={styles.layoutContainer}>
             <View style={{ flexDirection: "row" }}>
@@ -97,6 +129,7 @@ export default function HomeScreen({ navigation }) {
                     if (index % 2 === 0) {
                       return (
                         <TouchableOpacity
+                        activeOpacity={0.8}
                           key={index}
                           onPress={() => {
                             navigation.navigate("HomeView", {

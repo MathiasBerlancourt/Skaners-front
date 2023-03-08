@@ -1,13 +1,16 @@
 import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import logo from "../assets/Images/skanerslogoS.png";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
+import { useEffect } from "react";
 
 export default function SplashScreen() {
   const navigation = useNavigation();
 
-  setTimeout(() => {
-    navigation.navigate("Tab");
-  }, 2000);
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate("Tab");
+    }, 2000);
+  }, [useIsFocused()]);
 
   return (
     <View style={styles.container}>

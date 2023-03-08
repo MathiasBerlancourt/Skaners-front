@@ -12,10 +12,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "./Loading";
 import axios from "axios";
 import { API_URL } from "react-native-dotenv";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const LikesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
+  const [userName, setUserName] = useState();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -37,6 +42,7 @@ const LikesCategory = () => {
           headers: headers,
         });
         setData(response.data.likes.reverse());
+        setUserName(response.data.userName);
 
         setIsLoad(true);
       } catch (error) {
@@ -47,26 +53,34 @@ const LikesCategory = () => {
   }, [isFocused]);
 
   return isLoad ? (
-    <View style={styles.background}>
-      <ScrollView>
-        <View style={styles.likeContainer}>
-          {data.map((picture, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  navigation.navigate("ProductCardLikeScreen", {
-                    product: picture,
-                  });
-                }}
-              >
-                <Image style={styles.img} source={{ uri: picture.url }} />
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
-    </View>
+    data.length === 0 ? (
+      <View style={styles.background}>
+        <Text style={styles.text}>
+          Wesh {userName} tu n'as pas encore de likes
+        </Text>
+      </View>
+    ) : (
+      <View style={styles.background}>
+        <ScrollView>
+          <View style={styles.likeContainer}>
+            {data.map((picture, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate("ProductCardLikeScreen", {
+                      product: picture,
+                    });
+                  }}
+                >
+                  <Image style={styles.img} source={{ uri: picture.url }} />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
+    )
   ) : (
     <Loading />
   );
@@ -82,6 +96,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
+  },
+  text: {
+    fontFamily: "LouisGeorge",
+    fontSize: hp(2.5),
+    textAlign: "center",
+    marginTop: hp(2),
+    color: "#FF7E00",
   },
   img: {
     width: 150,

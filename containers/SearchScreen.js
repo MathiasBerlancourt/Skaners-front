@@ -162,6 +162,7 @@ const SearchScreen = () => {
                       id: item._id,
                     });
                   }}
+                  activeOpacity={0.8}
                 >
                   <View
                     style={{
@@ -254,7 +255,7 @@ const styles = StyleSheet.create({
   titleSearch: {
     justifyContent: "center",
     textAlign: "center",
-    fontSize: 22,
+    fontSize: hp(2.5),
     textAlign: "left",
     color: "#FF7E00",
     fontWeight: "bold",

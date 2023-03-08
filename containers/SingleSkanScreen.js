@@ -63,7 +63,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={name}
             style={styles.input}
-            placeholder={"Marque de la paire"}
+            placeholder={"Référence"}
             placeholderTextColor="#414141"
           />
           <TextInput
@@ -73,7 +73,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             value={desc}
             style={styles.input}
             placeholderTextColor="#414141"
-            placeholder={"Modèle de la paire"}
+            placeholder={"Marque"}
           />
           <TextInput
             onChangeText={(e) => {
@@ -82,7 +82,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             value={link}
             style={styles.input}
             placeholderTextColor="#414141"
-            placeholder={"Lien de la paire"}
+            placeholder={"Description"}
           />
         </View>
         <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>

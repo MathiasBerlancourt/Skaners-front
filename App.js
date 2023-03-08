@@ -486,7 +486,7 @@ export default function App() {
                           {(props) => <ProductCardLikeScreen {...props} />}
                         </Stack.Screen>
                         <Stack.Screen
-                          name="ProductCardFavoriteScreen"
+                          name="ProductScreen"
                           options={{
                             title: "",
                             headerRight: () => {
@@ -499,7 +499,9 @@ export default function App() {
                             },
                           }}
                         >
-                          {(props) => <ProductCardFavoriteScreen {...props} />}
+                          {(props) => (
+                            <ProductScreen token={userToken} {...props} />
+                          )}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
