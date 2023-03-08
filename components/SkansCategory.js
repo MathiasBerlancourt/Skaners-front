@@ -68,6 +68,7 @@ const SkansCategory = () => {
                     });
                   }}
                   style={{ width: wp(40), marginVertical: 7 }}
+                  activeOpacity={0.8}
                 >
                   <Image style={styles.img} source={{ uri: skan.pictureUrl }} />
                   <Text
