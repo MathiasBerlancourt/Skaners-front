@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -82,18 +83,24 @@ export default function SignInScreen({ setToken }) {
         >
           <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          disabled={submit}
-          onPress={() => {
-            if (!email || !password) {
-              return setErrorMessage("Vous devez remplir tous les champs");
-            }
-            setSubmit(true);
-          }}
-        >
-          <Text style={styles.loginTxt}>Valider</Text>
-        </TouchableOpacity>
+        {!submit ? (
+          <TouchableOpacity
+            style={styles.loginBtn}
+            disabled={submit}
+            onPress={() => {
+              if (!email || !password) {
+                return setErrorMessage("Vous devez remplir tous les champs");
+              }
+              setSubmit(true);
+            }}
+          >
+            <Text style={styles.loginTxt}>Valider</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.load}>
+            <ActivityIndicator color={"#FF7E00"} size={"large"} />
+          </View>
+        )}
       </View>
     </KeyboardAwareScrollView>
   );
@@ -140,6 +147,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     height: hp("5%"),
     width: wp("90%"),
+  },
+  load: {
+    marginHorizontal: 20,
+    marginTop: 30,
+    marginBottom: 20,
   },
 
   loginTxt: {

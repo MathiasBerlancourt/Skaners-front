@@ -131,7 +131,7 @@ const CreateUserAccountScreen = () => {
               });
             }}
           >
-            <Text style={styles.signUpTxt}>Valider</Text>
+            <Text style={styles.signUpTxt}>Continuer</Text>
           </TouchableOpacity>
           <Text style={styles.errorTxt}>{errorMessage}</Text>
         </View>

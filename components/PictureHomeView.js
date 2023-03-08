@@ -75,7 +75,7 @@ const PictureHomeView = ({ route, token }) => {
   };
 
   return (
-    <View style={{ position: "relative", backgroundColor: "white" }}>
+    <View style={{ position: "relative" }}>
       {id && (
         <TouchableOpacity
           style={{ position: "absolute", zIndex: 1, top: "90%", left: "85%" }}
@@ -95,10 +95,7 @@ const PictureHomeView = ({ route, token }) => {
           />
         </TouchableOpacity>
       )}
-      <Image
-        source={{ uri: route.params.url }}
-        style={{ width: windowWidth, height: windowHeight * 0.8 }}
-      />
+      <Image source={{ uri: route.params.url }} style={{ height: "100%" }} />
     </View>
   );
 };
