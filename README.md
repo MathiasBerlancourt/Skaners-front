@@ -53,7 +53,7 @@ Yarn a été utiliser pour l’installation des packages.
 Une fois le repository cloné vous pouvez entrer dans l’invité de commande et entrer la ligne suivante :
 
 ```bash
-yarn
+yarn install
 ```
 
 ## ▶︎ Lancer le projet
