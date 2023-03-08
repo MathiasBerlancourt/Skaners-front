@@ -19,7 +19,6 @@ import { API_URL } from "react-native-dotenv";
 
 const ProductCardScreenSkan = ({ route, navigation }) => {
   const product = route.params.product;
-  const size = 55;
 
   const sendData = async () => {
     try {
@@ -77,7 +76,7 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
               showAlert();
             }}
           >
-            <Entypo name="cross" size={size} color="#F86F00" />
+            <Entypo name="cross" size={40} color="#F86F00" />
           </TouchableOpacity>
         </View>
       </View>

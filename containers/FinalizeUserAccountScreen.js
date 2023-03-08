@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import {
@@ -40,9 +41,6 @@ const FinalizeUserAccountScreen = ({ route }) => {
       <View style={styles.finalizeContainer}>
         <View>
           <Text style={styles.title}>Finalise ton inscription !</Text>
-          <Text style={styles.notaBene}>
-            Tu pourras compléter ces informations plus tard dans ton profil
-          </Text>
         </View>
         <View style={styles.formContainer}>
           <View>
@@ -86,8 +84,13 @@ const FinalizeUserAccountScreen = ({ route }) => {
             <View style={styles.pickerContainer}>
               <RNPickerSelect
                 placeholder={{
-                  label: "Sectionner",
-                  value: "null",
+                  label: "Sélectionner",
+                  value: null,
+                }}
+                style={{
+                  placeholder: {
+                    color: "#717171",
+                  },
                 }}
                 onValueChange={(value) => setSex(value)}
                 items={[
@@ -100,30 +103,28 @@ const FinalizeUserAccountScreen = ({ route }) => {
           </View>
           <View>
             <Text style={styles.inputTitle}>Marque(s) favorite(s)</Text>
-            {/* <TextInput
-              placeholder="Air Jordan"
-              placeholderTextColor="#717171"
-              style={styles.inputWithTitle}
-              onChangeText={(input) => {
-                setFavoriteBrand(input);
-              }}
-              value={favoriteBrand}
-            /> */}
             <View style={styles.pickerContainer}>
               <RNPickerSelect
                 placeholder={{
-                  label: "Sectionner",
-                  value: "null",
-                  color: "#717171",
+                  label: "Sélectionner",
+                  value: null,
+                }}
+                style={{
+                  placeholder: {
+                    color: "#717171",
+                  },
                 }}
                 onValueChange={(value) => setFavoriteBrand(value)}
                 items={[
                   { key: "0", label: "Nike", value: "Nike" },
-                  { key: "1", label: "Adidas", value: "Féminin" },
-                  { key: "2", label: "Air Jordan", value: "Adidas" },
+                  { key: "1", label: "Adidas", value: "Adidas" },
+                  { key: "2", label: "Jordan", value: "Jordan" },
                   { key: "3", label: "Reebok", value: "Reebok" },
                   { key: "4", label: "Gucci", value: "Gucci" },
                   { key: "5", label: "Vans", value: "Vans" },
+                  { key: "6", label: "Converse", value: "Converse" },
+                  { key: "7", label: "New Balance", value: "New Balance" },
+                  { key: "8", label: "Puma", value: "Puma" },
                 ]}
               />
             </View>
@@ -133,9 +134,13 @@ const FinalizeUserAccountScreen = ({ route }) => {
             <View style={styles.pickerContainer}>
               <RNPickerSelect
                 placeholder={{
-                  label: "Sectionner",
-                  value: "null",
-                  color: "#717171",
+                  label: "Sélectionner",
+                  value: null,
+                }}
+                style={{
+                  placeholder: {
+                    color: "#717171",
+                  },
                 }}
                 onValueChange={(value) => setShoeSize(value)}
                 items={[
@@ -208,12 +213,13 @@ const styles = StyleSheet.create({
   },
   formContainer: { justifyContent: "space-around" },
   pickerContainer: {
-    paddingLeft: 10,
-    marginHorizontal: 20,
     backgroundColor: "lightgray",
     height: 30,
+    justifyContent: "center",
+    marginHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 20,
-    paddingTop: 5,
+    padding: Platform.OS === "ios" ? 10 : 0,
     color: "#717171",
   },
   inputTitle: {
