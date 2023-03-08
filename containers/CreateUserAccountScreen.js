@@ -49,7 +49,7 @@ const CreateUserAccountScreen = () => {
         <View style={styles.formContainer}>
           <TextInput
             style={styles.input}
-            placeholderTextColor="#515151"
+            placeholderTextColor="#717171"
             placeholder="Adresse email"
             onChangeText={(input) => {
               setEmail(input);
@@ -57,7 +57,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#515151"
+            placeholderTextColor="#717171"
             placeholder="Username"
             onChangeText={(input) => {
               setUsername(input);
@@ -65,7 +65,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#515151"
+            placeholderTextColor="#717171"
             placeholder="Mot de Passe"
             onChangeText={(input) => {
               setPassword(input);
@@ -74,7 +74,7 @@ const CreateUserAccountScreen = () => {
           />
           <TextInput
             style={styles.input}
-            placeholderTextColor="#515151"
+            placeholderTextColor="#717171"
             placeholder="Confirme le mot de passe"
             onChangeText={(input) => {
               setConfirmPassword(input);
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   txtDoB: {
-    color: "#515151",
+    color: "#717171",
     fontFamily: "LouisGeorge",
     paddingVertical: 10,
     textAlign: "center",

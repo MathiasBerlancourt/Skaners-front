@@ -62,7 +62,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             value={name}
             style={styles.input}
             placeholder={"Référence"}
-            placeholderTextColor="#414141"
+            placeholderTextColor="#717171"
           />
           <TextInput
             onChangeText={(e) => {
@@ -70,7 +70,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
             }}
             value={desc}
             style={styles.input}
-            placeholderTextColor="#414141"
+            placeholderTextColor="#717171"
             placeholder={"Marque"}
           />
         </View>

@@ -123,8 +123,8 @@ const ChooseUserAvatarScreens = ({ route, setToken }) => {
 export default ChooseUserAvatarScreens;
 const styles = StyleSheet.create({
   finalizeContainer: {
-    height: hp("86%"),
-    justifyContent: "space-around",
+    flex: 1,
+    justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "white",
   },
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   title: {
-    paddingTop: hp("3%"),
+    paddingTop: hp("2.5%"),
     alignContent: "center",
     fontSize: 28,
     color: "#FF7E00",

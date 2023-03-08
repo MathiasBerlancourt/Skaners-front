@@ -60,7 +60,7 @@ export default function SignInScreen({ setToken }) {
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor={"#515151"}
+          placeholderTextColor={"#717171"}
           onChangeText={(input) => {
             setEmail(input);
           }}
@@ -69,7 +69,7 @@ export default function SignInScreen({ setToken }) {
         <TextInput
           style={styles.input}
           placeholder="Mot de passe"
-          placeholderTextColor={"#515151"}
+          placeholderTextColor={"#717171"}
           secureTextEntry={true}
           onChangeText={(input) => {
             setPassword(input);
