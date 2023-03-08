@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Linking,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
@@ -18,7 +19,7 @@ import { API_URL } from "react-native-dotenv";
 
 const ProductCardScreenSkan = ({ route, navigation }) => {
   const product = route.params.product;
-  const size = 50;
+  const size = 55;
 
   const sendData = async () => {
     try {
@@ -71,34 +72,83 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
         <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.pictureUrl }} />
           <TouchableOpacity
+            style={styles.delete}
             onPress={() => {
               showAlert();
             }}
           >
-            <Entypo
-              style={styles.delete}
-              name="cross"
-              size={size}
-              color="#F86F00"
-            />
+            <Entypo name="cross" size={size} color="#F86F00" />
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.infosContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Marque :</Text>
+          <Text style={styles.labelColor}>Référence :</Text>
           <Text style={styles.text}>{product.sneakerName}</Text>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Description : </Text>
+          <Text style={styles.labelColor}>Marque : </Text>
           <Text style={styles.text}>{product.description}</Text>
         </View>
+      </View>
+      <View style={{ alignItems: "center" }}>
+        <View style={styles.lineBetween}></View>
+      </View>
+      <View style={styles.infosContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Lien : </Text>
-          <Text numberOfLines={1} style={styles.text}>
-            {product.linkUrl}
-          </Text>
+          <Text style={styles.labelColor}>Liens : </Text>
         </View>
+      </View>
+
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL(
+              `https://stockx.com/fr-fr/search?s=${product.sneakerName}`
+            )
+          }
+          style={{ width: 100, height: 70 }}
+        >
+          <Image
+            source={require("../assets/Images/logo_stockx.png")}
+            style={{ width: "100%", height: "100%" }}
+            resizeMode={"contain"}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL(
+              `https://www.goat.com/search?query=${product.sneakerName}`
+            )
+          }
+          style={{ width: 100, height: 70, marginHorizontal: 20 }}
+        >
+          <Image
+            source={require("../assets/Images/logo_goat.png")}
+            style={{ width: "100%", height: "100%" }}
+            resizeMode={"contain"}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL(
+              `https://restocks.net/fr/shop/?q=${product.sneakerName}`
+            )
+          }
+          style={{ width: 100, height: 70 }}
+        >
+          <Image
+            source={require("../assets/Images/logo_restocks.png")}
+            style={{ width: "100%", height: "100%" }}
+            resizeMode={"contain"}
+          />
+        </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -111,45 +161,49 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     justifyContent: "center",
-    height: 400,
-    marginTop: hp("5%"),
   },
   imgContainer: {
-    justifyContent: "center",
     alignItems: "center",
+    marginVertical: 20,
   },
 
   img: {
-    width: wp("80%"),
-    height: hp("60%"),
+    width: wp("90%"),
+    height: hp("50%"),
     resizeMode: "cover",
-    borderRadius: 20,
   },
   infosContainer: {
     width: wp("90%"),
     marginHorizontal: 20,
-    marginTop: hp("7%"),
   },
   delete: {
     position: "absolute",
-    bottom: hp("50%"),
-    left: wp("25%"),
+    zIndex: 1,
+    backgroundColor: "white",
+    borderRadius: 40,
+    bottom: hp("42%"),
+    left: wp("80%"),
   },
   textContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: hp("2.5%"),
+    marginVertical: hp("1.5%"),
   },
 
   text: {
     fontSize: hp("2%"),
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
   },
 
   labelColor: {
-    color: "#717171",
+    color: "#FF7E00",
     fontSize: hp("2%"),
     fontFamily: "LouisGeorge",
+  },
+  lineBetween: {
+    width: wp("90%"),
+    borderBottomColor: "#FF7E00",
+    borderBottomWidth: 1,
   },
 });
 
