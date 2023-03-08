@@ -41,13 +41,13 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
 
   const showAlert = () => {
     Alert.alert(
-      "Confirmation de suppression",
-      "Es tu sur de vouloir supprimer cette paire?",
+      "Confirmation",
+      "Es-tu sûr de vouloir retirer cette paire de tes favoris ?",
       [
         {
           text: "Oui",
-          onPress: () => {
-            sendData();
+          onPress: async () => {
+            await sendData();
             navigation.goBack();
           },
           style: "default",
@@ -65,7 +65,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
     );
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={styles.background}>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.picture }} />
@@ -94,7 +94,7 @@ const ProductCardFavoriteScreen = ({ route, navigation }) => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.labelColor}>Prix : </Text>
-          <Text style={styles.text}>{product.price}</Text>
+          <Text style={styles.text}>{product.price / 100} €</Text>
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -109,12 +109,16 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     justifyContent: "center",
-    height: 400,
-    marginTop: hp("5%"),
+    height: hp("50%"),
+    width: wp("80%"),
+    marginHorizontal: wp("10%"),
+    marginTop: hp("3%"),
+    backgroundColor: "white",
+    borderRadius: 20,
   },
   imgContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 
   img: {
@@ -130,8 +134,8 @@ const styles = StyleSheet.create({
   },
   delete: {
     position: "absolute",
-    bottom: hp("50%"),
-    left: wp("25%"),
+    bottom: hp("46%"),
+    left: wp("60%"),
   },
   textContainer: {
     flexDirection: "row",

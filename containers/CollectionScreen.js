@@ -12,7 +12,7 @@ const FavoritesCategoryRoute = () => (
 );
 
 const LikesCategoryRoute = () => (
-  <View style={{ flex: 1 }}>{/* <LikesCategory /> */}</View>
+  <View style={{ flex: 1 }}>{<LikesCategory />}</View>
 );
 const SkansCategoryRoute = () => (
   <View style={{ flex: 1 }}>

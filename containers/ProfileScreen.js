@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   btnAdmin: {
     padding: hp("1.5%"),
     borderRadius: wp("2%"),
-    backgroundColor: "red",
+    backgroundColor: "#FF7E00",
   },
 
   btnAdminTxt: {

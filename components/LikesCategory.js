@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
+  Image,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -44,24 +45,22 @@ const LikesCategory = () => {
     };
     fetchData();
   }, [isFocused]);
+
   return isLoad ? (
     <View style={styles.background}>
       <ScrollView>
         <View style={styles.likeContainer}>
-          {data.map((sneaker, index) => {
+          {data.map((picture, index) => {
             return (
               <TouchableOpacity
                 key={index}
                 onPress={() => {
                   navigation.navigate("ProductCardLikeScreen", {
-                    product: sneaker,
+                    product: picture,
                   });
                 }}
               >
-                <Image
-                  style={styles.img}
-                  source={{ uri: sneaker.pictureUrl }}
-                />
+                <Image style={styles.img} source={{ uri: picture.url }} />
               </TouchableOpacity>
             );
           })}

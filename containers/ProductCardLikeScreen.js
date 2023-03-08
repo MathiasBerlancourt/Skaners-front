@@ -32,7 +32,7 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
       await axios({
         method: "PUT",
         url: `${API_URL}/user/unlikePicture`,
-        data: { userId: userId, skanId: product._id },
+        data: { userId: userId, pictureId: product._id },
         headers: headers,
       });
     } catch (error) {
@@ -42,13 +42,13 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
 
   const showAlert = () => {
     Alert.alert(
-      "Confirmation de suppression",
-      "Es tu sur de vouloir supprimer cette paire?",
+      "Confirmation",
+      "Es-tu sur de vouloir retirer cette photo de tes favoris ?",
       [
         {
           text: "Oui",
-          onPress: () => {
-            sendData();
+          onPress: async () => {
+            await sendData();
             navigation.goBack();
           },
           style: "default",
@@ -66,10 +66,10 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
     );
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image style={styles.img} source={{ uri: product.pictureUrl }} />
+          <Image style={styles.img} source={{ uri: product.url }} />
           <TouchableOpacity
             onPress={() => {
               showAlert();
@@ -84,33 +84,15 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* <View style={styles.infosContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Marque :</Text>
-          <Text style={styles.text}>{product.sneakerName}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Description : </Text>
-          <Text style={styles.text}>{product.description}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.labelColor}>Lien : </Text>
-          <Text style={styles.text}>{product.linkUrl}</Text>
-        </View>
-      </View> */}
     </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: "white",
-    flex: 1,
-  },
   container: {
     alignContent: "center",
     justifyContent: "center",
-    height: 400,
+    flex: 1,
     marginTop: hp("5%"),
   },
   imgContainer: {

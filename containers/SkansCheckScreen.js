@@ -126,6 +126,8 @@ const styles = StyleSheet.create({
   skan: {
     height: 200,
     width: 300,
+    borderRadius: 5,
+    marginLeft: 5,
     backgroundColor: "black",
     borderWidth: 3,
     marginVertical: 10,

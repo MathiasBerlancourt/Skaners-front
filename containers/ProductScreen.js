@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Linking,
 } from "react-native";
 import { useEffect, useState } from "react";
 import {
@@ -84,35 +85,59 @@ const ProductScreen = ({ route, token }) => {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.productScreenContainer}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: sneakersData.picture }}
-              resizeMode="contain"
-              style={{
-                width: wp("100%"),
-                height: wp("100%"),
-              }}
-            />
-            <View style={styles.priceContainer}>
-              <Text
-                style={{
-                  color: "white",
-                  fontFamily: "LouisGeorge",
-                  fontSize: 18,
-                }}
-              >
-                PRIX RETAIL
-              </Text>
+          <Image
+            source={{ uri: sneakersData.picture }}
+            resizeMode="cover"
+            style={{
+              width: wp("100%"),
+              height: hp("30%"),
+              marginTop: hp(2),
+            }}
+          />
+          <View style={styles.detailsContainer}>
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity style={styles.priceContainer}>
+                <Text
+                  style={{
+                    color: "white",
+                    fontFamily: "LouisGeorge",
+                    fontSize: 18,
+                  }}
+                >
+                  PRIX RETAIL
+                </Text>
 
-              <Text
-                style={{
-                  color: "black",
-                  fontFamily: "LouisGeorge",
-                  fontSize: 18,
-                }}
-              >
-                {sneakersData.price / 100} €{" "}
-              </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontFamily: "LouisGeorge",
+                    fontSize: 18,
+                  }}
+                >
+                  {sneakersData.price / 100} €
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.priceResell}>
+                <Text
+                  style={{
+                    color: "white",
+                    fontFamily: "LouisGeorgeBold",
+                    fontSize: 18,
+                  }}
+                >
+                  PRIX RESSEL
+                </Text>
+
+                <Text
+                  style={{
+                    color: "black",
+                    fontFamily: "LouisGeorge",
+                    fontSize: 18,
+                  }}
+                >
+                  {sneakersData.price / 100 + 300} € et +
+                </Text>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.containerNameAndLike}>
@@ -130,39 +155,71 @@ const ProductScreen = ({ route, token }) => {
                   <AntDesign
                     name="heart"
                     size={30}
-                    style={{ paddingBottom: 10, color: "#FF7E00" }}
+                    style={{ color: "#FF7E00" }}
                   />
                 ) : (
                   <AntDesign
                     name="hearto"
                     size={30}
-                    style={{ paddingBottom: 10, color: "#FF7E00" }}
+                    style={{ color: "#FF7E00" }}
                   />
                 )}
               </TouchableOpacity>
               <Text style={styles.sneakerName}>
-                {"     "}
                 {sneakersData.name.toUpperCase()}
               </Text>
             </View>
 
-            <View>
-              <View
-                style={{
-                  backgroundColor: "#FF7E00",
-                  height: 1,
-                  width: wp("90%"),
-                  marginBottom: 20,
-                }}
-              ></View>
-              <View>
-                <Text style={styles.brandAndColor}>
-                  MARQUE : {sneakersData.brand.toUpperCase()}
-                </Text>
-                <Text style={styles.brandAndColor}>
-                  COLORIS : {sneakersData.color.toUpperCase()}
-                </Text>
-              </View>
+            <Text style={styles.brandAndColor}>LIENS</Text>
+            <View
+              style={{
+                width: "90%",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    `https://stockx.com/fr-fr/search?s=${sneakersData.name}`
+                  )
+                }
+                style={{ width: 100, height: 70 }}
+              >
+                <Image
+                  source={require("../assets/Images/logo_stockx.png")}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode={"contain"}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    `https://www.goat.com/search?query=${sneakersData.name}`
+                  )
+                }
+                style={{ width: 100, height: 70 }}
+              >
+                <Image
+                  source={require("../assets/Images/logo_goat.png")}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode={"contain"}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    `https://restocks.net/fr/shop/?q=${sneakersData.name}`
+                  )
+                }
+                style={{ width: 100, height: 70 }}
+              >
+                <Image
+                  source={require("../assets/Images/logo_restocks.png")}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode={"contain"}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -179,33 +236,44 @@ const styles = StyleSheet.create({
     width: wp("100%"),
     backgroundColor: "white",
   },
-  imageContainer: {
-    justifyContent: "center",
+  detailsContainer: {
     alignItems: "center",
-    alignContent: "center",
-    justifyContent: "space-between",
-    height: "100%",
+    flex: 1,
   },
   priceContainer: {
     backgroundColor: "#717171",
     paddingHorizontal: 35,
-    paddingVertical: 10,
+    marginHorizontal: 5,
+    paddingVertical: 15,
+    borderRadius: 40,
+    width: wp("45%"),
+    alignItems: "center",
+  },
+  priceResell: {
+    backgroundColor: "#FF7E00",
+    paddingHorizontal: 35,
+    marginHorizontal: 5,
+    paddingVertical: 15,
     borderRadius: 40,
     width: wp("45%"),
     alignItems: "center",
   },
   containerNameAndLike: {
     flexDirection: "row",
-    marginHorizontal: "10%",
-    alignItems: "flex-start",
+    width: wp(90),
+    borderBottomColor: "#FF7E00",
+    borderBottomWidth: 1,
+    marginVertical: hp(2),
+    paddingTop: hp(2),
+    paddingBottom: hp(4),
+    justifyContent: "center",
+    alignItems: "center",
   },
   sneakerName: {
     fontFamily: "LouisGeorge",
     fontSize: 20,
-    fontWeight: 100,
-
-    textAlign: "center",
-    justifyContent: "space-between",
+    paddingLeft: wp(4),
+    width: "90%",
   },
   lineBetween: {
     width: wp("45%"),
@@ -213,7 +281,10 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   brandAndColor: {
-    fontSize: 15,
-    color: "#717171",
+    fontSize: 20,
+    color: "#FF7E00",
+    marginVertical: wp(5),
+    width: wp(90),
+    fontFamily: "LouisGeorge",
   },
 });

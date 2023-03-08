@@ -12,12 +12,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "./Loading";
 import axios from "axios";
 import { API_URL } from "react-native-dotenv";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { AntDesign } from "@expo/vector-icons";
 
 const FavoritesCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const brandTab = [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,19 +53,52 @@ const FavoritesCategory = () => {
   return isLoad ? (
     <View style={styles.background}>
       <ScrollView>
-        <View style={styles.favoriteContainer}>
-          {data.map((sneaker, index) => {
+        <View>
+          {data.map((sneaker) => {
+            if (!brandTab.includes(sneaker.brand)) brandTab.push(sneaker.brand);
+          })}
+          {brandTab.map((brand, index) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  navigation.navigate("ProductCardFavoriteScreen", {
-                    product: sneaker,
-                  });
-                }}
-              >
-                <Image style={styles.img} source={{ uri: sneaker.picture }} />
-              </TouchableOpacity>
+              <View key={index} style={styles.brandContainer}>
+                <Text style={styles.textBrand}>{brand.toUpperCase()}</Text>
+                <ScrollView horizontal={true} style={{ flexDirection: "row" }}>
+                  {data.map((sneaker, index) => {
+                    if (sneaker.brand === brand) {
+                      return (
+                        <View key={index} style={styles.sneakerContainer}>
+                          <TouchableOpacity
+                            onPress={() => {
+                              navigation.navigate("ProductCardFavoriteScreen", {
+                                product: sneaker,
+                              });
+                            }}
+                          >
+                            <Image
+                              style={styles.img}
+                              source={{ uri: sneaker.picture }}
+                            />
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <AntDesign
+                                name="heart"
+                                size={18}
+                                color="#FF7E00"
+                              />
+                              <Text numberOfLines={2} style={styles.textName}>
+                                {sneaker.name}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    }
+                  })}
+                </ScrollView>
+              </View>
             );
           })}
         </View>
@@ -75,18 +114,37 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
   },
-  favoriteContainer: {
-    marginTop: 20,
-    marginHorizontal: 10,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+
+  brandContainer: { height: hp("23%") },
+
+  textBrand: {
+    color: "white",
+    backgroundColor: "black",
+    height: hp("5%"),
+    paddingHorizontal: 15,
+    lineHeight: hp("5%"),
+    fontSize: 16,
+    fontFamily: "LemonMilk",
   },
+  sneakerContainer: {
+    marginLeft: 15,
+    flex: 1,
+    width: wp("35%"),
+  },
+
+  textName: {
+    textAlign: "center",
+    maxWidth: wp("28%"),
+    height: hp("5%"),
+    paddingHorizontal: 5,
+    marginLeft: 3,
+    fontSize: 12,
+    fontFamily: "LemonMilk",
+  },
+
   img: {
-    width: 150,
-    height: 100,
-    borderRadius: 10,
-    marginBottom: 10,
+    width: wp("30%"),
+    height: hp("12%"),
     resizeMode: "cover",
   },
 });

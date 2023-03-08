@@ -53,8 +53,8 @@ export default function HomeScreen({ navigation }) {
     return <Loading />;
   } else
     return (
-      <ScrollView>
-        <View style={{ paddingTop: 10, backgroundColor: "white" }}>
+      <ScrollView style={{ backgroundColor: "white" }}>
+        <View style={{ paddingTop: 10 }}>
           <Text style={styles.title}>MES DERNIERS LIKES</Text>
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>
