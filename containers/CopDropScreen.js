@@ -102,7 +102,17 @@ const CopDropScreen = ({ token }) => {
             </TinderCard>
           ))
         ) : (
-          <Text>Quel crack t'as swipe toutes les paires</Text>
+          <Text
+            style={{
+              height: "100%",
+              textAlign: "center",
+              lineHeight: hp(70),
+              fontFamily: "LouisGeorge",
+              fontSize: hp(2.5),
+            }}
+          >
+            Quel crack t'as swipe toutes les paires
+          </Text>
         )}
       </View>
       <View style={styles.textContainer}>
