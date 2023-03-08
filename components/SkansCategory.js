@@ -12,10 +12,15 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import Loading from "./Loading";
 import { API_URL } from "react-native-dotenv";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const SkansCategory = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [data, setData] = useState();
+  const [userName, setUserName] = useState();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -33,6 +38,7 @@ const SkansCategory = () => {
           headers: headers,
         });
         setData(response.data.skans.reverse());
+        setUserName(response.data.userName);
         setIsLoad(true);
       } catch (error) {
         console.log(error.message);
@@ -42,26 +48,34 @@ const SkansCategory = () => {
   }, [isFocused]);
 
   return isLoad ? (
-    <View style={styles.background}>
-      <ScrollView>
-        <View style={styles.skanContainer}>
-          {data.map((skan, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  navigation.navigate("ProductCardSkanScreen", {
-                    product: skan,
-                  });
-                }}
-              >
-                <Image style={styles.img} source={{ uri: skan.pictureUrl }} />
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
-    </View>
+    data.length === 0 ? (
+      <View style={styles.background}>
+        <Text style={styles.text}>
+          Wesh {userName} tu n'as pas encore de skans
+        </Text>
+      </View>
+    ) : (
+      <View style={styles.background}>
+        <ScrollView>
+          <View style={styles.skanContainer}>
+            {data.map((skan, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate("ProductCardSkanScreen", {
+                      product: skan,
+                    });
+                  }}
+                >
+                  <Image style={styles.img} source={{ uri: skan.pictureUrl }} />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
+    )
   ) : (
     <Loading />
   );
@@ -77,6 +91,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
+  },
+  text: {
+    fontFamily: "LouisGeorge",
+    fontSize: hp(2.5),
+    textAlign: "center",
+    marginTop: hp(2),
+    color: "#FF7E00",
   },
   img: {
     width: 150,

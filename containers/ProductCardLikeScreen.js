@@ -43,7 +43,7 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
   const showAlert = () => {
     Alert.alert(
       "Confirmation",
-      "Es-tu sur de vouloir retirer cette photo de tes favoris ?",
+      "Es-tu sur de vouloir retirer cette photo de tes likes ?",
       [
         {
           text: "Oui",

@@ -20,7 +20,7 @@ import Loading from "../components/Loading";
 const ProductScreen = ({ route, token }) => {
   const [sneakersData, setSneakersData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [like, setLike] = useState();
+  const [like, setLike] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
