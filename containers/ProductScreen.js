@@ -32,10 +32,7 @@ const ProductScreen = ({ route, token }) => {
             headers: { Authorization: "Bearer " + token },
           }),
         ]);
-        const dinga = responseUserInfo.data.sneakers.find((sneaker) => {
-          console.log(
-            JSON.stringify(sneaker._id) === JSON.stringify(route.params.id)
-          );
+        responseUserInfo.data.sneakers.find((sneaker) => {
           if (JSON.stringify(sneaker._id) === JSON.stringify(route.params.id)) {
             setLike(true);
             return true;
