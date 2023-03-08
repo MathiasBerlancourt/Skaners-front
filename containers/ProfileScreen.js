@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#515151",
     marginTop: hp("1%"),
-    fontWeight: "bold",
     textTransform: "uppercase",
   },
 

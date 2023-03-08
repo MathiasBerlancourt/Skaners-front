@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -106,32 +107,21 @@ export default function SignInScreen({ setToken }) {
   );
 }
 const styles = StyleSheet.create({
-  title: {
-    fontFamily: "LemonMilkBold",
-    fontSize: 25,
-    fontWeight: "bold",
-    marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
-    textAlign: "center",
-    marginVertical: 20,
-  },
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
     borderRadius: 20,
     marginVertical: 10,
     marginHorizontal: 20,
-    padding: 10,
+    padding: Platform.OS === "ios" ? 10 : 7,
+    fontSize: Platform.OS === "android" ? hp(2) : 0,
   },
 
   title: {
     fontFamily: "LemonMilkBold",
     fontSize: 25,
-    fontWeight: "bold",
     marginHorizontal: 30,
-    borderBottomColor: "#FF7E00",
-    borderBottomWidth: 2,
+
     textAlign: "center",
     marginVertical: 50,
   },
@@ -162,6 +152,7 @@ const styles = StyleSheet.create({
 
   passwordForgetTxt: {
     fontFamily: "LouisGeorge",
+    fontSize: Platform.OS === "android" ? hp(2) : 0,
     marginHorizontal: 35,
     color: "grey",
   },
