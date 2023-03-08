@@ -106,9 +106,12 @@ const CopDropScreen = ({ token }) => {
         )}
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.dropText}>DROP</Text>
-        <View>
-          <Text style={styles.copText}>COP</Text>
+        <View style={styles.drop}>
+          <Text style={styles.copDropText}>DROP</Text>
+        </View>
+
+        <View style={styles.cop}>
+          <Text style={styles.copDropText}>COP</Text>
           <View style={styles.sparksContainer}>
             {playAnimation ? (
               <LottieView
@@ -155,10 +158,11 @@ const styles = StyleSheet.create({
     bottom: hp("2%"),
     left: wp("20%"),
   },
-  copText: {
+  cop: {
     backgroundColor: "#FF7E00",
-    borderRadius: 20,
     fontSize: 30,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
     width: wp("31%"),
     height: hp("7%"),
     lineHeight: hp("7%"),
@@ -170,9 +174,10 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  dropText: {
+  drop: {
     backgroundColor: "black",
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
     fontSize: 30,
     width: wp("31%"),
     height: hp("7%"),
@@ -182,12 +187,25 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     marginBottom: 10,
     fontFamily: "LouisGeorge",
-    paddingRight: hp("3%"),
+    paddingRight: 20,
+  },
+
+  copDropText: {
+    fontSize: 30,
+    lineHeight: hp("7%"),
+    color: "white",
+    textAlign: "center",
+    textAlignVertical: "center",
+    marginBottom: 10,
+    fontFamily: "LouisGeorge",
   },
 
   logo: {
     width: wp("12%"),
     height: hp("6%"),
+    backgroundColor: "white",
+    borderRadius: 20,
+    resizeMode: "contain",
   },
   logoContainer: {
     borderStyle: "solid",
