@@ -19,7 +19,7 @@ import { API_URL } from "react-native-dotenv";
 const ProductCardLikeScreen = ({ route, navigation }) => {
   const product = route.params.product;
 
-  const size = 50;
+  const size = 55;
 
   const sendData = async () => {
     try {
@@ -90,47 +90,22 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignContent: "center",
-    justifyContent: "center",
-    flex: 1,
-    marginTop: hp("5%"),
+    width: wp("100%"),
+    height: hp("100%"),
   },
   imgContainer: {
-    justifyContent: "center",
     alignItems: "center",
   },
 
   img: {
-    width: wp("80%"),
-    height: hp("60%"),
-    resizeMode: "cover",
-    borderRadius: 20,
+    width: wp("100%"),
+    height: hp("85%"),
   },
-  infosContainer: {
-    width: wp("90%"),
-    marginHorizontal: 20,
-    marginTop: hp("7%"),
-  },
+
   delete: {
     position: "absolute",
-    bottom: hp("50%"),
-    left: wp("25%"),
-  },
-  textContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: hp("2.5%"),
-  },
-
-  text: {
-    fontSize: hp("2%"),
-    fontFamily: "LouisGeorge",
-  },
-
-  labelColor: {
-    color: "#717171",
-    fontSize: hp("2%"),
-    fontFamily: "LouisGeorge",
+    bottom: hp("77%"),
+    left: wp("34%"),
   },
 });
 
