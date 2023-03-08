@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: wp("12%"),
+    width: wp("12.5%"),
     height: hp("6%"),
     backgroundColor: "white",
     borderRadius: 20,

@@ -21,7 +21,7 @@ const CreateUserAccountScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("jj/mm/aaaa");
+  const [dateOfBirth, setDateOfBirth] = useState(null);
   const navigation = useNavigation();
   //DATE PICKER-------
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -86,7 +86,7 @@ const CreateUserAccountScreen = () => {
             <TouchableOpacity onPress={showDatePicker}>
               <View style={{ flexDirection: "row" }}>
                 <Text style={styles.txtDoB}>
-                  {dateOfBirth instanceof Date ? "" : "Date de naissance :"}
+                  {dateOfBirth instanceof Date ? "" : "Date de naissance"}
                 </Text>
                 <Text
                   style={

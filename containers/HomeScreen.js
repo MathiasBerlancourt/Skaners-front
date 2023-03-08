@@ -78,8 +78,9 @@ export default function HomeScreen({ navigation }) {
         }
       >
         <View style={{ paddingTop: 10 }}>
-          <Text style={styles.title}>MES DERNIERS SKANS</Text>
-          <View></View>
+          {skans.length > 0 && (
+            <Text style={styles.title}>MES DERNIERS SKANS</Text>
+          )}
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>
               {Array.isArray(skans) &&

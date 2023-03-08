@@ -23,7 +23,6 @@ import ProfileButton from "./components/ProfileButton";
 import PictureHomeView from "./components/PictureHomeView";
 import { useFonts } from "expo-font";
 import ProductCardSkanScreen from "./containers/ProductCardSkanScreen";
-import ProductCardFavoriteScreen from "./containers/ProductCardFavoriteScreen";
 import ProductCardLikeScreen from "./containers/ProductCardLikeScreen";
 import { Image, StyleSheet, Platform } from "react-native";
 import ProductScreen from "./containers/ProductScreen";
