@@ -89,6 +89,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.layoutContainer}>
             {Array.isArray(pictures) &&
               pictures.map((elem, index) => {
+                // const isFirstInRow = index % 3 === 0;
                 return (
                   <TouchableOpacity
                     key={index}
@@ -98,12 +99,18 @@ export default function HomeScreen({ navigation }) {
                         url: elem.url,
                       });
                     }}
+                    // style={{
+                    //   // marginRight: isFirstInRow ? 0 : 4, // add right margin to all images except the first one in each row
+                    //   // marginLeft: isFirstInRow ? 0 : 4, // add left margin to all images except the first one in each row
+                    //   marginTop: index < 2 ? 0 : -80, // add top margin to all images except the first row
+                    // }}
                   >
                     <Image
                       key={elem.id}
                       source={{ uri: elem.url }}
                       style={{
-                        height: 0.2 * height,
+                        height: 0.3 * height,
+                        // height: index % 3 === 0 ? 0.3 * height : 0.2 * height, // Here we check if the index is even or odd
                         width: 0.43 * width,
                         borderRadius: 10,
                         marginVertical: 4,

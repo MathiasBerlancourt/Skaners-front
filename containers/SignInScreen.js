@@ -8,6 +8,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_URL } from "react-native-dotenv";
 
@@ -45,9 +49,41 @@ export default function SignInScreen({ setToken, setId }) {
   }, [submit]);
 
   return (
-    <KeyboardAwareScrollView style={styles.background}>
-      <View>
+    <KeyboardAwareScrollView style={{ backgroundColor: "white" }}>
+      <View style={styles.sinUpContainer}>
         <View>
+          <View>
+            <Text style={styles.title}>CONNEXION</Text>
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              onChangeText={(input) => {
+                setEmail(input);
+              }}
+              value={email}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Mot de passe"
+              secureTextEntry={true}
+              onChangeText={(input) => {
+                setPassword(input);
+              }}
+              value={password}
+            />
+
+            <TouchableOpacity
+              onPress={() => {
+                alert("Wesh Crack pourquoi t'as oublié ton mot de passe");
+              }}
+            >
+              <Text style={styles.passwordForgetTxt}>
+                Mot de passe oublié ?
+              </Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={styles.loginBtn}
             disabled={submit}
@@ -62,38 +98,27 @@ export default function SignInScreen({ setToken, setId }) {
           </TouchableOpacity>
 
           <Text style={styles.errorTxt}>{errorMessage}</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            onChangeText={(input) => {
-              setEmail(input);
-            }}
-            value={email}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Mot de passe"
-            secureTextEntry={true}
-            onChangeText={(input) => {
-              setPassword(input);
-            }}
-            value={password}
-          />
-
-          <TouchableOpacity
-            onPress={() => {
-              alert("Wesh Crack pourquoi t'as oublié ton mot de passe");
-            }}
-          >
-            <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
+  sinUpContainer: {
+    backgroundColor: "white",
+
+    height: hp("89%"),
+  },
+  title: {
+    fontFamily: "LemonMilkBold",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginHorizontal: 30,
+    borderBottomColor: "#FF7E00",
+    borderBottomWidth: 2,
+    textAlign: "center",
+    marginVertical: 20,
+  },
   input: {
     fontFamily: "LouisGeorge",
     backgroundColor: "lightgray",
@@ -107,12 +132,14 @@ const styles = StyleSheet.create({
   loginBtn: {
     height: 50,
     backgroundColor: "#FF7E00",
-    borderRadius: 15,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,
-    marginTop: 70,
+    marginTop: 30,
     marginBottom: 20,
+    height: hp("5%"),
+    width: wp("60%"),
   },
 
   loginTxt: {
@@ -135,8 +162,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  background: {
-    backgroundColor: "white",
-    flex: 1,
-  },
+  // background: {
+  //   backgroundColor: "white",
+
+  //   flex: 1,
+  // },
 });
