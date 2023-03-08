@@ -87,7 +87,7 @@ const PictureHomeView = ({ route, token }) => {
           style={{
             position: "absolute",
             zIndex: 1,
-            top: "88%",
+            top: "86%",
             left: "80%",
             backgroundColor: "white",
             padding: 10,

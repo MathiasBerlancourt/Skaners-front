@@ -72,6 +72,8 @@ const LikesCategory = () => {
                       product: picture,
                     });
                   }}
+                  style={{ width: wp(40), marginVertical: 7 }}
+                  activeOpacity={0.8}
                 >
                   <Image style={styles.img} source={{ uri: picture.url }} />
                 </TouchableOpacity>
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   likeContainer: {
-    marginTop: 20,
+    marginVertical: 20,
     marginHorizontal: 10,
     flexDirection: "row",
     flexWrap: "wrap",

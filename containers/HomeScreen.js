@@ -78,7 +78,9 @@ export default function HomeScreen({ navigation }) {
         }
       >
         <View style={{ paddingTop: 10 }}>
-          <Text style={styles.title}>MES DERNIERS SKANS</Text>
+          {skans.length > 0 && (
+            <Text style={styles.title}>MES DERNIERS SKANS</Text>
+          )}
           <ScrollView horizontal={true}>
             <View style={styles.likesContainer}>
               {Array.isArray(skans) &&
@@ -111,70 +113,83 @@ export default function HomeScreen({ navigation }) {
           </ScrollView>
 
           <Text style={styles.title}>PARCOURIR</Text>
-          <View style={styles.layoutContainer}>
-            <View style={{ flexDirection: "row" }}>
-              <View style={{ width: "50%" }}>
-                {Array.isArray(pictures) &&
-                  pictures.map((elem, index) => {
-                    if (index % 2 === 0) {
-                      return (
-                        <TouchableOpacity
-                          activeOpacity={0.8}
-                          key={index}
-                          onPress={() => {
-                            navigation.navigate("HomeView", {
-                              id: elem._id,
-                              url: elem.url,
-                            });
-                          }}
-                        >
-                          <Image
-                            key={elem.id}
-                            source={{ uri: elem.url }}
-                            style={{
-                              height:
-                                index % 3 === 0 ? 0.2 * height : 0.3 * height, // Here we check if the index is even or odd
-                              width: 0.43 * width,
-                              resizeMode: "cover",
-                              borderRadius: 10,
-                              marginBottom: 4,
+          <View>
+            <View style={styles.layoutContainer}>
+              <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{
+                    width: "50%",
+                    marginHorizontal: wp(1.25),
+                  }}
+                >
+                  {Array.isArray(pictures) &&
+                    pictures.map((elem, index) => {
+                      if (index % 2 === 0) {
+                        return (
+                          <TouchableOpacity
+                            activeOpacity={0.8}
+                            key={index}
+                            onPress={() => {
+                              navigation.navigate("HomeView", {
+                                id: elem._id,
+                                url: elem.url,
+                              });
                             }}
-                          />
-                        </TouchableOpacity>
-                      );
-                    }
-                  })}
-              </View>
-              <View style={{ width: "50%", paddingHorizontal: wp("2.5%") }}>
-                {Array.isArray(pictures) &&
-                  pictures.map((elem, index) => {
-                    if (index % 2 !== 0) {
-                      return (
-                        <TouchableOpacity
-                          key={index}
-                          onPress={() => {
-                            navigation.navigate("HomeView", {
-                              id: elem._id,
-                              url: elem.url,
-                            });
-                          }}
-                        >
-                          <Image
-                            key={elem.id}
-                            source={{ uri: elem.url }}
-                            style={{
-                              height:
-                                index % 3 !== 0 ? 0.3 * height : 0.2 * height, // Here we check if the index is even or odd
-                              width: 0.43 * width,
-                              resizeMode: "cover",
-                              borderRadius: 10,
-                              marginBottom: 6,
+                          >
+                            <Image
+                              key={elem.id}
+                              source={{ uri: elem.url }}
+                              style={{
+                                height:
+                                  index % 3 === 0 ? 0.2 * height : 0.3 * height, // Here we check if the index is even or odd
+                                width: 0.43 * width,
+                                resizeMode: "cover",
+                                borderRadius: 10,
+                                marginBottom: 4,
+                              }}
+                            />
+                          </TouchableOpacity>
+                        );
+                      }
+                    })}
+                </View>
+                <View
+                  style={{
+                    width: "50%",
+                    marginHorizontal: wp(1.25),
+                  }}
+                >
+                  {Array.isArray(pictures) &&
+                    pictures.map((elem, index) => {
+                      if (index % 2 !== 0) {
+                        return (
+                          <TouchableOpacity
+                            key={index}
+                            onPress={() => {
+                              navigation.navigate("HomeView", {
+                                id: elem._id,
+                                url: elem.url,
+                              });
                             }}
-                          />
-                        </TouchableOpacity>
-                      );
-                    }
-                  })}
+                            activeOpacity={0.8}
+                          >
+                            <Image
+                              key={elem.id}
+                              source={{ uri: elem.url }}
+                              style={{
+                                height:
+                                  index % 3 !== 0 ? 0.3 * height : 0.2 * height, // Here we check if the index is even or odd
+                                width: 0.43 * width,
+                                resizeMode: "cover",
+                                borderRadius: 10,
+                                marginBottom: 6,
+                              }}
+                            />
+                          </TouchableOpacity>
+                        );
+                      }
+                    })}
+                </View>
               </View>
             </View>
           </View>
@@ -199,9 +214,8 @@ const styles = StyleSheet.create({
   },
   likesContainer: { flexDirection: "row" },
   layoutContainer: {
-    paddingHorizontal: wp("5%"),
-    justifyContent: "center",
-    // flexDirection: "column",
+    paddingHorizontal: wp("7%"),
+    alignItems: "center",
   },
 
   pictureSneakers: {

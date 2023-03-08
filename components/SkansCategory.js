@@ -67,9 +67,20 @@ const SkansCategory = () => {
                       product: skan,
                     });
                   }}
+                  style={{ width: wp(40), marginVertical: 7 }}
+                  activeOpacity={0.8}
                 >
                   <Image style={styles.img} source={{ uri: skan.pictureUrl }} />
-                  <Text>{skan.sneakerName}</Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{
+                      textAlign: "center",
+                      color: "#717171",
+                      fontFamily: "LouisGeorgeBoldItalic",
+                    }}
+                  >
+                    {skan.sneakerName}
+                  </Text>
                 </TouchableOpacity>
               );
             })}
@@ -87,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   skanContainer: {
-    marginTop: 20,
+    marginVertical: 20,
     marginHorizontal: 10,
     flexDirection: "row",
     flexWrap: "wrap",

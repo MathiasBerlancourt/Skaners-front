@@ -85,6 +85,7 @@ const FavoritesCategory = () => {
                                   id: sneaker._id,
                                 });
                               }}
+                              activeOpacity={0.8}
                             >
                               <Image
                                 style={styles.img}
