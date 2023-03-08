@@ -162,6 +162,7 @@ const SearchScreen = () => {
                       id: item._id,
                     });
                   }}
+                  activeOpacity={0.8}
                 >
                   <View
                     style={{

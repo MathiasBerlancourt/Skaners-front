@@ -32,11 +32,19 @@ const ProductScreen = ({ route, token }) => {
             headers: { Authorization: "Bearer " + token },
           }),
         ]);
-        responseUserInfo.data.sneakers.find((sneaker) => {
-          setLike(
+        const dinga = responseUserInfo.data.sneakers.find((sneaker) => {
+          console.log(
             JSON.stringify(sneaker._id) === JSON.stringify(route.params.id)
           );
+          if (JSON.stringify(sneaker._id) === JSON.stringify(route.params.id)) {
+            setLike(true);
+            return true;
+          } else {
+            setLike(false);
+            return false;
+          }
         });
+
         setSneakersData(responseSneakers.data);
         setIsLoading(false);
       } catch (error) {
@@ -101,7 +109,7 @@ const ProductScreen = ({ route, token }) => {
                   style={{
                     color: "white",
                     fontFamily: "LouisGeorge",
-                    fontSize: 18,
+                    fontSize: hp(2),
                   }}
                 >
                   PRIX RETAIL
@@ -111,7 +119,7 @@ const ProductScreen = ({ route, token }) => {
                   style={{
                     color: "black",
                     fontFamily: "LouisGeorge",
-                    fontSize: 18,
+                    fontSize: hp(2),
                   }}
                 >
                   {sneakersData.price / 100} €
@@ -122,7 +130,7 @@ const ProductScreen = ({ route, token }) => {
                   style={{
                     color: "white",
                     fontFamily: "LouisGeorgeBold",
-                    fontSize: 18,
+                    fontSize: hp(2),
                   }}
                 >
                   PRIX RESSEL
@@ -132,7 +140,7 @@ const ProductScreen = ({ route, token }) => {
                   style={{
                     color: "black",
                     fontFamily: "LouisGeorge",
-                    fontSize: 18,
+                    fontSize: hp(2),
                   }}
                 >
                   {sneakersData.price / 100 + 300} € et +
@@ -244,17 +252,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#717171",
     paddingHorizontal: 35,
     marginHorizontal: 5,
-    paddingVertical: 15,
     borderRadius: 40,
+    height: hp(7),
     width: wp("45%"),
     alignItems: "center",
+    justifyContent: "center",
   },
   priceResell: {
     backgroundColor: "#FF7E00",
     paddingHorizontal: 35,
     marginHorizontal: 5,
-    paddingVertical: 15,
     borderRadius: 40,
+    justifyContent: "center",
     width: wp("45%"),
     alignItems: "center",
   },

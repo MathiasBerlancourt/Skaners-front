@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import axios from "axios";
 import Loading from "../components/Loading";
@@ -19,6 +20,14 @@ export default function HomeScreen({ navigation }) {
   const [skans, setSkans] = useState([]);
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const fetchPictures = async () => {
@@ -47,44 +56,59 @@ export default function HomeScreen({ navigation }) {
     };
 
     fetchPictures();
-  }, []);
+  }, [refreshing]);
 
   if (isLoading === true) {
     return <Loading />;
   } else
     return (
-      <ScrollView style={{ backgroundColor: "white" }}>
+      <ScrollView
+        style={{ backgroundColor: "white" }}
+        refreshControl={
+          <RefreshControl
+            size={"large"}
+            tintColor={"#FF7E00"}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
         <View style={{ paddingTop: 10 }}>
-          <Text style={styles.title}>MES DERNIERS LIKES</Text>
-          <ScrollView horizontal={true}>
-            <View style={styles.likesContainer}>
-              {Array.isArray(skans) &&
-                skans.map((skan, index) => {
-                  return (
-                    <TouchableOpacity
-                      key={index}
-                      onPress={() => {
-                        navigation.navigate("HomeView", {
-                          url: skan.pictureUrl,
-                        });
-                      }}
-                    >
-                      <Image
-                        source={{ uri: skan?.pictureUrl }}
-                        key={skan.id}
-                        style={{
-                          height: 0.13 * height,
-                          width: 0.6 * width,
-                          borderRadius: 10,
-                          marginHorizontal: 3,
-                          marginVertical: 5,
+          {skans.length > 0 && (
+            <Text style={styles.title}>MES DERNIERS SKANS</Text>
+          )}
+          {skans.length > 0 && (
+            <ScrollView horizontal={true}>
+              <View style={styles.likesContainer}>
+                {Array.isArray(skans) &&
+                  skans.map((skan, index) => {
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        onPress={() => {
+                          navigation.navigate("HomeView", {
+                            url: skan.pictureUrl,
+                          });
                         }}
-                      />
-                    </TouchableOpacity>
-                  );
-                })}
-            </View>
-          </ScrollView>
+                        activeOpacity={0.8}
+                      >
+                        <Image
+                          source={{ uri: skan?.pictureUrl }}
+                          key={skan.id}
+                          style={{
+                            height: 0.13 * height,
+                            width: 0.6 * width,
+                            borderRadius: 10,
+                            marginHorizontal: 3,
+                            marginVertical: 5,
+                          }}
+                        />
+                      </TouchableOpacity>
+                    );
+                  })}
+              </View>
+            </ScrollView>
+          )}
           <Text style={styles.title}>PARCOURIR</Text>
           <View style={styles.layoutContainer}>
             {Array.isArray(pictures) &&
@@ -92,6 +116,7 @@ export default function HomeScreen({ navigation }) {
                 // const isFirstInRow = index % 3 === 0;
                 return (
                   <TouchableOpacity
+                    activeOpacity={0.8}
                     key={index}
                     onPress={() => {
                       navigation.navigate("HomeView", {

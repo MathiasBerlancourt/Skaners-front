@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import axios from "axios";
 import imagesAvatar from "../assets/Json/avatar-url.json";
 import Avatar from "../components/Avatars";
@@ -91,15 +97,23 @@ const ChooseUserAvatarScreens = ({ route, setToken }) => {
         </View>
       </View>
       <View>
-        <TouchableOpacity
-          style={styles.signUpBtn}
-          disabled={submit}
-          onPress={() => {
-            setSubmit(true);
-          }}
-        >
-          <Text style={styles.signUpTxt}>Valider</Text>
-        </TouchableOpacity>
+        {!submit ? (
+          <TouchableOpacity
+            style={styles.signUpBtn}
+            disabled={submit}
+            onPress={() => {
+              setSubmit(true);
+            }}
+          >
+            <Text style={styles.signUpTxt}>Valider</Text>
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator
+            style={styles.load}
+            size={"large"}
+            color={"#FF7E00"}
+          />
+        )}
         <Text style={styles.errorTxt}>{errorMessage}</Text>
       </View>
     </View>
@@ -146,6 +160,17 @@ const styles = StyleSheet.create({
     height: hp("5%"),
     width: wp("60%"),
   },
+  load: {
+    height: 50,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginTop: 30,
+    marginBottom: 20,
+    height: hp("5%"),
+    width: wp("60%"),
+  },
   errorTxt: {
     fontFamily: "LouisGeorge",
     color: "#F86F00",
@@ -154,9 +179,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   signUpTxt: {
-    fontFamily: "LouisGeorge",
+    fontFamily: "LouisGeorgeBold",
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 23,
   },
 });
