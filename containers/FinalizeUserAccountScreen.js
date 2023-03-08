@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -82,19 +83,24 @@ const FinalizeUserAccountScreen = ({ route }) => {
           </View>
           <View>
             <Text style={styles.inputTitle}>Sexe</Text>
-            <TextInput
-              placeholder="M"
-              placeholderTextColor="#717171"
-              style={styles.inputWithTitle}
-              onChangeText={(input) => {
-                setSex(input);
-              }}
-              value={sex}
-            />
+            <View style={styles.pickerContainer}>
+              <RNPickerSelect
+                placeholder={{
+                  label: "Sectionner",
+                  value: "null",
+                }}
+                onValueChange={(value) => setSex(value)}
+                items={[
+                  { key: "M", label: "Masculin", value: "Masculin" },
+                  { key: "F", label: "Féminin", value: "Féminin" },
+                  { key: "Autre", label: "Autre", value: "Autre" },
+                ]}
+              />
+            </View>
           </View>
           <View>
             <Text style={styles.inputTitle}>Marque(s) favorite(s)</Text>
-            <TextInput
+            {/* <TextInput
               placeholder="Air Jordan"
               placeholderTextColor="#717171"
               style={styles.inputWithTitle}
@@ -102,19 +108,52 @@ const FinalizeUserAccountScreen = ({ route }) => {
                 setFavoriteBrand(input);
               }}
               value={favoriteBrand}
-            />
+            /> */}
+            <View style={styles.pickerContainer}>
+              <RNPickerSelect
+                placeholder={{
+                  label: "Sectionner",
+                  value: "null",
+                  color: "#717171",
+                }}
+                onValueChange={(value) => setFavoriteBrand(value)}
+                items={[
+                  { key: "0", label: "Nike", value: "Nike" },
+                  { key: "1", label: "Adidas", value: "Féminin" },
+                  { key: "2", label: "Air Jordan", value: "Adidas" },
+                  { key: "3", label: "Reebok", value: "Reebok" },
+                  { key: "4", label: "Gucci", value: "Gucci" },
+                  { key: "5", label: "Vans", value: "Vans" },
+                ]}
+              />
+            </View>
           </View>
           <View>
             <Text style={styles.inputTitle}>Pointure</Text>
-            <TextInput
-              placeholder="43"
-              placeholderTextColor="#717171"
-              style={styles.inputWithTitle}
-              onChangeText={(input) => {
-                setShoeSize(input);
-              }}
-              value={shoeSize}
-            />
+            <View style={styles.pickerContainer}>
+              <RNPickerSelect
+                placeholder={{
+                  label: "Sectionner",
+                  value: "null",
+                  color: "#717171",
+                }}
+                onValueChange={(value) => setShoeSize(value)}
+                items={[
+                  { key: "0", label: "35", value: "35" },
+                  { key: "1", label: "36", value: "36" },
+                  { key: "2", label: "37", value: "37" },
+                  { key: "3", label: "38", value: "38" },
+                  { key: "4", label: "39", value: "39" },
+                  { key: "5", label: "40", value: "40" },
+                  { key: "6", label: "41", value: "41" },
+                  { key: "7", label: "42", value: "42" },
+                  { key: "8", label: "43", value: "43" },
+                  { key: "9", label: "44", value: "44" },
+                  { key: "10", label: "45", value: "45" },
+                  { key: "11", label: "46", value: "46" },
+                ]}
+              />
+            </View>
           </View>
         </View>
         <View>
@@ -168,7 +207,15 @@ const styles = StyleSheet.create({
     fontFamily: "LouisGeorge",
   },
   formContainer: { justifyContent: "space-around" },
-
+  pickerContainer: {
+    paddingLeft: 10,
+    marginHorizontal: 20,
+    backgroundColor: "lightgray",
+    height: 30,
+    borderRadius: 20,
+    paddingTop: 5,
+    color: "#717171",
+  },
   inputTitle: {
     fontFamily: "LouisGeorge",
     marginHorizontal: 30,
