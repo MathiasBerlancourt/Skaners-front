@@ -21,13 +21,11 @@ const SingleSkanScreen = ({ route, navigation }) => {
 
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [link, setLink] = useState("");
 
   const updateCheck = {
     skanId: data._id,
     sneakerName: name,
     description: desc,
-    linkUrl: link,
   };
 
   const sendSkanResponse = async () => {
@@ -74,15 +72,6 @@ const SingleSkanScreen = ({ route, navigation }) => {
             style={styles.input}
             placeholderTextColor="#414141"
             placeholder={"Marque"}
-          />
-          <TextInput
-            onChangeText={(e) => {
-              setLink(e);
-            }}
-            value={link}
-            style={styles.input}
-            placeholderTextColor="#414141"
-            placeholder={"Description"}
           />
         </View>
         <TouchableOpacity style={styles.btnCheck} onPress={sendSkanResponse}>
