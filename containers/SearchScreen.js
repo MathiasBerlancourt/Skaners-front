@@ -11,7 +11,7 @@ import {
 
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+
 import { TouchableOpacity } from "react-native";
 import Loading from "../components/Loading";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -27,11 +27,9 @@ const SearchScreen = () => {
   const [color, setColor] = useState("");
   const [sneakers, setSneakers] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const height = Dimensions.get("window").height;
+
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
   const navigation = useNavigation();
-  const dropdownController = useRef(null);
-  const searchRef = useRef(null);
 
   const handleName = (name) => {
     setName(name);
@@ -134,15 +132,6 @@ const SearchScreen = () => {
               style={styles.clearButton}
             >
               <Text style={styles.clearBtnTxt}>EFFACER</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{ paddingRight: wp("3%") }}
-              onPress={() => {
-                setDisplaySearchBar(false);
-              }}
-            >
-              <AntDesign name="close" size={30} color="#FF7E00" />
             </TouchableOpacity>
           </View>
         </View>
@@ -269,28 +258,24 @@ const styles = StyleSheet.create({
   },
   modalButtons: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
 
     width: wp("100%"),
     height: hp("6%"),
   },
   clearBtnTxt: {
     fontFamily: "LouisGeorge",
-    fontSize: 18,
+    fontSize: 15,
   },
   clearButton: {
-    height: hp("4%"),
     backgroundColor: "whitesmoke",
     borderWidth: 1,
     borderColor: "#717171",
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    // marginHorizontal: 20,
-    // marginTop: 30,
-    // marginBottom: 20,
-    marginLeft: wp("10%"),
-    width: wp("40%"),
-    height: "100%",
+
+    width: wp("25%"),
+    height: hp("4%"),
   },
 });
