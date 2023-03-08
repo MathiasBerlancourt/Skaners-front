@@ -8,9 +8,12 @@
 
 Pour tester l’application vous devez dans un premier temps télécharger puis installer l’application **Expo Go**  sur votre téléphone :
 
-| **[Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)** | **[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)** |
+| ![** [Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)**](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/668d4ac3-113e-4f8b-8cc6-4584daad5cf0/expo-go-iphone.png)
+
+** [Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)** | ![**[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)**](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/93fc0b19-a719-4037-9e03-5aaddfab3843/expo-go-android.png)
+
+**[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)** |
 | --- | --- |
-| ![https://static.expo.dev/static/images/client/expo-go-iphone.png](https://static.expo.dev/static/images/client/expo-go-iphone.png) | ![https://static.expo.dev/static/images/client/expo-go-android.png](https://static.expo.dev/static/images/client/expo-go-android.png) |
 
 Une fois l’application téléchargée vous devrez vous créer un compte.
 
