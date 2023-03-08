@@ -100,36 +100,26 @@ export default function HomeScreen({ navigation }) {
                           height: 0.13 * height,
                           width: 0.6 * width,
                           borderRadius: 10,
+                          marginHorizontal: 3,
+                          marginVertical: 5,
                         }}
-                      >
-                        <Image
-                          source={{ uri: skan?.pictureUrl }}
-                          key={skan.id}
-                          style={{
-                            height: 0.13 * height,
-                            width: 0.6 * width,
-                            borderRadius: 10,
-                            marginHorizontal: 3,
-                            marginVertical: 5,
-                          }}
-                        />
-                      </TouchableOpacity>
-                    );
-                  })}
-              </View>
-            </ScrollView>
-          )}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+            </View>
+          </ScrollView>
+
           <Text style={styles.title}>PARCOURIR</Text>
           <View style={styles.layoutContainer}>
             <View style={{ flexDirection: "row" }}>
               <View style={{ width: "50%" }}>
                 {Array.isArray(pictures) &&
                   pictures.map((elem, index) => {
-                    console.log("index 1er map : ", index);
                     if (index % 2 === 0) {
                       return (
                         <TouchableOpacity
-                        activeOpacity={0.8}
+                          activeOpacity={0.8}
                           key={index}
                           onPress={() => {
                             navigation.navigate("HomeView", {
@@ -155,7 +145,7 @@ export default function HomeScreen({ navigation }) {
                     }
                   })}
               </View>
-              <View style={{ width: "50%", flexDirection: "column" }}>
+              <View style={{ width: "50%", paddingHorizontal: wp("2.5%") }}>
                 {Array.isArray(pictures) &&
                   pictures.map((elem, index) => {
                     if (index % 2 !== 0) {
@@ -210,6 +200,7 @@ const styles = StyleSheet.create({
   likesContainer: { flexDirection: "row" },
   layoutContainer: {
     paddingHorizontal: wp("5%"),
+    justifyContent: "center",
     // flexDirection: "column",
   },
 
