@@ -8,6 +8,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import axios from "axios";
 import Loading from "../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -76,8 +80,6 @@ export default function HomeScreen({ navigation }) {
                           height: 0.13 * height,
                           width: 0.6 * width,
                           borderRadius: 10,
-                          marginHorizontal: 3,
-                          marginVertical: 5,
                         }}
                       />
                     </TouchableOpacity>
@@ -87,39 +89,71 @@ export default function HomeScreen({ navigation }) {
           </ScrollView>
           <Text style={styles.title}>PARCOURIR</Text>
           <View style={styles.layoutContainer}>
-            {Array.isArray(pictures) &&
-              pictures.map((elem, index) => {
-                // const isFirstInRow = index % 3 === 0;
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      navigation.navigate("HomeView", {
-                        id: elem._id,
-                        url: elem.url,
-                      });
-                    }}
-                    // style={{
-                    //   // marginRight: isFirstInRow ? 0 : 4, // add right margin to all images except the first one in each row
-                    //   // marginLeft: isFirstInRow ? 0 : 4, // add left margin to all images except the first one in each row
-                    //   marginTop: index < 2 ? 0 : -80, // add top margin to all images except the first row
-                    // }}
-                  >
-                    <Image
-                      key={elem.id}
-                      source={{ uri: elem.url }}
-                      style={{
-                        height: 0.3 * height,
-                        // height: index % 3 === 0 ? 0.3 * height : 0.2 * height, // Here we check if the index is even or odd
-                        width: 0.43 * width,
-                        borderRadius: 10,
-                        marginVertical: 4,
-                        marginHorizontal: 4,
-                      }}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ width: "50%" }}>
+                {Array.isArray(pictures) &&
+                  pictures.map((elem, index) => {
+                    console.log("index 1er map : ", index);
+                    if (index % 2 === 0) {
+                      return (
+                        <TouchableOpacity
+                          key={index}
+                          onPress={() => {
+                            navigation.navigate("HomeView", {
+                              id: elem._id,
+                              url: elem.url,
+                            });
+                          }}
+                        >
+                          <Image
+                            key={elem.id}
+                            source={{ uri: elem.url }}
+                            style={{
+                              height:
+                                index % 3 === 0 ? 0.2 * height : 0.3 * height, // Here we check if the index is even or odd
+                              width: 0.43 * width,
+                              resizeMode: "cover",
+                              borderRadius: 10,
+                              marginBottom: 4,
+                            }}
+                          />
+                        </TouchableOpacity>
+                      );
+                    }
+                  })}
+              </View>
+              <View style={{ width: "50%", flexDirection: "column" }}>
+                {Array.isArray(pictures) &&
+                  pictures.map((elem, index) => {
+                    if (index % 2 !== 0) {
+                      return (
+                        <TouchableOpacity
+                          key={index}
+                          onPress={() => {
+                            navigation.navigate("HomeView", {
+                              id: elem._id,
+                              url: elem.url,
+                            });
+                          }}
+                        >
+                          <Image
+                            key={elem.id}
+                            source={{ uri: elem.url }}
+                            style={{
+                              height:
+                                index % 3 !== 0 ? 0.3 * height : 0.2 * height, // Here we check if the index is even or odd
+                              width: 0.43 * width,
+                              resizeMode: "cover",
+                              borderRadius: 10,
+                              marginBottom: 6,
+                            }}
+                          />
+                        </TouchableOpacity>
+                      );
+                    }
+                  })}
+              </View>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -142,9 +176,8 @@ const styles = StyleSheet.create({
   },
   likesContainer: { flexDirection: "row" },
   layoutContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    paddingHorizontal: wp("5%"),
+    // flexDirection: "column",
   },
 
   pictureSneakers: {
