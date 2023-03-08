@@ -8,7 +8,7 @@
 
 Pour tester l’application vous devez dans un premier temps télécharger puis installer l’application **Expo Go**  sur votre téléphone :
 
-| ** [Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)** | **[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)** |
+| **[Télécharger Expo Go pour IOS](https://itunes.apple.com/app/apple-store/id982107779)** | **[Télécharger Expo Go our Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)** |
 | --- | --- |
 | ![https://static.expo.dev/static/images/client/expo-go-iphone.png](https://static.expo.dev/static/images/client/expo-go-iphone.png) | ![https://static.expo.dev/static/images/client/expo-go-android.png](https://static.expo.dev/static/images/client/expo-go-android.png) |
 
