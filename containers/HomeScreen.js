@@ -89,8 +89,8 @@ export default function HomeScreen({ navigation }) {
                     <TouchableOpacity
                       key={index}
                       onPress={() => {
-                        navigation.navigate("HomeView", {
-                          url: skan.pictureUrl,
+                        navigation.navigate("ProductCardSkanScreen", {
+                          product: skan,
                         });
                       }}
                       activeOpacity={0.8}

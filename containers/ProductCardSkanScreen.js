@@ -163,13 +163,14 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     alignItems: "center",
-    marginVertical: 20,
+    marginBottom: 20,
   },
 
   img: {
-    width: wp("90%"),
+    width: wp("100%"),
+    backgroundColor: "black",
     height: hp("50%"),
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   infosContainer: {
     width: wp("90%"),
@@ -180,8 +181,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
     backgroundColor: "white",
     borderRadius: 40,
-    bottom: hp("42%"),
-    left: wp("80%"),
+    top: hp("2%"),
+    right: wp("4%"),
   },
   textContainer: {
     flexDirection: "row",
