@@ -50,6 +50,7 @@ const SingleSkanScreen = ({ route, navigation }) => {
           style={{
             height: 350,
             width: 500,
+            backgroundColor: "black",
           }}
           source={{ uri: data.pictureUrl }}
           resizeMode="contain"

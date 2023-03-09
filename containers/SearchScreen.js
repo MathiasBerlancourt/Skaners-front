@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   Dimensions,
+  Platform,
 } from "react-native";
 
 import axios from "axios";
@@ -141,6 +142,7 @@ const SearchScreen = () => {
       ) : (
         <View style={{ paddingHorizontal: 9 }}>
           <FlatList
+            style={{ marginBottom: Platform.OS === "ios" ? 60 : 60 }}
             data={sneakers}
             numColumns={2}
             renderItem={({ item }) => {

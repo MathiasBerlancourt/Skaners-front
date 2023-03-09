@@ -69,7 +69,8 @@ const LikesCategory = () => {
                   key={index}
                   onPress={() => {
                     navigation.navigate("ProductCardLikeScreen", {
-                      product: picture,
+                      id: picture._id,
+                      url: picture.url,
                     });
                   }}
                   style={{ width: wp(40), marginVertical: 7 }}
