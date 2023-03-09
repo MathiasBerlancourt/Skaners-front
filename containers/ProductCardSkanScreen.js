@@ -72,6 +72,7 @@ const ProductCardScreenSkan = ({ route, navigation }) => {
           <Image style={styles.img} source={{ uri: product.pictureUrl }} />
           <TouchableOpacity
             style={styles.delete}
+            activeOpacity={1}
             onPress={() => {
               showAlert();
             }}
