@@ -93,15 +93,17 @@ const CreateUserAccountScreen = () => {
                     dateOfBirth instanceof Date ? styles.txtDoA : styles.txtDoB
                   }
                 >
-                  {dateOfBirth instanceof Date
-                    ? dateOfBirth.toLocaleDateString("fr-FR")
-                    : dateOfBirth}
+                  {dateOfBirth instanceof Date &&
+                    dateOfBirth.toLocaleDateString("fr-FR")}
                 </Text>
               </View>
             </TouchableOpacity>
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
+              minimumDate={new Date("1920-05-15")}
+              maximumDate={new Date("2015-06-15")}
               mode="date"
+              display="inline"
               locale="fr_FR"
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
@@ -128,7 +130,7 @@ const CreateUserAccountScreen = () => {
                 email: email,
                 userName: userName,
                 password: password,
-                dateOfBirth: dateOfBirth.toLocaleDateString("fr-FR"),
+                dateOfBirth: dateOfBirth.toLocaleDateString("en-US"),
               });
             }}
           >
