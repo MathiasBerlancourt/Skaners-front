@@ -1,17 +1,18 @@
-# 👟 SKANERS-FRONT 
+# 👟 SKANERS-FRONT
+
 ![reactNative](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+
+![Gif](./assets/Images/GIF14.gif)
 
 # 🤳Tester l’application
 
 ## 💽 Installation
 
-*Expo, c'est à la fois un framework et une plateforme qui simplifient la création et le déploiement d'applications mobiles avec React Native .Expo embarque de nombreux outils utiles et des librairies natives pour React Native. Il gère aussi la mise à jour de ces librairies.*
+_Expo, c'est à la fois un framework et une plateforme qui simplifient la création et le déploiement d'applications mobiles avec React Native .Expo embarque de nombreux outils utiles et des librairies natives pour React Native. Il gère aussi la mise à jour de ces librairies._
 
-Pour tester l’application vous devez dans un premier temps télécharger puis installer l’application **Expo Go**  sur votre téléphone :
+Pour tester l’application vous devez dans un premier temps télécharger puis installer l’application **Expo Go** sur votre téléphone :
 
-[![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)](https://itunes.apple.com/app/apple-store/id982107779)    [![ANDROID](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www&pli=1)
-
-
+[![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)](https://itunes.apple.com/app/apple-store/id982107779) [![ANDROID](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www&pli=1)
 
 Une fois l’application téléchargée vous devrez vous créer un compte.
 
@@ -26,16 +27,13 @@ Il vous suffira ensuite de scanner ce QR-CODE via l’application Expo Go sur An
 
 </aside>
 
-Ou de cliquer sur ce [lien](http://exp.host/@mathiasb/porjet-test?release-channel=default) via votre téléphone 
+Ou de cliquer sur ce [lien](http://exp.host/@mathiasb/porjet-test?release-channel=default) via votre téléphone
 
 ## 💻 Récupérer le projet en local sur son ordinateur
 
 ### 💽 Installer les logiciels nécessaires
 
-
-
-
-Installer un éditeur de code pour consulter  le code comme Visual Studio Code par exemple
+Installer un éditeur de code pour consulter le code comme Visual Studio Code par exemple
 
 Installer l'outil Git
 
