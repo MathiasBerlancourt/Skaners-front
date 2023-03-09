@@ -228,7 +228,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   inputsContainer: {},
   input: {
-    backgroundColor: "whitesmoke",
+    backgroundColor: "lightgray",
     height: hp("4%"),
     borderRadius: 20,
     paddingLeft: 20,

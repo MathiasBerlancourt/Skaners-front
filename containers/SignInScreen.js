@@ -77,9 +77,6 @@ export default function SignInScreen({ setToken }) {
           value={password}
         />
 
-        <TouchableOpacity>
-          <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
-        </TouchableOpacity>
         {!submit ? (
           <TouchableOpacity
             style={styles.loginBtn}

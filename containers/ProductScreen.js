@@ -101,7 +101,10 @@ const ProductScreen = ({ route, token }) => {
           />
           <View style={styles.detailsContainer}>
             <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity style={styles.priceContainer}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.priceContainer}
+              >
                 <Text
                   style={{
                     color: "white",
@@ -122,7 +125,7 @@ const ProductScreen = ({ route, token }) => {
                   {sneakersData.price / 100} €
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.priceResell}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.priceResell}>
                 <Text
                   style={{
                     color: "white",
@@ -155,6 +158,7 @@ const ProductScreen = ({ route, token }) => {
                     likeSneaker();
                   }
                 }}
+                activeOpacity={1}
               >
                 {like ? (
                   <AntDesign
@@ -184,6 +188,7 @@ const ProductScreen = ({ route, token }) => {
               }}
             >
               <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() =>
                   Linking.openURL(
                     `https://stockx.com/fr-fr/search?s=${sneakersData.name}`
@@ -198,6 +203,7 @@ const ProductScreen = ({ route, token }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() =>
                   Linking.openURL(
                     `https://www.goat.com/search?query=${sneakersData.name}`
@@ -212,6 +218,7 @@ const ProductScreen = ({ route, token }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() =>
                   Linking.openURL(
                     `https://restocks.net/fr/shop/?q=${sneakersData.name}`
