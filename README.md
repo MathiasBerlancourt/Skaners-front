@@ -35,9 +35,13 @@ Ou de cliquer sur ce [lien](http://exp.host/@mathiasb/porjet-test?release-channe
 
 
 
-Un éditeur de code pour consulter  le code comme Visual Studio Code  
+Installer un éditeur de code pour consulter  le code comme Visual Studio Code par exemple
 
-Vous pouvez télécharger Visual Studio Code ici [![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://code.visualstudio.com/download)
+Installer l'outil Git
+
+Vous pouvez télécharger Visual Studio Code : [![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://code.visualstudio.com/download)
+
+Vous pouvez télécharger Git : [![GIT](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/downloads)
 
 ### 📁 Cloner le repository GitHub
 
@@ -80,7 +84,6 @@ Starting Metro Bundler
 █▀▄▀▀▀▀▄▄█ ▀ █▄▀█ ▀▀█▀▀█ ▀█
 ███▄▄██▄█▀▄ ██▄ ▄ ▄▄▄ ▀▄█▀█
 █ ▄▄▄▄▄ ██▀▀▀▄███ █▄█ █▄▄▄█
-█ █   █ █▀▄▄▀ █▀▀▄▄   █▀▀ █
 █ █▄▄▄█ █ █ ▄█▀▄▀▄▀▄█▄▄ ▄██
 █▄▄▄▄▄▄▄█▄▄███▄█▄██████▄▄▄█
 
