@@ -56,7 +56,7 @@ const FavoritesCategory = () => {
     data.length === 0 ? (
       <View style={styles.background}>
         <Text style={styles.text}>
-          Wesh {userName} tu n'as pas encore de favoris
+          Tu n'as pas encore de likes {userName} !
         </Text>
       </View>
     ) : (
