@@ -77,11 +77,7 @@ export default function SignInScreen({ setToken }) {
           value={password}
         />
 
-        <TouchableOpacity
-          onPress={() => {
-            alert("Wesh Crack pourquoi t'as oublié ton mot de passe");
-          }}
-        >
+        <TouchableOpacity>
           <Text style={styles.passwordForgetTxt}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
         {!submit ? (
