@@ -145,7 +145,7 @@ export default function HomeScreen({ navigation }) {
                                 width: 0.43 * width,
                                 resizeMode: "cover",
                                 borderRadius: 10,
-                                marginBottom: 4,
+                                marginBottom: 9,
                               }}
                             />
                           </TouchableOpacity>
@@ -182,7 +182,7 @@ export default function HomeScreen({ navigation }) {
                                 width: 0.43 * width,
                                 resizeMode: "cover",
                                 borderRadius: 10,
-                                marginBottom: 6,
+                                marginBottom: 9,
                               }}
                             />
                           </TouchableOpacity>
