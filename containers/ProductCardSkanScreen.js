@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: hp("2%"),
     fontFamily: "LouisGeorgeBold",
+    width: wp("65%"),
   },
 
   labelColor: {

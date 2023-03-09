@@ -9,9 +9,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import LottieView from "lottie-react-native";
-import sparks from "../assets/Json/effectSparksCopDrop.json";
-import { useRef } from "react";
 import { API_URL } from "react-native-dotenv";
 
 const CopDropScreen = ({ token }) => {
@@ -20,8 +17,7 @@ const CopDropScreen = ({ token }) => {
   const [data, setData] = useState();
   const [idLike, setIdLike] = useState();
   const [idUser, setIdUser] = useState();
-  const [playAnimation, setPlayAnimation] = useState(false);
-  const animation = useRef(null);
+  const [userSkans, setUserSkans] = useState();
 
   useEffect(() => {
     const headers = {
@@ -46,6 +42,7 @@ const CopDropScreen = ({ token }) => {
         console.log(error.message);
       }
     };
+
     const fetchData = async () => {
       try {
         const response = await axios({
@@ -53,19 +50,22 @@ const CopDropScreen = ({ token }) => {
           url: `${API_URL}/allSkans`,
           headers: headers,
         });
+        const responseUser = await axios({
+          method: "GET",
+          url: `${API_URL}/user/info/${idUser}`,
+          headers: headers,
+        });
+        setUserSkans(responseUser.data.skans.reverse());
         if (!idUser) {
           return;
         }
         // je filtre le tableau une premiere fois pour avoir que les skans validés
         const tempTab = response.data.filter((sneaker) => sneaker.isChecked);
 
-        // je filtre une 2 eme fois pour avoir que les skans validés qui ne viennent pas de notre user et je setData
-
+        // je filtre une 2 eme fois pour avoir que les skans validés qui ne viennent pas de notre user
         setData(tempTab.filter((sneaker) => sneaker.userId !== idUser));
+
         setIsLoad(true);
-        setTimeout(() => {
-          setPlayAnimation(false);
-        }, 500);
       } catch (error) {
         console.log(error.message);
       }
@@ -77,12 +77,11 @@ const CopDropScreen = ({ token }) => {
     getId();
     fetchData();
     sendLike();
-  }, [lastDirection, idUser, playAnimation]);
+  }, [lastDirection, idUser]);
 
   const swiped = (direction, id) => {
     setLastDirection(direction);
     if (direction === "right") {
-      setPlayAnimation(!playAnimation);
       setIdLike(id);
     }
   };
@@ -122,17 +121,7 @@ const CopDropScreen = ({ token }) => {
 
         <View style={styles.cop}>
           <Text style={styles.copDropText}>COP</Text>
-          <View style={styles.sparksContainer}>
-            {playAnimation ? (
-              <LottieView
-                ref={animation}
-                autoPlay
-                loop={playAnimation}
-                style={styles.sparks}
-                source={sparks}
-              />
-            ) : null}
-          </View>
+          <View style={styles.sparksContainer}></View>
         </View>
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={logo} />

@@ -124,6 +124,9 @@ const CreateUserAccountScreen = () => {
               if (password !== confirmPassword) {
                 return setErrorMessage("Mot de passe différents");
               }
+              if (userName.length < 4) {
+                return setErrorMessage("Username trop court");
+              }
               navigation.navigate("Finalize User Account", {
                 email: email,
                 userName: userName,
