@@ -19,7 +19,7 @@ import { API_URL } from "react-native-dotenv";
 const ProductCardLikeScreen = ({ route, navigation }) => {
   const product = route.params.product;
 
-  const size = 55;
+  const size = 45;
 
   const sendData = async () => {
     try {
@@ -71,16 +71,12 @@ const ProductCardLikeScreen = ({ route, navigation }) => {
         <View style={styles.imgContainer}>
           <Image style={styles.img} source={{ uri: product.url }} />
           <TouchableOpacity
+            style={styles.delete}
             onPress={() => {
               showAlert();
             }}
           >
-            <Entypo
-              style={styles.delete}
-              name="cross"
-              size={size}
-              color="#F86F00"
-            />
+            <Entypo name="cross" size={size} color="#F86F00" />
           </TouchableOpacity>
         </View>
       </View>
@@ -104,8 +100,11 @@ const styles = StyleSheet.create({
 
   delete: {
     position: "absolute",
+    zIndex: 1,
+    backgroundColor: "white",
+    borderRadius: 40,
     bottom: hp("77%"),
-    left: wp("34%"),
+    left: wp("85%"),
   },
 });
 
