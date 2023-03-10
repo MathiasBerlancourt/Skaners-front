@@ -4,12 +4,19 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Loading from "../components/Loading";
 import { API_URL } from "react-native-dotenv";
-
+import { Feather } from "@expo/vector-icons";
 export default function ProfileScreen({ navigation, setToken }) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -43,6 +50,51 @@ export default function ProfileScreen({ navigation, setToken }) {
     }
   }, [isFocused]);
 
+  const deleteAccount = async () => {
+    try {
+      const userId = await AsyncStorage.getItem("userId");
+      const token = await AsyncStorage.getItem("userToken");
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
+      await axios({
+        method: "DELETE",
+        url: `${API_URL}/user/delete/${userId}`,
+        headers: headers,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const showAlert = () => {
+    Alert.alert(
+      "Suppression du compte",
+      "Es-tu sûr de vouloir supprimer ton compte ?",
+      [
+        {
+          text: "Oui",
+          onPress: async () => {
+            await deleteAccount();
+            setToken(null);
+            AsyncStorage.removeItem("userId");
+            AsyncStorage.removeItem("userPfp");
+          },
+          style: "default",
+        },
+        {
+          text: "Non",
+          onDismiss: () => {},
+          style: "default",
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      }
+    );
+  };
+
   return loading ? (
     <Loading />
   ) : (
@@ -57,6 +109,15 @@ export default function ProfileScreen({ navigation, setToken }) {
             }
             style={styles.avatar}
           />
+          <TouchableOpacity
+            style={styles.deleteAccount}
+            onPress={() => {
+              showAlert();
+            }}
+          >
+            <Feather name="trash-2" size={34} color="#FF7E00" />
+          </TouchableOpacity>
+
           <Text style={styles.name}>
             {data.firstName ? data.firstName : data.userName}
           </Text>
@@ -215,5 +276,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "LouisGeorge",
     textDecorationLine: "underline",
+  },
+
+  deleteAccount: {
+    position: "absolute",
+    right: wp("1%"),
+    top: hp("2%"),
   },
 });
