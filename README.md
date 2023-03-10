@@ -104,3 +104,10 @@ Starting Metro Bundler
 Vous pouvez scanner ce QR code avec votre téléphone ou ouvrir un simulateur Android ou IOS
 
 Pour obtenir un émulateur Android vous devez installer [AndroidStudio](https://developer.android.com/studio). Vous devez installer [XCode](https://apps.apple.com/fr/app/xcode/id497799835?mt=12) pour l’émulateur IPhone (disponible sur Mac OS uniquement).
+
+### Made with react native ⚛️ by 
+
+[@Louilallier](https://github.com/Louilallier)
+[@moustaphadiakhaby](https://github.com/moustaphadiakhaby)
+[@MaxenceValvason](https://github.com/MaxenceValvason)
+[@LouisLallier](https://github.com/LouisLallier)
