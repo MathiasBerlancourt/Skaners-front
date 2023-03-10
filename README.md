@@ -110,4 +110,4 @@ Pour obtenir un émulateur Android vous devez installer [AndroidStudio](https://
 [@Louilallier](https://github.com/Louilallier)
 [@moustaphadiakhaby](https://github.com/moustaphadiakhaby)
 [@MaxenceValvason](https://github.com/MaxenceValvason)
-[@LouisLallier](https://github.com/LouisLallier)
+[@LouisLallier](https://github.com/MathiasBerlancourt)
