@@ -2,7 +2,10 @@
 
 ![reactNative](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-   ![Gif](./assets/Images/GIF14.gif)
+  <p align=center>
+  <img height=500 src="./assets/Images/GIF14.gif" alt="gif"/>
+   </p>
+   
 
 # 🤳Tester l’application
 
@@ -20,14 +23,14 @@ Une fois l’application téléchargée vous devrez vous créer un compte.
 
 Il vous suffira ensuite de scanner ce QR-CODE via l’application Expo Go sur Android ou via l’application appareil photo sur IOS :
 
-[https://qr.expo.dev/expo-go?owner=mathiasb&slug=porjet-test&releaseChannel=default&host=exp.host](https://qr.expo.dev/expo-go?owner=mathiasb&slug=porjet-test&releaseChannel=default&host=exp.host)
+
 
 <aside>
-⚠️ Ce QR code est un QR code de test, qr code et lien à remplacer par les bons
+<img align="center" width=300 src="./assets/QRcode.png"/ alt="qrcode"/>
 
 </aside>
 
-Ou de cliquer sur ce [lien](http://exp.host/@mathiasb/porjet-test?release-channel=default) via votre téléphone
+Ou de cliquer sur ce lien [🔗](exp://exp.host/@mathiasb/Skaners?release-channel=default) via votre téléphone
 
 ## 💻 Récupérer le projet en local sur son ordinateur
 
