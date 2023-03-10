@@ -30,8 +30,7 @@ Il vous suffira ensuite de scanner ce QR-CODE via l’application Expo Go sur An
 
 </aside>
 
-Ou de cliquer sur ce lien [Lien](exp://exp.host/@mathiasb/Skaners?release-channel=default) 
-via votre téléphone
+Ou d'ouvrir ce lien via votre téléphone : exp://exp.host/@mathiasb/Skaners?release-channel=default
 
 ## 💻 Récupérer le projet en local sur son ordinateur
 
