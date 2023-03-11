@@ -26,7 +26,7 @@ Il vous suffira ensuite de scanner ce QR-CODE via l’application Expo Go sur An
 
 
 <aside>
-<img align="center" width=300 src="./assets/QRcode.png"/ alt="qrcode"/>
+<img align="center" width=300 src="./assets/QRcode2.png"/ alt="qrcode"/>
 
 </aside>
 
